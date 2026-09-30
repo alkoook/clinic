@@ -1,0 +1,178 @@
+- generic [active] [ref=f17e1]:
+  - link "الانتقال إلى المحتوى" [ref=f17e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f17e3]:
+    - generic [ref=f17e4]:
+      - link "عيادة الحياة" [ref=f17e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f17e15]:
+        - generic [ref=f17e16]:
+          - generic [ref=f17e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f17e18]
+            - generic [ref=f17e19]:
+              - link "لوحة التشغيل" [ref=f17e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f17e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f17e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f17e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f17e44]:
+            - heading "المرضى" [level=2] [ref=f17e45]
+            - generic [ref=f17e46]:
+              - link "ملفات المرضى" [ref=f17e47] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f17e54] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f17e60]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f17e61]
+            - generic [ref=f17e62]:
+              - link "الأطباء والمعالجون" [ref=f17e63] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners
+              - link "التوفر والدوام" [ref=f17e70] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f17e76]:
+            - heading "المالية والتقارير" [level=2] [ref=f17e77]
+            - generic [ref=f17e79]:
+              - link "المصروفات" [ref=f17e80] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/expenses
+              - link "الاتفاقات المالية" [ref=f17e86] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/agreements
+              - link "الصناديق" [ref=f17e92] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+              - link "الإغلاق الأسبوعي" [ref=f17e98] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/weekly-closing
+              - link "المستحقات" [ref=f17e105] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f17e111] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+          - generic [ref=f17e117]:
+            - heading "إدارة النظام" [level=2] [ref=f17e118]
+            - generic [ref=f17e119]:
+              - link "الاختصاصات" [ref=f17e120] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/specialties
+              - link "أنواع العلاج" [ref=f17e126] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/treatment-types
+              - link "الغرف" [ref=f17e132] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/rooms
+              - link "المستخدمون" [ref=f17e137] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/users
+              - link "سجل التدقيق" [ref=f17e143] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/audit-log
+              - link "الإعدادات" [ref=f17e149] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/settings
+      - generic [ref=f17e155]:
+        - button "تسجيل الخروج" [ref=f17e157] [cursor=pointer]
+        - paragraph [ref=f17e161]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f17e162]:
+    - banner [ref=f17e163]:
+      - generic [ref=f17e164]:
+        - button "طي القائمة الجانبية" [ref=f17e165] [cursor=pointer]
+        - generic [ref=f17e168]:
+          - paragraph [ref=f17e169]: مساحة العمل الآمنة
+          - heading "مستحقات الأطباء والمعالجين" [level=1] [ref=f17e170]
+        - button "الإشعارات" [ref=f17e172] [cursor=pointer]:
+          - generic [ref=f17e175]: 99+
+        - button "المواعيد القادمة" [ref=f17e177] [cursor=pointer]:
+          - generic [ref=f17e182]: "6"
+        - button "تفعيل المظهر الداكن" [ref=f17e183] [cursor=pointer]
+        - generic [ref=f17e186]:
+          - generic [ref=f17e187]: م
+          - generic [ref=f17e188]:
+            - paragraph [ref=f17e189]: مدير عيادة الحياة
+            - paragraph [ref=f17e190]: المدير العام
+    - main [ref=f17e191]:
+      - generic [ref=f17e192]:
+        - status [ref=f17e430]:
+          - paragraph [ref=f17e432]: تم تسجيل التسوية اليومية بنجاح.
+          - button "إخفاء الرسالة" [ref=f17e433] [cursor=pointer]
+        - generic [ref=f17e193]:
+          - generic [ref=f17e195]:
+            - paragraph [ref=f17e196]: ذمم المعالجين
+            - heading "مستحقات الأطباء والمعالجين" [level=1] [ref=f17e197]
+            - paragraph [ref=f17e198]: تسويات أسبوعية تحفظ الرصيد المرحّل، والأرباح، والمدفوع، والمتبقي.
+          - generic [ref=f17e199]:
+            - generic [ref=f17e200]:
+              - generic [ref=f17e201]: الطبيب / المعالج
+              - combobox "الطبيب / المعالج" [ref=f17e202]:
+                - option "كل المعالجين"
+                - option "أ. سامر العلي"
+                - option "أ. ليلى شاهين"
+                - option "أ. نور منصور"
+                - option "د. ريم الأحمد"
+                - option "د. محمد خالد"
+                - option "د. هالة النجار" [selected]
+            - generic [ref=f17e203]:
+              - generic [ref=f17e204]: حالة التسوية
+              - combobox "حالة التسوية" [ref=f17e205]:
+                - option "كل الحالات" [selected]
+                - option "غير مدفوع"
+                - option "مدفوع جزئيًا"
+                - option "مدفوع"
+          - generic [ref=f17e413]:
+            - generic [ref=f17e414]:
+              - paragraph [ref=f17e415]: تسوية يومية
+              - paragraph [ref=f17e416]:
+                - text: "الرصيد غير المدفوع الآن:"
+                - strong [ref=f17e417]: 633,500 ل.س
+            - button "تسوية الرصيد الآن" [ref=f17e418] [cursor=pointer]
+          - table [ref=f17e207]:
+            - rowgroup [ref=f17e208]:
+              - row [ref=f17e209]:
+                - columnheader "المعالج" [ref=f17e210]
+                - columnheader "الأسبوع" [ref=f17e211]
+                - columnheader "الرصيد المرحّل" [ref=f17e212]
+                - columnheader "أرباح الأسبوع" [ref=f17e213]
+                - columnheader "التعديلات" [ref=f17e214]
+                - columnheader "الإجمالي" [ref=f17e215]
+                - columnheader "المدفوع" [ref=f17e216]
+                - columnheader "المتبقي" [ref=f17e217]
+                - columnheader "الحالة" [ref=f17e218]
+                - columnheader [ref=f17e219]
+            - rowgroup [ref=f17e220]:
+              - row [ref=f17e436]:
+                - cell "د. هالة النجار" [ref=f17e437]
+                - cell [ref=f17e438]:
+                  - paragraph [ref=f17e439]: 2026/09/19
+                  - paragraph [ref=f17e440]: حتى 2026/09/24
+                - cell "445,500 ل.س" [ref=f17e441]
+                - cell "288,000 ل.س" [ref=f17e442]
+                - cell "0 ل.س" [ref=f17e443]
+                - cell "733,500 ل.س" [ref=f17e444]
+                - cell "100,000 ل.س" [ref=f17e445]
+                - cell "633,500 ل.س" [ref=f17e446]
+                - cell "مدفوع جزئيًا" [ref=f17e447]
+                - cell [ref=f17e449]:
+                  - button "كشف تفصيلي" [ref=f17e450] [cursor=pointer]
+                  - button "تسجيل دفعة" [ref=f17e451] [cursor=pointer]
+              - row [ref=f17e221]:
+                - cell "د. هالة النجار" [ref=f17e222]
+                - cell [ref=f17e223]:
+                  - paragraph [ref=f17e224]: 2026/09/12
+                  - paragraph [ref=f17e225]: حتى 2026/09/24
+                - cell "258,750 ل.س" [ref=f17e226]
+                - cell "186,750 ل.س" [ref=f17e227]
+                - cell "0 ل.س" [ref=f17e228]
+                - cell "445,500 ل.س" [ref=f17e229]
+                - cell "0 ل.س" [ref=f17e230]
+                - cell "445,500 ل.س" [ref=f17e231]
+                - cell "غير مدفوع" [ref=f17e232]
+                - cell [ref=f17e234]:
+                  - button "كشف تفصيلي" [ref=f17e235] [cursor=pointer]
+                  - button "تسجيل دفعة" [ref=f17e236] [cursor=pointer]
+              - row [ref=f17e317]:
+                - cell "د. هالة النجار" [ref=f17e318]
+                - cell [ref=f17e319]:
+                  - paragraph [ref=f17e320]: 2026/09/05
+                  - paragraph [ref=f17e321]: حتى 2026/09/24
+                - cell "0 ل.س" [ref=f17e322]
+                - cell "258,750 ل.س" [ref=f17e323]
+                - cell "0 ل.س" [ref=f17e324]
+                - cell "258,750 ل.س" [ref=f17e325]
+                - cell "0 ل.س" [ref=f17e326]
+                - cell "258,750 ل.س" [ref=f17e327]
+                - cell "غير مدفوع" [ref=f17e328]
+                - cell [ref=f17e330]:
+                  - button "كشف تفصيلي" [ref=f17e331] [cursor=pointer]
+                  - button "تسجيل دفعة" [ref=f17e332] [cursor=pointer]

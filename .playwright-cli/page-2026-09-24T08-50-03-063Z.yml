@@ -1,0 +1,224 @@
+- generic [ref=f27e1]:
+  - link "الانتقال إلى المحتوى" [ref=f27e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f27e3]:
+    - banner [ref=f27e4]:
+      - generic [ref=f27e5]:
+        - button "فتح قائمة التنقل" [ref=f27e6] [cursor=pointer]
+        - generic [ref=f27e9]:
+          - paragraph [ref=f27e10]: مساحة العمل الآمنة
+          - heading "الإعدادات" [level=1] [ref=f27e11]
+        - button "الإشعارات" [ref=f27e13] [cursor=pointer]:
+          - generic [ref=f27e16]: 99+
+        - button "المواعيد القادمة" [ref=f27e18] [cursor=pointer]:
+          - generic [ref=f27e23]: "6"
+        - button "تفعيل المظهر الداكن" [active] [ref=f27e244] [cursor=pointer]
+    - main [ref=f27e28]:
+      - generic [ref=f27e30]:
+        - generic [ref=f27e32]:
+          - paragraph [ref=f27e33]: تهيئة النظام
+          - heading "الإعدادات" [level=1] [ref=f27e34]
+          - paragraph [ref=f27e35]: قيم العيادة الافتراضية التي تظهر في مختلف أجزاء النظام.
+        - generic [ref=f27e36]:
+          - generic [ref=f27e37]:
+            - heading "هوية العيادة" [level=2] [ref=f27e38]
+            - generic [ref=f27e39]:
+              - generic [ref=f27e40]:
+                - generic [ref=f27e41]: اسم العيادة *
+                - textbox "اسم العيادة *" [ref=f27e42]: عيادة الحياة
+              - generic [ref=f27e43]:
+                - generic [ref=f27e44]: الاسم المختصر *
+                - textbox "الاسم المختصر *" [ref=f27e45]: الحياة
+              - generic [ref=f27e46]:
+                - generic [ref=f27e47]: الهاتف
+                - textbox "الهاتف" [ref=f27e48]
+              - generic [ref=f27e49]:
+                - generic [ref=f27e50]: العنوان
+                - textbox "العنوان" [ref=f27e51]
+          - generic [ref=f27e52]:
+            - heading "التشغيل والمظهر" [level=2] [ref=f27e53]
+            - generic [ref=f27e54]:
+              - generic [ref=f27e55]:
+                - generic [ref=f27e56]: مدة الموعد الافتراضية
+                - spinbutton "مدة الموعد الافتراضية" [ref=f27e57]: "60"
+              - generic [ref=f27e58]:
+                - generic [ref=f27e59]: السمة الافتراضية
+                - combobox "السمة الافتراضية" [ref=f27e60]:
+                  - option "فاتحة — بحري وغابة" [selected]
+                  - option "داكنة — فحمي وناري"
+          - region [ref=f27e61]:
+            - generic [ref=f27e62]:
+              - paragraph [ref=f27e63]: الإطار التشغيلي للحجوزات
+              - heading "دوام العيادة" [level=2] [ref=f27e64]
+              - paragraph [ref=f27e65]: يجب أن يقع الموعد بالكامل داخل دوام العيادة وتوفر المعالج.
+            - generic [ref=f27e66]:
+              - article [ref=f27e67]:
+                - generic [ref=f27e68]:
+                  - strong [ref=f27e69]: الأحد
+                  - generic [ref=f27e70]:
+                    - checkbox "مفتوح" [checked] [ref=f27e71]
+                    - generic [ref=f27e72]: مفتوح
+                - generic [ref=f27e73]:
+                  - generic [ref=f27e74]:
+                    - generic [ref=f27e75]: من
+                    - textbox "من" [ref=f27e76]: 07:00
+                  - generic [ref=f27e77]:
+                    - generic [ref=f27e78]: إلى
+                    - textbox "إلى" [ref=f27e79]: 23:00
+              - article [ref=f27e80]:
+                - generic [ref=f27e81]:
+                  - strong [ref=f27e82]: الاثنين
+                  - generic [ref=f27e83]:
+                    - checkbox "مفتوح" [checked] [ref=f27e84]
+                    - generic [ref=f27e85]: مفتوح
+                - generic [ref=f27e86]:
+                  - generic [ref=f27e87]:
+                    - generic [ref=f27e88]: من
+                    - textbox "من" [ref=f27e89]: 07:00
+                  - generic [ref=f27e90]:
+                    - generic [ref=f27e91]: إلى
+                    - textbox "إلى" [ref=f27e92]: 23:00
+              - article [ref=f27e93]:
+                - generic [ref=f27e94]:
+                  - strong [ref=f27e95]: الثلاثاء
+                  - generic [ref=f27e96]:
+                    - checkbox "مفتوح" [checked] [ref=f27e97]
+                    - generic [ref=f27e98]: مفتوح
+                - generic [ref=f27e99]:
+                  - generic [ref=f27e100]:
+                    - generic [ref=f27e101]: من
+                    - textbox "من" [ref=f27e102]: 07:00
+                  - generic [ref=f27e103]:
+                    - generic [ref=f27e104]: إلى
+                    - textbox "إلى" [ref=f27e105]: 23:00
+              - article [ref=f27e106]:
+                - generic [ref=f27e107]:
+                  - strong [ref=f27e108]: الأربعاء
+                  - generic [ref=f27e109]:
+                    - checkbox "مفتوح" [checked] [ref=f27e110]
+                    - generic [ref=f27e111]: مفتوح
+                - generic [ref=f27e112]:
+                  - generic [ref=f27e113]:
+                    - generic [ref=f27e114]: من
+                    - textbox "من" [ref=f27e115]: 07:00
+                  - generic [ref=f27e116]:
+                    - generic [ref=f27e117]: إلى
+                    - textbox "إلى" [ref=f27e118]: 23:00
+              - article [ref=f27e119]:
+                - generic [ref=f27e120]:
+                  - strong [ref=f27e121]: الخميس
+                  - generic [ref=f27e122]:
+                    - checkbox "مفتوح" [checked] [ref=f27e123]
+                    - generic [ref=f27e124]: مفتوح
+                - generic [ref=f27e125]:
+                  - generic [ref=f27e126]:
+                    - generic [ref=f27e127]: من
+                    - textbox "من" [ref=f27e128]: 07:00
+                  - generic [ref=f27e129]:
+                    - generic [ref=f27e130]: إلى
+                    - textbox "إلى" [ref=f27e131]: 23:00
+              - article [ref=f27e132]:
+                - generic [ref=f27e133]:
+                  - strong [ref=f27e134]: الجمعة
+                  - generic [ref=f27e135]:
+                    - checkbox "مفتوح" [checked] [ref=f27e136]
+                    - generic [ref=f27e137]: مفتوح
+                - generic [ref=f27e138]:
+                  - generic [ref=f27e139]:
+                    - generic [ref=f27e140]: من
+                    - textbox "من" [ref=f27e141]: 07:00
+                  - generic [ref=f27e142]:
+                    - generic [ref=f27e143]: إلى
+                    - textbox "إلى" [ref=f27e144]: 23:00
+              - article [ref=f27e145]:
+                - generic [ref=f27e146]:
+                  - strong [ref=f27e147]: السبت
+                  - generic [ref=f27e148]:
+                    - checkbox "مفتوح" [checked] [ref=f27e149]
+                    - generic [ref=f27e150]: مفتوح
+                - generic [ref=f27e151]:
+                  - generic [ref=f27e152]:
+                    - generic [ref=f27e153]: من
+                    - textbox "من" [ref=f27e154]: 07:00
+                  - generic [ref=f27e155]:
+                    - generic [ref=f27e156]: إلى
+                    - textbox "إلى" [ref=f27e157]: 23:00
+          - generic [ref=f27e158]:
+            - generic [ref=f27e159]:
+              - generic [ref=f27e160]:
+                - paragraph [ref=f27e161]: قناة خارجية اختيارية
+                - heading "إعدادات تيلغرام" [level=2] [ref=f27e162]
+                - paragraph [ref=f27e163]: يُحفظ رمز البوت مشفّرًا، ولا يؤثر تعطل تيلغرام في العمليات الأساسية.
+              - generic [ref=f27e164]:
+                - checkbox "تفعيل تيلغرام" [ref=f27e165]
+                - generic [ref=f27e166]: تفعيل تيلغرام
+            - generic [ref=f27e167]:
+              - generic [ref=f27e168]:
+                - generic [ref=f27e169]: رمز البوت
+                - generic [ref=f27e170]:
+                  - textbox "رمز البوت إظهار" [ref=f27e171]:
+                    - /placeholder: أدخل Bot Token
+                  - button "إظهار" [ref=f27e172] [cursor=pointer]
+              - generic [ref=f27e173]:
+                - generic [ref=f27e174]: معرّف المحادثة الافتراضية
+                - textbox "معرّف المحادثة الافتراضية" [ref=f27e175]
+            - generic [ref=f27e176]:
+              - heading "مجموعات الإشعارات المرسلة إلى تيلغرام" [level=3] [ref=f27e177]
+              - generic [ref=f27e178]:
+                - generic [ref=f27e179]:
+                  - checkbox "المواعيد" [checked] [ref=f27e180]
+                  - generic [ref=f27e181]: المواعيد
+                - generic [ref=f27e182]:
+                  - checkbox "الجلسات" [checked] [ref=f27e183]
+                  - generic [ref=f27e184]: الجلسات
+                - generic [ref=f27e185]:
+                  - checkbox "الدفعات" [checked] [ref=f27e186]
+                  - generic [ref=f27e187]: الدفعات
+                - generic [ref=f27e188]:
+                  - checkbox "الاستردادات" [checked] [ref=f27e189]
+                  - generic [ref=f27e190]: الاستردادات
+                - generic [ref=f27e191]:
+                  - checkbox "المصروفات" [checked] [ref=f27e192]
+                  - generic [ref=f27e193]: المصروفات
+                - generic [ref=f27e194]:
+                  - checkbox "تسويات المعالجين" [checked] [ref=f27e195]
+                  - generic [ref=f27e196]: تسويات المعالجين
+                - generic [ref=f27e197]:
+                  - checkbox "الصناديق" [checked] [ref=f27e198]
+                  - generic [ref=f27e199]: الصناديق
+                - generic [ref=f27e200]:
+                  - checkbox "الإغلاق الأسبوعي" [checked] [ref=f27e201]
+                  - generic [ref=f27e202]: الإغلاق الأسبوعي
+                - generic [ref=f27e203]:
+                  - checkbox "المرضى الجدد" [checked] [ref=f27e204]
+                  - generic [ref=f27e205]: المرضى الجدد
+            - generic [ref=f27e206]:
+              - button "حفظ إعدادات تيلغرام" [ref=f27e207] [cursor=pointer]
+              - button "إرسال رسالة تجريبية" [ref=f27e208] [cursor=pointer]
+          - region [ref=f27e209]:
+            - generic [ref=f27e210]:
+              - paragraph [ref=f27e211]: الشعار وأيقونة التطبيق
+              - heading "الهوية البصرية" [level=2] [ref=f27e212]
+              - paragraph [ref=f27e213]: ملفات آمنة تظهر في تسجيل الدخول والقائمة الجانبية وعنوان المتصفح.
+            - generic [ref=f27e214]:
+              - article [ref=f27e215]:
+                - generic [ref=f27e216]:
+                  - link [ref=f27e218] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/dashboard
+                  - generic [ref=f27e225]:
+                    - heading "شعار العيادة" [level=3] [ref=f27e226]
+                    - paragraph [ref=f27e227]: PNG أو JPG أو WEBP، حتى 2MB.
+                - generic [ref=f27e228] [cursor=pointer]:
+                  - generic [ref=f27e229]: اختيار ملف الشعار
+                  - button "اختيار ملف الشعار" [ref=f27e230]
+              - article [ref=f27e231]:
+                - generic [ref=f27e232]:
+                  - generic [ref=f27e233]: ✦
+                  - generic [ref=f27e235]:
+                    - heading "أيقونة التطبيق" [level=3] [ref=f27e236]
+                    - paragraph [ref=f27e237]: PNG أو ICO أو WEBP، حتى 512KB.
+                - generic [ref=f27e238] [cursor=pointer]:
+                  - generic [ref=f27e239]: اختيار ملف الأيقونة
+                  - button "اختيار ملف الأيقونة" [ref=f27e240]
+            - button "حفظ الهوية البصرية" [ref=f27e241] [cursor=pointer]
+          - button "حفظ الإعدادات" [ref=f27e243] [cursor=pointer]

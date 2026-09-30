@@ -1,0 +1,506 @@
+- generic [active] [ref=f5e182]:
+  - link "الانتقال إلى المحتوى" [ref=f5e183] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f5e184]:
+    - generic [ref=f5e185]:
+      - link "عيادة الحياة" [ref=f5e187] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f5e196]:
+        - generic [ref=f5e197]:
+          - generic [ref=f5e198]:
+            - heading "التشغيل اليومي" [level=2] [ref=f5e199]
+            - generic [ref=f5e201]:
+              - link "لوحة التشغيل" [ref=f5e202] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f5e207] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f5e213] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f5e220] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f5e226]:
+            - heading "المرضى" [level=2] [ref=f5e227]
+            - generic [ref=f5e228]:
+              - link "ملفات المرضى" [ref=f5e229] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f5e236] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f5e242]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f5e243]
+            - link "التوفر والدوام" [ref=f5e245] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f5e251]:
+            - heading "المالية والتقارير" [level=2] [ref=f5e252]
+            - link "المصروفات" [ref=f5e254] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f5e260]:
+            - heading "إدارة النظام" [level=2] [ref=f5e261]
+            - link "الغرف" [ref=f5e263] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f5e268]:
+        - button "تسجيل الخروج" [ref=f5e270] [cursor=pointer]
+        - paragraph [ref=f5e274]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f5e275]:
+    - banner [ref=f5e276]:
+      - generic [ref=f5e277]:
+        - button "طي القائمة الجانبية" [ref=f5e278] [cursor=pointer]
+        - generic [ref=f5e281]:
+          - paragraph [ref=f5e282]: مساحة العمل الآمنة
+          - heading "المواعيد" [level=1] [ref=f5e283]
+        - button "الإشعارات" [ref=f5e285] [cursor=pointer]:
+          - generic [ref=f5e288]: 99+
+        - button "المواعيد القادمة" [ref=f5e290] [cursor=pointer]:
+          - generic [ref=f5e295]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f5e296] [cursor=pointer]
+        - generic [ref=f5e300]:
+          - generic [ref=f5e301]: ل
+          - generic [ref=f5e302]:
+            - paragraph [ref=f5e303]: لينا منصور — السكرتارية
+            - paragraph [ref=f5e304]: السكرتارية
+    - main [ref=f5e305]:
+      - generic [ref=f5e306]:
+        - status [ref=f5e309]:
+          - paragraph [ref=f5e313]: تم حجز الموعد بنجاح.
+          - button "إخفاء الرسالة" [ref=f5e314] [cursor=pointer]
+        - generic [ref=f5e317]:
+          - generic [ref=f5e318]:
+            - generic [ref=f5e319]:
+              - paragraph [ref=f5e320]: التشغيل اليومي
+              - heading "المواعيد" [level=1] [ref=f5e321]
+              - paragraph [ref=f5e322]: الموعد للحجز والتنظيم فقط؛ الأثر المالي يبدأ من الجلسة والدفع.
+            - generic [ref=f5e323]:
+              - link "عرض التقويم" [ref=f5e324] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "موعد جديد" [ref=f5e325] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/create
+          - generic [ref=f5e326]:
+            - generic [ref=f5e327]:
+              - generic [ref=f5e328]: البحث عن مريض
+              - searchbox "البحث عن مريض" [ref=f5e329]
+            - generic [ref=f5e330]:
+              - generic [ref=f5e331]: من
+              - textbox "من" [ref=f5e332]: 2026-09-24
+            - generic [ref=f5e333]:
+              - generic [ref=f5e334]: إلى
+              - textbox "إلى" [ref=f5e335]: 2026-10-08
+            - generic [ref=f5e336]:
+              - generic [ref=f5e337]: الطبيب / المعالج
+              - combobox "الطبيب / المعالج" [ref=f5e338]:
+                - option "الكل" [selected]
+                - option "أ. سامر العلي"
+                - option "أ. ليلى شاهين"
+                - option "أ. نور منصور"
+                - option "د. ريم الأحمد"
+                - option "د. محمد خالد"
+                - option "د. هالة النجار"
+            - generic [ref=f5e339]:
+              - generic [ref=f5e340]: الغرفة
+              - combobox "الغرفة" [ref=f5e341]:
+                - option "كل الغرف" [selected]
+                - option "غرفة 1 — العلاج الفردي"
+                - option "غرفة 2 — العلاج الفردي"
+                - option "غرفة 3 — الجلسات الجماعية والأسرية"
+            - generic [ref=f5e342]:
+              - generic [ref=f5e343]: الحالة
+              - combobox "الحالة" [ref=f5e344]:
+                - option "كل الحالات" [selected]
+                - option "مجدول"
+                - option "حضر"
+                - option "مكتمل"
+                - option "ملغى"
+                - option "لم يحضر"
+                - option "أعيدت جدولته"
+          - table [ref=f5e346]:
+            - rowgroup [ref=f5e347]:
+              - row [ref=f5e348]:
+                - columnheader "الموعد" [ref=f5e349]
+                - columnheader "المريض / المرضى" [ref=f5e350]
+                - columnheader "المعالج" [ref=f5e351]
+                - columnheader "الغرفة والعلاج" [ref=f5e352]
+                - columnheader "الحالة" [ref=f5e353]
+                - columnheader "الإجراء" [ref=f5e354]
+            - rowgroup [ref=f5e355]:
+              - row [ref=f5e356]:
+                - cell [ref=f5e357]:
+                  - paragraph [ref=f5e358]: السبت 03/10/2026
+                  - paragraph [ref=f5e359]: 11:00 ص — 12:00 م
+                - cell [ref=f5e360]:
+                  - paragraph [ref=f5e361]: أحمد مازن العلي
+                  - paragraph [ref=f5e362]: فردية · 1 مريض
+                - cell "د. هالة النجار" [ref=f5e363]
+                - cell [ref=f5e364]:
+                  - paragraph [ref=f5e365]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e366]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e367]
+                - cell [ref=f5e369]:
+                  - generic [ref=f5e370]:
+                    - button "حضر" [ref=f5e371] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e375] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e379] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/160/reschedule
+                    - button "إلغاء" [ref=f5e383] [cursor=pointer]
+              - row [ref=f5e386]:
+                - cell [ref=f5e387]:
+                  - paragraph [ref=f5e388]: السبت 03/10/2026
+                  - paragraph [ref=f5e389]: 11:00 ص — 12:00 م
+                - cell [ref=f5e390]:
+                  - paragraph [ref=f5e391]: مريم فراس الحسن
+                  - paragraph [ref=f5e392]: فردية · 1 مريض
+                - cell "أ. ليلى شاهين" [ref=f5e393]
+                - cell [ref=f5e394]:
+                  - paragraph [ref=f5e395]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e396]: جلسة علاج نطق
+                - cell "مجدول" [ref=f5e397]
+                - cell [ref=f5e399]:
+                  - generic [ref=f5e400]:
+                    - button "حضر" [ref=f5e401] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e405] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e409] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/159/reschedule
+                    - button "إلغاء" [ref=f5e413] [cursor=pointer]
+              - row [ref=f5e416]:
+                - cell [ref=f5e417]:
+                  - paragraph [ref=f5e418]: السبت 03/10/2026
+                  - paragraph [ref=f5e419]: 11:00 ص — 12:00 م
+                - cell [ref=f5e420]:
+                  - paragraph [ref=f5e421]: كريم نزار الحسن
+                  - paragraph [ref=f5e422]: فردية · 1 مريض
+                - cell "أ. نور منصور" [ref=f5e423]
+                - cell [ref=f5e424]:
+                  - paragraph [ref=f5e425]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e426]: جلسة علاج سلوكي
+                - cell "مجدول" [ref=f5e427]
+                - cell [ref=f5e429]:
+                  - generic [ref=f5e430]:
+                    - button "حضر" [ref=f5e431] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e435] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e439] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/158/reschedule
+                    - button "إلغاء" [ref=f5e443] [cursor=pointer]
+              - row [ref=f5e446]:
+                - cell [ref=f5e447]:
+                  - paragraph [ref=f5e448]: السبت 03/10/2026
+                  - paragraph [ref=f5e449]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e450]:
+                  - paragraph [ref=f5e451]: تالا سليم الحسن
+                  - paragraph [ref=f5e452]: فردية · 1 مريض
+                - cell "أ. سامر العلي" [ref=f5e453]
+                - cell [ref=f5e454]:
+                  - paragraph [ref=f5e455]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e456]: جلسة علاج نطق
+                - cell "مجدول" [ref=f5e457]
+                - cell [ref=f5e459]:
+                  - generic [ref=f5e460]:
+                    - button "حضر" [ref=f5e461] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e465] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e469] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/157/reschedule
+                    - button "إلغاء" [ref=f5e473] [cursor=pointer]
+              - row [ref=f5e476]:
+                - cell [ref=f5e477]:
+                  - paragraph [ref=f5e478]: السبت 03/10/2026
+                  - paragraph [ref=f5e479]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e480]:
+                  - paragraph [ref=f5e481]: نور ياسر الحسن، تالا عماد الخطيب، كريم نزار شاهين
+                  - paragraph [ref=f5e482]: جماعية · 3 مريض
+                - cell "د. ريم الأحمد" [ref=f5e483]
+                - cell [ref=f5e484]:
+                  - paragraph [ref=f5e485]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e486]: جلسة علاج جماعي
+                - cell "مجدول" [ref=f5e487]
+                - cell [ref=f5e489]:
+                  - generic [ref=f5e490]:
+                    - button "حضر" [ref=f5e491] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e495] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e499] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/156/reschedule
+                    - button "إلغاء" [ref=f5e503] [cursor=pointer]
+              - row [ref=f5e506]:
+                - cell [ref=f5e507]:
+                  - paragraph [ref=f5e508]: السبت 03/10/2026
+                  - paragraph [ref=f5e509]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e510]:
+                  - paragraph [ref=f5e511]: يزن خالد الحسن
+                  - paragraph [ref=f5e512]: فردية · 1 مريض
+                - cell "د. محمد خالد" [ref=f5e513]
+                - cell [ref=f5e514]:
+                  - paragraph [ref=f5e515]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e516]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e517]
+                - cell [ref=f5e519]:
+                  - generic [ref=f5e520]:
+                    - button "حضر" [ref=f5e521] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e525] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e529] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/155/reschedule
+                    - button "إلغاء" [ref=f5e533] [cursor=pointer]
+              - row [ref=f5e536]:
+                - cell [ref=f5e537]:
+                  - paragraph [ref=f5e538]: الخميس 01/10/2026
+                  - paragraph [ref=f5e539]: 11:00 ص — 12:00 م
+                - cell [ref=f5e540]:
+                  - paragraph [ref=f5e541]: ريم محمود الحسن
+                  - paragraph [ref=f5e542]: فردية · 1 مريض
+                - cell "د. هالة النجار" [ref=f5e543]
+                - cell [ref=f5e544]:
+                  - paragraph [ref=f5e545]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e546]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e547]
+                - cell [ref=f5e549]:
+                  - generic [ref=f5e550]:
+                    - button "حضر" [ref=f5e551] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e555] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e559] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/154/reschedule
+                    - button "إلغاء" [ref=f5e563] [cursor=pointer]
+              - row [ref=f5e566]:
+                - cell [ref=f5e567]:
+                  - paragraph [ref=f5e568]: الخميس 01/10/2026
+                  - paragraph [ref=f5e569]: 11:00 ص — 12:00 م
+                - cell [ref=f5e570]:
+                  - paragraph [ref=f5e571]: عمر عماد الحسن
+                  - paragraph [ref=f5e572]: فردية · 1 مريض
+                - cell "أ. ليلى شاهين" [ref=f5e573]
+                - cell [ref=f5e574]:
+                  - paragraph [ref=f5e575]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e576]: جلسة علاج نطق
+                - cell "ملغى" [ref=f5e577]
+                - cell "لا إجراء" [ref=f5e579]
+              - row [ref=f5e582]:
+                - cell [ref=f5e583]:
+                  - paragraph [ref=f5e584]: الخميس 01/10/2026
+                  - paragraph [ref=f5e585]: 11:00 ص — 12:00 م
+                - cell [ref=f5e586]:
+                  - paragraph [ref=f5e587]: ليان مازن الحسن
+                  - paragraph [ref=f5e588]: فردية · 1 مريض
+                - cell "أ. نور منصور" [ref=f5e589]
+                - cell [ref=f5e590]:
+                  - paragraph [ref=f5e591]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e592]: جلسة علاج سلوكي
+                - cell "مجدول" [ref=f5e593]
+                - cell [ref=f5e595]:
+                  - generic [ref=f5e596]:
+                    - button "حضر" [ref=f5e597] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e601] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e605] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/152/reschedule
+                    - button "إلغاء" [ref=f5e609] [cursor=pointer]
+              - row [ref=f5e612]:
+                - cell [ref=f5e613]:
+                  - paragraph [ref=f5e614]: الخميس 01/10/2026
+                  - paragraph [ref=f5e615]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e616]:
+                  - paragraph [ref=f5e617]: سارة فراس الحسن
+                  - paragraph [ref=f5e618]: فردية · 1 مريض
+                - cell "أ. سامر العلي" [ref=f5e619]
+                - cell [ref=f5e620]:
+                  - paragraph [ref=f5e621]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e622]: جلسة علاج نطق
+                - cell "مجدول" [ref=f5e623]
+                - cell [ref=f5e625]:
+                  - generic [ref=f5e626]:
+                    - button "حضر" [ref=f5e627] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e631] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e635] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/151/reschedule
+                    - button "إلغاء" [ref=f5e639] [cursor=pointer]
+              - row [ref=f5e642]:
+                - cell [ref=f5e643]:
+                  - paragraph [ref=f5e644]: الخميس 01/10/2026
+                  - paragraph [ref=f5e645]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e646]:
+                  - paragraph [ref=f5e647]: أحمد نزار الحسن
+                  - paragraph [ref=f5e648]: فردية · 1 مريض
+                - cell "د. ريم الأحمد" [ref=f5e649]
+                - cell [ref=f5e650]:
+                  - paragraph [ref=f5e651]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e652]: جلسة علاج أسري
+                - cell "مجدول" [ref=f5e653]
+                - cell [ref=f5e655]:
+                  - generic [ref=f5e656]:
+                    - button "حضر" [ref=f5e657] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e661] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e665] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/150/reschedule
+                    - button "إلغاء" [ref=f5e669] [cursor=pointer]
+              - row [ref=f5e672]:
+                - cell [ref=f5e673]:
+                  - paragraph [ref=f5e674]: الخميس 01/10/2026
+                  - paragraph [ref=f5e675]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e676]:
+                  - paragraph [ref=f5e677]: مريم سليم درويش
+                  - paragraph [ref=f5e678]: فردية · 1 مريض
+                - cell "د. محمد خالد" [ref=f5e679]
+                - cell [ref=f5e680]:
+                  - paragraph [ref=f5e681]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e682]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e683]
+                - cell [ref=f5e685]:
+                  - generic [ref=f5e686]:
+                    - button "حضر" [ref=f5e687] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e691] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e695] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/149/reschedule
+                    - button "إلغاء" [ref=f5e699] [cursor=pointer]
+              - row [ref=f5e702]:
+                - cell [ref=f5e703]:
+                  - paragraph [ref=f5e704]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e705]: 11:00 ص — 12:00 م
+                - cell [ref=f5e706]:
+                  - paragraph [ref=f5e707]: كريم ياسر درويش
+                  - paragraph [ref=f5e708]: فردية · 1 مريض
+                - cell "د. هالة النجار" [ref=f5e709]
+                - cell [ref=f5e710]:
+                  - paragraph [ref=f5e711]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e712]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e713]
+                - cell [ref=f5e715]:
+                  - generic [ref=f5e716]:
+                    - button "حضر" [ref=f5e717] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e721] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e725] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/148/reschedule
+                    - button "إلغاء" [ref=f5e729] [cursor=pointer]
+              - row [ref=f5e732]:
+                - cell [ref=f5e733]:
+                  - paragraph [ref=f5e734]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e735]: 11:00 ص — 12:00 م
+                - cell [ref=f5e736]:
+                  - paragraph [ref=f5e737]: تالا خالد درويش
+                  - paragraph [ref=f5e738]: فردية · 1 مريض
+                - cell "أ. ليلى شاهين" [ref=f5e739]
+                - cell [ref=f5e740]:
+                  - paragraph [ref=f5e741]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e742]: جلسة علاج نطق
+                - cell "مجدول" [ref=f5e743]
+                - cell [ref=f5e745]:
+                  - generic [ref=f5e746]:
+                    - button "حضر" [ref=f5e747] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e751] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e755] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/147/reschedule
+                    - button "إلغاء" [ref=f5e759] [cursor=pointer]
+              - row [ref=f5e762]:
+                - cell [ref=f5e763]:
+                  - paragraph [ref=f5e764]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e765]: 11:00 ص — 12:00 م
+                - cell [ref=f5e766]:
+                  - paragraph [ref=f5e767]: نور محمود درويش
+                  - paragraph [ref=f5e768]: فردية · 1 مريض
+                - cell "أ. نور منصور" [ref=f5e769]
+                - cell [ref=f5e770]:
+                  - paragraph [ref=f5e771]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e772]: جلسة علاج سلوكي
+                - cell "مجدول" [ref=f5e773]
+                - cell [ref=f5e775]:
+                  - generic [ref=f5e776]:
+                    - button "حضر" [ref=f5e777] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e781] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e785] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/146/reschedule
+                    - button "إلغاء" [ref=f5e789] [cursor=pointer]
+              - row [ref=f5e792]:
+                - cell [ref=f5e793]:
+                  - paragraph [ref=f5e794]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e795]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e796]:
+                  - paragraph [ref=f5e797]: يزن عماد درويش
+                  - paragraph [ref=f5e798]: فردية · 1 مريض
+                - cell "أ. سامر العلي" [ref=f5e799]
+                - cell [ref=f5e800]:
+                  - paragraph [ref=f5e801]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e802]: جلسة علاج نطق
+                - cell "مجدول" [ref=f5e803]
+                - cell [ref=f5e805]:
+                  - generic [ref=f5e806]:
+                    - button "حضر" [ref=f5e807] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e811] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e815] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/145/reschedule
+                    - button "إلغاء" [ref=f5e819] [cursor=pointer]
+              - row [ref=f5e822]:
+                - cell [ref=f5e823]:
+                  - paragraph [ref=f5e824]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e825]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e826]:
+                  - paragraph [ref=f5e827]: ريم مازن درويش
+                  - paragraph [ref=f5e828]: فردية · 1 مريض
+                - cell "د. ريم الأحمد" [ref=f5e829]
+                - cell [ref=f5e830]:
+                  - paragraph [ref=f5e831]: غرفة 2 — العلاج الفردي
+                  - paragraph [ref=f5e832]: جلسة علاج أسري
+                - cell "مجدول" [ref=f5e833]
+                - cell [ref=f5e835]:
+                  - generic [ref=f5e836]:
+                    - button "حضر" [ref=f5e837] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e841] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e845] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/144/reschedule
+                    - button "إلغاء" [ref=f5e849] [cursor=pointer]
+              - row [ref=f5e852]:
+                - cell [ref=f5e853]:
+                  - paragraph [ref=f5e854]: الأربعاء 30/09/2026
+                  - paragraph [ref=f5e855]: 09:00 ص — 10:00 ص
+                - cell [ref=f5e856]:
+                  - paragraph [ref=f5e857]: عمر فراس درويش
+                  - paragraph [ref=f5e858]: فردية · 1 مريض
+                - cell "د. محمد خالد" [ref=f5e859]
+                - cell [ref=f5e860]:
+                  - paragraph [ref=f5e861]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e862]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e863]
+                - cell [ref=f5e865]:
+                  - generic [ref=f5e866]:
+                    - button "حضر" [ref=f5e867] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e871] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e875] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/143/reschedule
+                    - button "إلغاء" [ref=f5e879] [cursor=pointer]
+              - row [ref=f5e882]:
+                - cell [ref=f5e883]:
+                  - paragraph [ref=f5e884]: الثلاثاء 29/09/2026
+                  - paragraph [ref=f5e885]: 12:00 م — 01:00 م
+                - cell [ref=f5e886]:
+                  - paragraph [ref=f5e887]: أحمد ياسر درويش
+                  - paragraph [ref=f5e888]: فردية · 1 مريض
+                - cell "أ. نور منصور" [ref=f5e889]
+                - cell [ref=f5e890]:
+                  - paragraph [ref=f5e891]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e892]: جلسة علاج سلوكي
+                - cell "مجدول" [ref=f5e893]
+                - cell [ref=f5e895]:
+                  - generic [ref=f5e896]:
+                    - button "حضر" [ref=f5e897] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e901] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e905] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/140/reschedule
+                    - button "إلغاء" [ref=f5e909] [cursor=pointer]
+              - row [ref=f5e912]:
+                - cell [ref=f5e913]:
+                  - paragraph [ref=f5e914]: الثلاثاء 29/09/2026
+                  - paragraph [ref=f5e915]: 11:00 ص — 12:00 م
+                - cell [ref=f5e916]:
+                  - paragraph [ref=f5e917]: ليان نزار درويش
+                  - paragraph [ref=f5e918]: فردية · 1 مريض
+                - cell "د. هالة النجار" [ref=f5e919]
+                - cell [ref=f5e920]:
+                  - paragraph [ref=f5e921]: غرفة 3 — الجلسات الجماعية والأسرية
+                  - paragraph [ref=f5e922]: جلسة علاج نفسي فردي
+                - cell "ملغى" [ref=f5e923]
+                - cell "لا إجراء" [ref=f5e925]
+          - navigation "التنقل بين الصفحات" [ref=f5e928]:
+            - paragraph [ref=f5e929]:
+              - text: عرض
+              - strong [ref=f5e930]: "1"
+              - text: إلى
+              - strong [ref=f5e931]: "20"
+              - text: من أصل
+              - strong [ref=f5e932]: "52"
+              - text: نتيجة
+            - generic [ref=f5e933]:
+              - generic [ref=f5e934]: السابق
+              - generic [ref=f5e937]:
+                - generic "الصفحة الحالية، 1" [ref=f5e938]: "1"
+                - button "الانتقال إلى الصفحة 2" [ref=f5e939] [cursor=pointer]: "2"
+                - button "الانتقال إلى الصفحة 3" [ref=f5e940] [cursor=pointer]: "3"
+              - button "الصفحة التالية" [ref=f5e941] [cursor=pointer]: التالي

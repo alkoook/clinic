@@ -1,0 +1,222 @@
+- generic [ref=f7e1]:
+  - link "الانتقال إلى المحتوى" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "عيادة الحياة" [ref=f7e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f7e15]:
+        - generic [ref=f7e16]:
+          - generic [ref=f7e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f7e18]
+            - generic [ref=f7e19]:
+              - link "لوحة التشغيل" [ref=f7e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f7e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f7e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f7e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f7e44]:
+            - heading "المرضى" [level=2] [ref=f7e45]
+            - generic [ref=f7e46]:
+              - link "ملفات المرضى" [ref=f7e47] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f7e54] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f7e60]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f7e61]
+            - generic [ref=f7e62]:
+              - link "الأطباء والمعالجون" [ref=f7e63] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners
+              - link "التوفر والدوام" [ref=f7e70] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f7e76]:
+            - heading "المالية والتقارير" [level=2] [ref=f7e77]
+            - generic [ref=f7e78]:
+              - link "المصروفات" [ref=f7e79] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/expenses
+              - link "الاتفاقات المالية" [ref=f7e85] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/agreements
+              - link "الصناديق" [ref=f7e91] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+              - link "الإغلاق الأسبوعي" [ref=f7e97] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/weekly-closing
+              - link "المستحقات" [ref=f7e104] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f7e110] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+          - generic [ref=f7e116]:
+            - heading "إدارة النظام" [level=2] [ref=f7e117]
+            - generic [ref=f7e118]:
+              - link "الاختصاصات" [ref=f7e119] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/specialties
+              - link "أنواع العلاج" [ref=f7e125] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/treatment-types
+              - link "الغرف" [ref=f7e131] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/rooms
+              - link "المستخدمون" [ref=f7e136] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/users
+              - link "سجل التدقيق" [ref=f7e142] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/audit-log
+              - link "الإعدادات" [ref=f7e148] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/settings
+      - generic [ref=f7e154]:
+        - button "تسجيل الخروج" [ref=f7e156] [cursor=pointer]
+        - paragraph [ref=f7e160]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f7e161]:
+    - banner [ref=f7e162]:
+      - generic [ref=f7e163]:
+        - button "طي القائمة الجانبية" [ref=f7e164] [cursor=pointer]
+        - generic [ref=f7e167]:
+          - paragraph [ref=f7e168]: مساحة العمل الآمنة
+          - heading "ملف مريض تدقيق" [level=1] [ref=f7e169]
+        - button "الإشعارات" [ref=f7e171] [cursor=pointer]:
+          - generic [ref=f7e174]: 99+
+        - button "المواعيد القادمة" [ref=f7e176] [cursor=pointer]:
+          - generic [ref=f7e181]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f7e182] [cursor=pointer]
+        - generic [ref=f7e186]:
+          - generic [ref=f7e187]: م
+          - generic [ref=f7e188]:
+            - paragraph [ref=f7e189]: مدير عيادة الحياة
+            - paragraph [ref=f7e190]: المدير العام
+    - main [ref=f7e191]:
+      - generic [ref=f7e193]:
+        - generic [ref=f7e194]:
+          - generic [ref=f7e195]:
+            - paragraph [ref=f7e196]: ملف رقم 15
+            - heading "مريض تدقيق" [level=1] [ref=f7e197]
+            - paragraph [ref=f7e198]: لا يوجد رقم هاتف · من طرف العيادة
+          - generic [ref=f7e199]:
+            - link "تعديل الملف" [ref=f7e200] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/patients/81/edit
+            - link "المرضى" [ref=f7e201] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/patients
+        - generic [ref=f7e202]:
+          - article [ref=f7e203]:
+            - heading "بيانات المريض" [level=2] [ref=f7e204]
+            - generic [ref=f7e205]:
+              - generic [ref=f7e206]:
+                - term [ref=f7e207]: المرافق
+                - definition [ref=f7e208]: —
+              - generic [ref=f7e209]:
+                - term [ref=f7e210]: المستشفى المحوّل منه
+                - definition [ref=f7e211]: —
+              - generic [ref=f7e212]:
+                - term [ref=f7e213]: المعالج المحوّل
+                - definition [ref=f7e214]: —
+              - generic [ref=f7e215]:
+                - term [ref=f7e216]: المعالج الحالي
+                - definition [ref=f7e217]: د. محمد خالد
+              - generic [ref=f7e218]:
+                - term [ref=f7e219]: الجهة المحوّل إليها
+                - definition [ref=f7e220]: —
+              - generic [ref=f7e221]:
+                - term [ref=f7e222]: تاريخ التحويل الخارجي
+                - definition [ref=f7e223]: —
+          - article [ref=f7e224]:
+            - heading "ملاحظات" [level=2] [ref=f7e225]
+            - paragraph [ref=f7e226]: لا توجد ملاحظات إدارية.
+        - generic [ref=f7e227]:
+          - heading "المواعيد" [level=2] [ref=f7e228]
+          - table [ref=f7e230]:
+            - rowgroup [ref=f7e231]:
+              - row [ref=f7e232]:
+                - columnheader "التاريخ" [ref=f7e233]
+                - columnheader "المعالج" [ref=f7e234]
+                - columnheader "الغرفة" [ref=f7e235]
+                - columnheader "الخدمة" [ref=f7e236]
+                - columnheader "الحالة" [ref=f7e237]
+            - rowgroup [ref=f7e238]:
+              - row [ref=f7e239]:
+                - cell "2026/09/26 19:00" [ref=f7e240]
+                - cell "د. محمد خالد" [ref=f7e241]
+                - cell "غرفة 1 — العلاج الفردي" [ref=f7e242]
+                - cell "جلسة علاج نفسي فردي" [ref=f7e243]
+                - cell "مجدول" [ref=f7e244]
+        - generic [ref=f7e246]:
+          - heading "الجلسات والمدفوعات" [level=2] [ref=f7e247]
+          - table [ref=f7e249]:
+            - rowgroup [ref=f7e250]:
+              - row [ref=f7e251]:
+                - columnheader "الجلسة" [ref=f7e252]
+                - columnheader "التاريخ" [ref=f7e253]
+                - columnheader "الإجمالي" [ref=f7e254]
+                - columnheader "الخصم" [ref=f7e255]
+                - columnheader "حالة الدفع" [ref=f7e256]
+            - rowgroup [ref=f7e257]:
+              - row [ref=f7e258]:
+                - cell "لم تُنشأ جلسات لهذا المريض." [ref=f7e259]
+        - generic [ref=f7e261]:
+          - generic [ref=f7e262]:
+            - heading "الملفات والمرفقات" [level=2] [ref=f7e263]
+            - generic [ref=f7e264]:
+              - article [ref=f7e265]:
+                - generic [ref=f7e266]:
+                  - generic [ref=f7e267]:
+                    - paragraph [ref=f7e268]: handover.txt
+                    - paragraph [ref=f7e269]: TXT · 0.1 ك.ب · الخميس 24/09/2026
+                    - paragraph [ref=f7e270]: ملف عام للمريض · رفعه لينا منصور — السكرتارية
+                  - generic [ref=f7e271]:
+                    - generic [ref=f7e272]: لا تتوفر معاينة
+                    - link "تنزيل" [ref=f7e273] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/4
+              - article [ref=f7e274]:
+                - generic [ref=f7e275]:
+                  - generic [ref=f7e276]:
+                    - paragraph [ref=f7e277]: handover.pdf
+                    - paragraph [ref=f7e278]: PDF · 0.1 ك.ب · الخميس 24/09/2026
+                    - paragraph [ref=f7e279]: ملف عام للمريض · رفعه لينا منصور — السكرتارية
+                  - generic [ref=f7e280]:
+                    - link "معاينة" [active] [ref=f7e281] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/1/preview
+                    - link "تنزيل" [ref=f7e282] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/1
+              - article [ref=f7e283]:
+                - generic [ref=f7e284]:
+                  - generic [ref=f7e285]:
+                    - paragraph [ref=f7e286]: handover.png
+                    - paragraph [ref=f7e287]: PNG · 56.9 ك.ب · الخميس 24/09/2026
+                    - paragraph [ref=f7e288]: ملف عام للمريض · رفعه لينا منصور — السكرتارية
+                  - generic [ref=f7e289]:
+                    - link "معاينة" [ref=f7e290] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/2/preview
+                    - link "تنزيل" [ref=f7e291] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/2
+              - article [ref=f7e292]:
+                - generic [ref=f7e293]:
+                  - generic [ref=f7e294]:
+                    - paragraph [ref=f7e295]: handover.txt
+                    - paragraph [ref=f7e296]: TXT · 0.1 ك.ب · الخميس 24/09/2026
+                    - paragraph [ref=f7e297]: ملف عام للمريض · رفعه لينا منصور — السكرتارية
+                  - generic [ref=f7e298]:
+                    - generic [ref=f7e299]: لا تتوفر معاينة
+                    - link "تنزيل" [ref=f7e300] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/patients/81/attachments/3
+          - generic [ref=f7e301]:
+            - generic [ref=f7e302]:
+              - heading "رفع مرفق" [level=2] [ref=f7e303]
+              - paragraph [ref=f7e304]: العنوان والوصف والجلسة اختيارية. تُحفظ الملفات في التخزين الخاص فقط.
+            - generic [ref=f7e305]:
+              - generic [ref=f7e306]: العنوان (اختياري)
+              - textbox "العنوان (اختياري)" [ref=f7e307]:
+                - /placeholder: يُستخدم اسم الملف إن تُرك فارغًا
+            - generic [ref=f7e308]:
+              - generic [ref=f7e309]: ربط بجلسة (اختياري)
+              - combobox "ربط بجلسة (اختياري)" [ref=f7e310]:
+                - option "دون ربط" [selected]
+            - generic [ref=f7e311]:
+              - generic [ref=f7e312]: الملفات
+              - paragraph [ref=f7e313]: يمكن رفع عدة ملفات — حتى 25 م.ب لكل ملف
+              - generic [ref=f7e314] [cursor=pointer]:
+                - button "Choose File" [ref=f7e315]
+                - generic [ref=f7e316]:
+                  - paragraph [ref=f7e319]: اسحب الملفات هنا
+                  - button "اختيار الملفات" [ref=f7e320]
+            - generic [ref=f7e321]:
+              - generic [ref=f7e322]: الوصف (اختياري)
+              - textbox "الوصف (اختياري)" [ref=f7e323]:
+                - /placeholder: تفاصيل إضافية عن المرفق…
+            - button "رفع إلى التخزين الخاص" [ref=f7e324] [cursor=pointer]

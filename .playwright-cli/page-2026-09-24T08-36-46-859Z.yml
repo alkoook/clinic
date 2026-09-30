@@ -1,0 +1,131 @@
+- generic [active] [ref=f5e1]:
+  - link "الانتقال إلى المحتوى" [ref=f5e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f5e3]:
+    - generic [ref=f5e4]:
+      - link "عيادة الحياة" [ref=f5e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f5e15]:
+        - generic [ref=f5e16]:
+          - generic [ref=f5e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f5e18]
+            - generic [ref=f5e19]:
+              - link "لوحة التشغيل" [ref=f5e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f5e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f5e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f5e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f5e44]:
+            - heading "المرضى" [level=2] [ref=f5e45]
+            - generic [ref=f5e46]:
+              - link "ملفات المرضى" [ref=f5e47] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f5e54] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f5e60]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f5e61]
+            - link "التوفر والدوام" [ref=f5e63] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f5e69]:
+            - heading "المالية والتقارير" [level=2] [ref=f5e70]
+            - link "المصروفات" [ref=f5e72] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f5e78]:
+            - heading "إدارة النظام" [level=2] [ref=f5e79]
+            - link "الغرف" [ref=f5e81] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f5e86]:
+        - button "تسجيل الخروج" [ref=f5e88] [cursor=pointer]
+        - paragraph [ref=f5e92]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f5e93]:
+    - banner [ref=f5e94]:
+      - generic [ref=f5e95]:
+        - button "طي القائمة الجانبية" [ref=f5e96] [cursor=pointer]
+        - generic [ref=f5e99]:
+          - paragraph [ref=f5e100]: مساحة العمل الآمنة
+          - heading "حجز موعد" [level=1] [ref=f5e101]
+        - button "الإشعارات" [ref=f5e103] [cursor=pointer]:
+          - generic [ref=f5e106]: 99+
+        - button "المواعيد القادمة" [ref=f5e108] [cursor=pointer]:
+          - generic [ref=f5e113]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f5e114] [cursor=pointer]
+        - generic [ref=f5e118]:
+          - generic [ref=f5e119]: ل
+          - generic [ref=f5e120]:
+            - paragraph [ref=f5e121]: لينا منصور — السكرتارية
+            - paragraph [ref=f5e122]: السكرتارية
+    - main [ref=f5e123]:
+      - generic [ref=f5e125]:
+        - generic [ref=f5e126]:
+          - generic [ref=f5e127]:
+            - paragraph [ref=f5e128]: موعد جديد
+            - heading "حجز موعد" [level=1] [ref=f5e129]
+            - paragraph [ref=f5e130]: سيجري التحقق آلياً من توفر المعالج والغرفة وعدم وجود تعارض.
+          - link "رجوع" [ref=f5e131] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/appointments
+        - generic [ref=f5e132]:
+          - generic [ref=f5e133]:
+            - generic [ref=f5e134]:
+              - generic [ref=f5e135]: الطبيب / المعالج *
+              - combobox "الطبيب / المعالج *" [ref=f5e136]:
+                - option "اختر" [selected]
+                - option "أ. سامر العلي"
+                - option "أ. ليلى شاهين"
+                - option "أ. نور منصور"
+                - option "د. ريم الأحمد"
+                - option "د. محمد خالد"
+                - option "د. هالة النجار"
+            - generic [ref=f5e137]:
+              - generic [ref=f5e138]: الغرفة *
+              - combobox "الغرفة *" [ref=f5e139]:
+                - option "اختر" [selected]
+                - option "غرفة 1 — العلاج الفردي"
+                - option "غرفة 2 — العلاج الفردي"
+                - option "غرفة 3 — الجلسات الجماعية والأسرية"
+            - generic [ref=f5e140]:
+              - generic [ref=f5e141]: نوع العلاج *
+              - combobox "نوع العلاج *" [ref=f5e142]:
+                - option "اختر" [selected]
+                - option "استشارة طبية"
+                - option "جلسة تقييم نطق"
+                - option "جلسة دعم نفسي فردية"
+                - option "جلسة علاج أسري"
+                - option "جلسة علاج جماعي — جماعي"
+                - option "جلسة علاج سلوكي"
+                - option "جلسة علاج فيزيائي"
+                - option "جلسة علاج نطق"
+                - option "جلسة علاج نفسي فردي"
+                - option "جلسة متابعة إدمان"
+            - generic [ref=f5e143]:
+              - generic [ref=f5e144]: التاريخ *
+              - textbox "التاريخ *" [ref=f5e145]: 2026-09-24
+            - generic [ref=f5e146]:
+              - generic [ref=f5e147]: وقت البدء *
+              - textbox "وقت البدء *" [ref=f5e148]: 12:06
+            - generic [ref=f5e149]:
+              - generic [ref=f5e150]: المدة بالدقائق *
+              - spinbutton "المدة بالدقائق *" [ref=f5e151]: "60"
+          - region "الأوقات المتاحة" [ref=f5e152]:
+            - heading "المتاح في هذا اليوم" [level=2] [ref=f5e153]
+            - paragraph [ref=f5e154]: الفترات تكفي لمدة الموعد المحددة، بعد استبعاد الحجوزات واستثناءات الدوام للمعالج والغرفة.
+            - paragraph [ref=f5e156]: اختر المعالج والغرفة والتاريخ لعرض الفترات المتاحة.
+          - generic [ref=f5e157]:
+            - generic [ref=f5e158]:
+              - generic [ref=f5e159]:
+                - heading "المرضى" [level=2] [ref=f5e160]
+                - paragraph [ref=f5e161]: 0 محدد · موعد فردي
+              - generic [ref=f5e162]: مريض واحد فقط
+            - generic [ref=f5e163]:
+              - generic [ref=f5e164]: ابحث بالاسم أو رقم الملف أو الهاتف
+              - searchbox "ابحث بالاسم أو رقم الملف أو الهاتف" [ref=f5e165]
+            - generic [ref=f5e166]: ابحث عن مريض لاختياره.
+          - generic [ref=f5e168]:
+            - generic [ref=f5e169]: ملاحظات الموعد
+            - textbox "ملاحظات الموعد" [ref=f5e170]
+          - generic [ref=f5e171]:
+            - link "إلغاء" [ref=f5e172] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments
+            - button "تأكيد الحجز" [ref=f5e173] [cursor=pointer]

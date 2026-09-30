@@ -1,0 +1,302 @@
+- generic [active] [ref=f17e1]:
+  - link "الانتقال إلى المحتوى" [ref=f17e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f17e3]:
+    - generic [ref=f17e4]:
+      - link "عيادة الحياة" [ref=f17e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f17e15]:
+        - generic [ref=f17e16]:
+          - generic [ref=f17e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f17e18]
+            - generic [ref=f17e19]:
+              - link "لوحة التشغيل" [ref=f17e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f17e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f17e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f17e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f17e44]:
+            - heading "المرضى" [level=2] [ref=f17e45]
+            - generic [ref=f17e46]:
+              - link "ملفات المرضى" [ref=f17e47] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f17e54] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f17e60]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f17e61]
+            - generic [ref=f17e62]:
+              - link "الأطباء والمعالجون" [ref=f17e63] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners
+              - link "التوفر والدوام" [ref=f17e70] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f17e76]:
+            - heading "المالية والتقارير" [level=2] [ref=f17e77]
+            - generic [ref=f17e79]:
+              - link "المصروفات" [ref=f17e80] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/expenses
+              - link "الاتفاقات المالية" [ref=f17e86] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/agreements
+              - link "الصناديق" [ref=f17e92] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+              - link "الإغلاق الأسبوعي" [ref=f17e98] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/weekly-closing
+              - link "المستحقات" [ref=f17e105] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f17e111] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+          - generic [ref=f17e117]:
+            - heading "إدارة النظام" [level=2] [ref=f17e118]
+            - generic [ref=f17e119]:
+              - link "الاختصاصات" [ref=f17e120] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/specialties
+              - link "أنواع العلاج" [ref=f17e126] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/treatment-types
+              - link "الغرف" [ref=f17e132] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/rooms
+              - link "المستخدمون" [ref=f17e137] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/users
+              - link "سجل التدقيق" [ref=f17e143] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/audit-log
+              - link "الإعدادات" [ref=f17e149] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/settings
+      - generic [ref=f17e155]:
+        - button "تسجيل الخروج" [ref=f17e157] [cursor=pointer]
+        - paragraph [ref=f17e161]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f17e162]:
+    - banner [ref=f17e163]:
+      - generic [ref=f17e164]:
+        - button "طي القائمة الجانبية" [ref=f17e165] [cursor=pointer]
+        - generic [ref=f17e168]:
+          - paragraph [ref=f17e169]: مساحة العمل الآمنة
+          - heading "مستحقات الأطباء والمعالجين" [level=1] [ref=f17e170]
+        - button "الإشعارات" [ref=f17e172] [cursor=pointer]:
+          - generic [ref=f17e175]: 99+
+        - button "المواعيد القادمة" [ref=f17e177] [cursor=pointer]:
+          - generic [ref=f17e182]: "6"
+        - button "تفعيل المظهر الداكن" [ref=f17e183] [cursor=pointer]
+        - generic [ref=f17e186]:
+          - generic [ref=f17e187]: م
+          - generic [ref=f17e188]:
+            - paragraph [ref=f17e189]: مدير عيادة الحياة
+            - paragraph [ref=f17e190]: المدير العام
+    - main [ref=f17e191]:
+      - generic [ref=f17e193]:
+        - generic [ref=f17e195]:
+          - paragraph [ref=f17e196]: ذمم المعالجين
+          - heading "مستحقات الأطباء والمعالجين" [level=1] [ref=f17e197]
+          - paragraph [ref=f17e198]: تسويات أسبوعية تحفظ الرصيد المرحّل، والأرباح، والمدفوع، والمتبقي.
+        - generic [ref=f17e199]:
+          - generic [ref=f17e200]:
+            - generic [ref=f17e201]: الطبيب / المعالج
+            - combobox "الطبيب / المعالج" [ref=f17e202]:
+              - option "كل المعالجين"
+              - option "أ. سامر العلي"
+              - option "أ. ليلى شاهين"
+              - option "أ. نور منصور"
+              - option "د. ريم الأحمد"
+              - option "د. محمد خالد"
+              - option "د. هالة النجار" [selected]
+          - generic [ref=f17e203]:
+            - generic [ref=f17e204]: حالة التسوية
+            - combobox "حالة التسوية" [ref=f17e205]:
+              - option "كل الحالات" [selected]
+              - option "غير مدفوع"
+              - option "مدفوع جزئيًا"
+              - option "مدفوع"
+        - table [ref=f17e207]:
+          - rowgroup [ref=f17e208]:
+            - row [ref=f17e209]:
+              - columnheader "المعالج" [ref=f17e210]
+              - columnheader "الأسبوع" [ref=f17e211]
+              - columnheader "الرصيد المرحّل" [ref=f17e212]
+              - columnheader "أرباح الأسبوع" [ref=f17e213]
+              - columnheader "التعديلات" [ref=f17e214]
+              - columnheader "الإجمالي" [ref=f17e215]
+              - columnheader "المدفوع" [ref=f17e216]
+              - columnheader "المتبقي" [ref=f17e217]
+              - columnheader "الحالة" [ref=f17e218]
+              - columnheader [ref=f17e219]
+          - rowgroup [ref=f17e220]:
+            - row [ref=f17e221]:
+              - cell "د. هالة النجار" [ref=f17e222]
+              - cell [ref=f17e223]:
+                - paragraph [ref=f17e224]: 2026/09/12
+                - paragraph [ref=f17e225]: حتى 2026/09/24
+              - cell "258,750 ل.س" [ref=f17e226]
+              - cell "186,750 ل.س" [ref=f17e227]
+              - cell "0 ل.س" [ref=f17e228]
+              - cell "445,500 ل.س" [ref=f17e229]
+              - cell "0 ل.س" [ref=f17e230]
+              - cell "445,500 ل.س" [ref=f17e231]
+              - cell "غير مدفوع" [ref=f17e232]
+              - cell [ref=f17e234]:
+                - button "كشف تفصيلي" [ref=f17e235] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e236] [cursor=pointer]
+            - row [ref=f17e237]:
+              - cell "أ. ليلى شاهين" [ref=f17e238]
+              - cell [ref=f17e239]:
+                - paragraph [ref=f17e240]: 2026/09/12
+                - paragraph [ref=f17e241]: حتى 2026/09/24
+              - cell "250,250 ل.س" [ref=f17e242]
+              - cell "271,250 ل.س" [ref=f17e243]
+              - cell "0 ل.س" [ref=f17e244]
+              - cell "521,500 ل.س" [ref=f17e245]
+              - cell "0 ل.س" [ref=f17e246]
+              - cell "521,500 ل.س" [ref=f17e247]
+              - cell "غير مدفوع" [ref=f17e248]
+              - cell [ref=f17e250]:
+                - button "كشف تفصيلي" [ref=f17e251] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e252] [cursor=pointer]
+            - row [ref=f17e253]:
+              - cell "أ. نور منصور" [ref=f17e254]
+              - cell [ref=f17e255]:
+                - paragraph [ref=f17e256]: 2026/09/12
+                - paragraph [ref=f17e257]: حتى 2026/09/24
+              - cell "237,000 ل.س" [ref=f17e258]
+              - cell "207,000 ل.س" [ref=f17e259]
+              - cell "0 ل.س" [ref=f17e260]
+              - cell "444,000 ل.س" [ref=f17e261]
+              - cell "0 ل.س" [ref=f17e262]
+              - cell "444,000 ل.س" [ref=f17e263]
+              - cell "غير مدفوع" [ref=f17e264]
+              - cell [ref=f17e266]:
+                - button "كشف تفصيلي" [ref=f17e267] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e268] [cursor=pointer]
+            - row [ref=f17e269]:
+              - cell "أ. سامر العلي" [ref=f17e270]
+              - cell [ref=f17e271]:
+                - paragraph [ref=f17e272]: 2026/09/12
+                - paragraph [ref=f17e273]: حتى 2026/09/24
+              - cell "156,000 ل.س" [ref=f17e274]
+              - cell "190,000 ل.س" [ref=f17e275]
+              - cell "0 ل.س" [ref=f17e276]
+              - cell "346,000 ل.س" [ref=f17e277]
+              - cell "0 ل.س" [ref=f17e278]
+              - cell "346,000 ل.س" [ref=f17e279]
+              - cell "غير مدفوع" [ref=f17e280]
+              - cell [ref=f17e282]:
+                - button "كشف تفصيلي" [ref=f17e283] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e284] [cursor=pointer]
+            - row [ref=f17e285]:
+              - cell "د. ريم الأحمد" [ref=f17e286]
+              - cell [ref=f17e287]:
+                - paragraph [ref=f17e288]: 2026/09/12
+                - paragraph [ref=f17e289]: حتى 2026/09/24
+              - cell "485,750 ل.س" [ref=f17e290]
+              - cell "585,750 ل.س" [ref=f17e291]
+              - cell "0 ل.س" [ref=f17e292]
+              - cell "1,071,500 ل.س" [ref=f17e293]
+              - cell "100,000 ل.س" [ref=f17e294]
+              - cell "971,500 ل.س" [ref=f17e295]
+              - cell "مدفوع جزئيًا" [ref=f17e296]
+              - cell [ref=f17e298]:
+                - button "كشف تفصيلي" [ref=f17e299] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e300] [cursor=pointer]
+            - row [ref=f17e301]:
+              - cell "د. محمد خالد" [ref=f17e302]
+              - cell [ref=f17e303]:
+                - paragraph [ref=f17e304]: 2026/09/12
+                - paragraph [ref=f17e305]: حتى 2026/09/24
+              - cell "414,000 ل.س" [ref=f17e306]
+              - cell "474,000 ل.س" [ref=f17e307]
+              - cell "0 ل.س" [ref=f17e308]
+              - cell "888,000 ل.س" [ref=f17e309]
+              - cell "0 ل.س" [ref=f17e310]
+              - cell "888,000 ل.س" [ref=f17e311]
+              - cell "غير مدفوع" [ref=f17e312]
+              - cell [ref=f17e314]:
+                - button "كشف تفصيلي" [ref=f17e315] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e316] [cursor=pointer]
+            - row [ref=f17e317]:
+              - cell "د. هالة النجار" [ref=f17e318]
+              - cell [ref=f17e319]:
+                - paragraph [ref=f17e320]: 2026/09/05
+                - paragraph [ref=f17e321]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e322]
+              - cell "258,750 ل.س" [ref=f17e323]
+              - cell "0 ل.س" [ref=f17e324]
+              - cell "258,750 ل.س" [ref=f17e325]
+              - cell "0 ل.س" [ref=f17e326]
+              - cell "258,750 ل.س" [ref=f17e327]
+              - cell "غير مدفوع" [ref=f17e328]
+              - cell [ref=f17e330]:
+                - button "كشف تفصيلي" [ref=f17e331] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e332] [cursor=pointer]
+            - row [ref=f17e333]:
+              - cell "أ. ليلى شاهين" [ref=f17e334]
+              - cell [ref=f17e335]:
+                - paragraph [ref=f17e336]: 2026/09/05
+                - paragraph [ref=f17e337]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e338]
+              - cell "250,250 ل.س" [ref=f17e339]
+              - cell "0 ل.س" [ref=f17e340]
+              - cell "250,250 ل.س" [ref=f17e341]
+              - cell "0 ل.س" [ref=f17e342]
+              - cell "250,250 ل.س" [ref=f17e343]
+              - cell "غير مدفوع" [ref=f17e344]
+              - cell [ref=f17e346]:
+                - button "كشف تفصيلي" [ref=f17e347] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e348] [cursor=pointer]
+            - row [ref=f17e349]:
+              - cell "أ. نور منصور" [ref=f17e350]
+              - cell [ref=f17e351]:
+                - paragraph [ref=f17e352]: 2026/09/05
+                - paragraph [ref=f17e353]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e354]
+              - cell "237,000 ل.س" [ref=f17e355]
+              - cell "0 ل.س" [ref=f17e356]
+              - cell "237,000 ل.س" [ref=f17e357]
+              - cell "0 ل.س" [ref=f17e358]
+              - cell "237,000 ل.س" [ref=f17e359]
+              - cell "غير مدفوع" [ref=f17e360]
+              - cell [ref=f17e362]:
+                - button "كشف تفصيلي" [ref=f17e363] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e364] [cursor=pointer]
+            - row [ref=f17e365]:
+              - cell "أ. سامر العلي" [ref=f17e366]
+              - cell [ref=f17e367]:
+                - paragraph [ref=f17e368]: 2026/09/05
+                - paragraph [ref=f17e369]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e370]
+              - cell "156,000 ل.س" [ref=f17e371]
+              - cell "0 ل.س" [ref=f17e372]
+              - cell "156,000 ل.س" [ref=f17e373]
+              - cell "0 ل.س" [ref=f17e374]
+              - cell "156,000 ل.س" [ref=f17e375]
+              - cell "غير مدفوع" [ref=f17e376]
+              - cell [ref=f17e378]:
+                - button "كشف تفصيلي" [ref=f17e379] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e380] [cursor=pointer]
+            - row [ref=f17e381]:
+              - cell "د. ريم الأحمد" [ref=f17e382]
+              - cell [ref=f17e383]:
+                - paragraph [ref=f17e384]: 2026/09/05
+                - paragraph [ref=f17e385]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e386]
+              - cell "585,750 ل.س" [ref=f17e387]
+              - cell "0 ل.س" [ref=f17e388]
+              - cell "585,750 ل.س" [ref=f17e389]
+              - cell "100,000 ل.س" [ref=f17e390]
+              - cell "485,750 ل.س" [ref=f17e391]
+              - cell "مدفوع جزئيًا" [ref=f17e392]
+              - cell [ref=f17e394]:
+                - button "كشف تفصيلي" [ref=f17e395] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e396] [cursor=pointer]
+            - row [ref=f17e397]:
+              - cell "د. محمد خالد" [ref=f17e398]
+              - cell [ref=f17e399]:
+                - paragraph [ref=f17e400]: 2026/09/05
+                - paragraph [ref=f17e401]: حتى 2026/09/24
+              - cell "0 ل.س" [ref=f17e402]
+              - cell "414,000 ل.س" [ref=f17e403]
+              - cell "0 ل.س" [ref=f17e404]
+              - cell "414,000 ل.س" [ref=f17e405]
+              - cell "0 ل.س" [ref=f17e406]
+              - cell "414,000 ل.س" [ref=f17e407]
+              - cell "غير مدفوع" [ref=f17e408]
+              - cell [ref=f17e410]:
+                - button "كشف تفصيلي" [ref=f17e411] [cursor=pointer]
+                - button "تسجيل دفعة" [ref=f17e412] [cursor=pointer]

@@ -1,0 +1,109 @@
+- generic [active] [ref=f15e1]:
+  - link "الانتقال إلى المحتوى" [ref=f15e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f15e3]:
+    - generic [ref=f15e4]:
+      - link "عيادة الحياة" [ref=f15e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f15e15]:
+        - generic [ref=f15e16]:
+          - generic [ref=f15e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f15e18]
+            - generic [ref=f15e20]:
+              - link "لوحة التشغيل" [ref=f15e21] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f15e26] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f15e32] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f15e39] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f15e45]:
+            - heading "المرضى" [level=2] [ref=f15e46]
+            - generic [ref=f15e47]:
+              - link "ملفات المرضى" [ref=f15e48] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f15e55] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f15e61]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f15e62]
+            - link "التوفر والدوام" [ref=f15e64] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f15e70]:
+            - heading "المالية والتقارير" [level=2] [ref=f15e71]
+            - link "المصروفات" [ref=f15e73] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f15e79]:
+            - heading "إدارة النظام" [level=2] [ref=f15e80]
+            - link "الغرف" [ref=f15e82] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f15e87]:
+        - button "تسجيل الخروج" [ref=f15e89] [cursor=pointer]
+        - paragraph [ref=f15e93]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f15e94]:
+    - banner [ref=f15e95]:
+      - generic [ref=f15e96]:
+        - button "طي القائمة الجانبية" [ref=f15e97] [cursor=pointer]
+        - generic [ref=f15e100]:
+          - paragraph [ref=f15e101]: مساحة العمل الآمنة
+          - heading "لوحة التحكم" [level=1] [ref=f15e102]
+        - button "الإشعارات" [ref=f15e104] [cursor=pointer]:
+          - generic [ref=f15e107]: 99+
+        - button "المواعيد القادمة" [ref=f15e109] [cursor=pointer]:
+          - generic [ref=f15e114]: "6"
+        - button "تفعيل المظهر الداكن" [ref=f15e115] [cursor=pointer]
+        - generic [ref=f15e118]:
+          - generic [ref=f15e119]: ل
+          - generic [ref=f15e120]:
+            - paragraph [ref=f15e121]: لينا منصور — السكرتارية
+            - paragraph [ref=f15e122]: السكرتارية
+    - main [ref=f15e123]:
+      - generic [ref=f15e125]:
+        - generic [ref=f15e126]:
+          - generic [ref=f15e127]:
+            - paragraph [ref=f15e128]: نظرة اليوم
+            - heading "مرحباً، لينا منصور — السكرتارية" [level=1] [ref=f15e129]
+            - paragraph [ref=f15e130]: الخميس، 24 سبتمبر 2026 — ملخص حي لعمل العيادة.
+          - generic [ref=f15e131]:
+            - link "حجز موعد" [ref=f15e132] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments/create
+            - link "فتح التقويم" [ref=f15e133] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments/calendar
+        - region "إحصاءات مواعيد اليوم" [ref=f15e134]:
+          - article [ref=f15e135]:
+            - paragraph [ref=f15e136]: كل المواعيد
+            - paragraph [ref=f15e137]: "7"
+          - article [ref=f15e138]:
+            - paragraph [ref=f15e139]: المجدولة
+            - paragraph [ref=f15e140]: "3"
+          - article [ref=f15e141]:
+            - paragraph [ref=f15e142]: الحضور
+            - paragraph [ref=f15e143]: "0"
+          - article [ref=f15e144]:
+            - paragraph [ref=f15e145]: المكتملة
+            - paragraph [ref=f15e146]: "3"
+          - article [ref=f15e147]:
+            - paragraph [ref=f15e148]: لم يحضر
+            - paragraph [ref=f15e149]: "0"
+          - article [ref=f15e150]:
+            - paragraph [ref=f15e151]: الملغاة
+            - paragraph [ref=f15e152]: "0"
+        - generic [ref=f15e153]:
+          - article [ref=f15e154]:
+            - paragraph [ref=f15e155]: بانتظار الدخول
+            - paragraph [ref=f15e156]: "0"
+          - article [ref=f15e157]:
+            - paragraph [ref=f15e158]: بانتظار الدفع
+            - paragraph [ref=f15e159]: "0"
+          - article [ref=f15e160]:
+            - paragraph [ref=f15e161]: الغرف المشغولة
+            - paragraph [ref=f15e162]: 2 / 3
+          - article [ref=f15e163]:
+            - paragraph [ref=f15e164]: مرضى جدد
+            - paragraph [ref=f15e165]: "5"
+        - generic [ref=f15e166]:
+          - generic [ref=f15e167]:
+            - heading "المواعيد القادمة اليوم" [level=2] [ref=f15e168]
+            - link "عرض الكل" [ref=f15e169] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments
+          - generic [ref=f15e170]: لا توجد مواعيد قادمة اليوم.

@@ -1,0 +1,120 @@
+- generic [active] [ref=f5e1731]:
+  - link "الانتقال إلى المحتوى" [ref=f5e1732] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f5e1733]:
+    - generic [ref=f5e1734]:
+      - link "عيادة الحياة" [ref=f5e1736] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f5e1745]:
+        - generic [ref=f5e1746]:
+          - generic [ref=f5e1747]:
+            - heading "التشغيل اليومي" [level=2] [ref=f5e1748]
+            - generic [ref=f5e1750]:
+              - link "لوحة التشغيل" [ref=f5e1751] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f5e1756] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f5e1762] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f5e1769] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f5e1775]:
+            - heading "المرضى" [level=2] [ref=f5e1776]
+            - generic [ref=f5e1777]:
+              - link "ملفات المرضى" [ref=f5e1778] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f5e1785] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f5e1791]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f5e1792]
+            - link "التوفر والدوام" [ref=f5e1794] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f5e1800]:
+            - heading "المالية والتقارير" [level=2] [ref=f5e1801]
+            - link "المصروفات" [ref=f5e1803] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f5e1809]:
+            - heading "إدارة النظام" [level=2] [ref=f5e1810]
+            - link "الغرف" [ref=f5e1812] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f5e1817]:
+        - button "تسجيل الخروج" [ref=f5e1819] [cursor=pointer]
+        - paragraph [ref=f5e1823]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f5e1824]:
+    - banner [ref=f5e1825]:
+      - generic [ref=f5e1826]:
+        - button "طي القائمة الجانبية" [ref=f5e1827] [cursor=pointer]
+        - generic [ref=f5e1830]:
+          - paragraph [ref=f5e1831]: مساحة العمل الآمنة
+          - 'heading "تفاصيل الجلسة #79" [level=1] [ref=f5e1832]'
+        - button "الإشعارات" [ref=f5e1834] [cursor=pointer]:
+          - generic [ref=f5e1837]: 99+
+        - button "المواعيد القادمة" [ref=f5e1839] [cursor=pointer]:
+          - generic [ref=f5e1844]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f5e1845] [cursor=pointer]
+        - generic [ref=f5e1849]:
+          - generic [ref=f5e1850]: ل
+          - generic [ref=f5e1851]:
+            - paragraph [ref=f5e1852]: لينا منصور — السكرتارية
+            - paragraph [ref=f5e1853]: السكرتارية
+    - main [ref=f5e1854]:
+      - generic [ref=f5e1856]:
+        - generic [ref=f5e1857]:
+          - generic [ref=f5e1858]:
+            - paragraph [ref=f5e1859]: "جلسة #79"
+            - heading "جلسة علاج نفسي فردي" [level=1] [ref=f5e1860]
+            - paragraph [ref=f5e1861]: د. هالة النجار · غرفة 3 — الجلسات الجماعية والأسرية · الخميس 24/09/2026 · 11:42 ص
+          - generic [ref=f5e1862]:
+            - generic [ref=f5e1863]: بانتظار الدفع
+            - link "الجلسات" [ref=f5e1864] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/sessions
+        - generic [ref=f5e1865]:
+          - generic [ref=f5e1866]:
+            - paragraph [ref=f5e1867]: موعد الحجز
+            - time [ref=f5e1868]: الخميس 24/09/2026 · 11:00 ص
+          - generic [ref=f5e1869]:
+            - paragraph [ref=f5e1870]: بدء الجلسة فعليًا
+            - time [ref=f5e1871]: الخميس 24/09/2026 · 11:42 ص
+          - generic [ref=f5e1872]:
+            - paragraph [ref=f5e1873]: مدة الجلسة الفعلية
+            - text: 0 دقيقة — قيد التنفيذ
+        - article [ref=f5e1875]:
+          - generic [ref=f5e1876]:
+            - generic [ref=f5e1877]:
+              - link "كريم نزار شاهين" [ref=f5e1878] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/29
+              - paragraph [ref=f5e1879]: ملف 5 · من طرف العيادة
+            - generic [ref=f5e1880]: غير مدفوع
+          - complementary [ref=f5e1881]:
+            - generic [ref=f5e1882]:
+              - generic [ref=f5e1883]:
+                - paragraph [ref=f5e1884]: آخر سعر جلسة
+                - paragraph [ref=f5e1885]: 175,000 ل.س
+                - paragraph [ref=f5e1886]: أ. نور منصور · جلسة علاج سلوكي · الأربعاء 09/09/2026 · خصم 10,000 ل.س
+              - button "استخدام آخر سعر" [ref=f5e1887] [cursor=pointer]
+          - generic [ref=f5e1888]:
+            - generic [ref=f5e1889]:
+              - generic [ref=f5e1890]: السعر الأصلي *
+              - spinbutton "السعر الأصلي *" [ref=f5e1891]: "0"
+            - generic [ref=f5e1892]:
+              - generic [ref=f5e1893]: الخصم
+              - spinbutton "الخصم" [ref=f5e1894]: "0"
+            - button "تسجيل الدفع النقدي" [ref=f5e1895] [cursor=pointer]
+        - generic [ref=f5e1896]:
+          - generic [ref=f5e1897]:
+            - paragraph [ref=f5e1898]: توثيق الجلسة
+            - heading "رفع ملفات للجلسة" [level=2] [ref=f5e1899]
+            - paragraph [ref=f5e1900]: العنوان والوصف اختياريان. تُحفظ الملفات في التخزين الخاص وتُربط تلقائيًا بهذه الجلسة.
+          - generic [ref=f5e1901]:
+            - generic [ref=f5e1902]:
+              - generic [ref=f5e1903]: المريض
+              - paragraph [ref=f5e1904]: كريم نزار شاهين
+            - generic [ref=f5e1905]:
+              - generic [ref=f5e1906]: الملفات (حتى 25 م.ب للملف)
+              - button "الملفات (حتى 25 م.ب للملف)" [ref=f5e1907]
+          - button "رفع وربط بالجلسة" [disabled] [ref=f5e1908]
+        - generic [ref=f5e1910]:
+          - generic [ref=f5e1911]:
+            - heading "اعتماد اكتمال الجلسة" [level=2] [ref=f5e1912]
+            - paragraph [ref=f5e1913]: لا يمكن الإكمال قبل دفع كريم نزار شاهين.
+          - button "إكمال الجلسة" [disabled] [ref=f5e1914]

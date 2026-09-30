@@ -1,0 +1,432 @@
+- generic [active] [ref=f8e1]:
+  - link "الانتقال إلى المحتوى" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - link "عيادة الحياة" [ref=f8e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f8e15]:
+        - generic [ref=f8e16]:
+          - generic [ref=f8e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f8e18]
+            - generic [ref=f8e19]:
+              - link "لوحة التشغيل" [ref=f8e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f8e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f8e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f8e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f8e44]:
+            - heading "المرضى" [level=2] [ref=f8e45]
+            - generic [ref=f8e46]:
+              - link "ملفات المرضى" [ref=f8e47] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f8e54] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f8e60]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f8e61]
+            - generic [ref=f8e62]:
+              - link "الأطباء والمعالجون" [ref=f8e63] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners
+              - link "التوفر والدوام" [ref=f8e70] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f8e76]:
+            - heading "المالية والتقارير" [level=2] [ref=f8e77]
+            - generic [ref=f8e78]:
+              - link "المصروفات" [ref=f8e79] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/expenses
+              - link "الاتفاقات المالية" [ref=f8e85] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/agreements
+              - link "الصناديق" [ref=f8e91] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+              - link "الإغلاق الأسبوعي" [ref=f8e97] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/weekly-closing
+              - link "المستحقات" [ref=f8e104] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f8e110] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+          - generic [ref=f8e116]:
+            - heading "إدارة النظام" [level=2] [ref=f8e117]
+            - generic [ref=f8e119]:
+              - link "الاختصاصات" [ref=f8e120] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/specialties
+              - link "أنواع العلاج" [ref=f8e126] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/treatment-types
+              - link "الغرف" [ref=f8e132] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/rooms
+              - link "المستخدمون" [ref=f8e137] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/users
+              - link "سجل التدقيق" [ref=f8e143] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/audit-log
+              - link "الإعدادات" [ref=f8e149] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/settings
+      - generic [ref=f8e155]:
+        - button "تسجيل الخروج" [ref=f8e157] [cursor=pointer]
+        - paragraph [ref=f8e161]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f8e162]:
+    - banner [ref=f8e163]:
+      - generic [ref=f8e164]:
+        - button "طي القائمة الجانبية" [ref=f8e165] [cursor=pointer]
+        - generic [ref=f8e168]:
+          - paragraph [ref=f8e169]: مساحة العمل الآمنة
+          - heading "سجل العمليات المالية" [level=1] [ref=f8e170]
+        - button "الإشعارات" [ref=f8e172] [cursor=pointer]:
+          - generic [ref=f8e175]: 99+
+        - button "المواعيد القادمة" [ref=f8e177] [cursor=pointer]:
+          - generic [ref=f8e182]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f8e183] [cursor=pointer]
+        - generic [ref=f8e187]:
+          - generic [ref=f8e188]: م
+          - generic [ref=f8e189]:
+            - paragraph [ref=f8e190]: مدير عيادة الحياة
+            - paragraph [ref=f8e191]: المدير العام
+    - main [ref=f8e192]:
+      - generic [ref=f8e193]:
+        - status [ref=f8e534]:
+          - paragraph [ref=f8e535]: جارٍ تجهيز تقرير سجل التدقيق في الخلفية. سيصلك إشعار عند جاهزيته.
+          - button "إخفاء الرسالة" [ref=f8e536] [cursor=pointer]
+        - generic [ref=f8e194]:
+          - generic [ref=f8e195]:
+            - generic [ref=f8e196]:
+              - paragraph [ref=f8e197]: أثر مالي موثّق
+              - heading "سجل العمليات المالية" [level=1] [ref=f8e198]
+              - paragraph [ref=f8e199]: راجع العمليات بلغة واضحة، مع إبقاء السجل التقني الأصلي محفوظًا داخليًا دون عرضه للمستخدم.
+            - button "تصدير Excel" [ref=f8e200] [cursor=pointer]
+          - region "ملخص السجل" [ref=f8e201]:
+            - article [ref=f8e202]:
+              - paragraph [ref=f8e203]: كل العمليات
+              - strong [ref=f8e204]: "122"
+            - article [ref=f8e205]:
+              - paragraph [ref=f8e206]: الدفعات
+              - strong [ref=f8e207]: "85"
+            - article [ref=f8e208]:
+              - paragraph [ref=f8e209]: الاستردادات
+              - strong [ref=f8e210]: "2"
+            - article [ref=f8e211]:
+              - paragraph [ref=f8e212]: المصروفات
+              - strong [ref=f8e213]: "3"
+            - article [ref=f8e214]:
+              - paragraph [ref=f8e215]: عمليات أخرى
+              - strong [ref=f8e216]: "32"
+          - generic [ref=f8e217]:
+            - generic [ref=f8e218]:
+              - generic [ref=f8e219]: نوع العملية
+              - combobox "نوع العملية" [ref=f8e220]:
+                - option "كل العمليات" [selected]
+                - option "تسجيل دفعة"
+                - option "تسجيل استرداد"
+                - option "تسجيل مصروف"
+                - option "إيداع في صندوق"
+                - option "سحب من صندوق"
+                - option "تحويل بين الصناديق"
+                - option "إغلاق أسبوع مالي"
+                - option "إنشاء تسوية معالج"
+                - option "دفع مستحق معالج"
+                - option "إنشاء تعديل مالي"
+                - option "إنشاء اتفاق مالي"
+                - option "تعديل اتفاق مالي"
+                - option "أرشفة اتفاق مالي"
+                - option "إعادة فتح فترة مالية"
+            - generic [ref=f8e221]:
+              - generic [ref=f8e222]: المنفّذ
+              - combobox "المنفّذ" [ref=f8e223]:
+                - option "كل المستخدمين" [selected]
+                - option "لينا منصور — السكرتارية"
+                - option "مدير عيادة الحياة"
+            - generic [ref=f8e224]:
+              - generic [ref=f8e225]: نوع السجل
+              - combobox "نوع السجل" [ref=f8e226]:
+                - option "كل السجلات" [selected]
+                - option "الدفعات"
+                - option "الاستردادات"
+                - option "المصروفات"
+                - option "الاتفاقات المالية"
+                - option "التعديلات المالية"
+                - option "حركات الصناديق"
+                - option "التحويلات بين الصناديق"
+                - option "الإغلاقات الأسبوعية"
+                - option "تسويات المعالجين"
+                - option "دفعات التسويات"
+            - generic [ref=f8e227]:
+              - generic [ref=f8e228]: المبلغ من
+              - spinbutton "المبلغ من" [ref=f8e229]
+            - generic [ref=f8e230]:
+              - generic [ref=f8e231]: المبلغ إلى
+              - spinbutton "المبلغ إلى" [ref=f8e232]
+            - generic [ref=f8e233]:
+              - generic [ref=f8e234]: من تاريخ
+              - textbox "من تاريخ" [ref=f8e235]: 2026-08-24
+            - generic [ref=f8e236]:
+              - generic [ref=f8e237]: إلى تاريخ
+              - textbox "إلى تاريخ" [ref=f8e238]: 2026-09-24
+          - region "العمليات المالية" [ref=f8e239]:
+            - article [ref=f8e240]:
+              - generic [ref=f8e242]:
+                - generic [ref=f8e243]:
+                  - generic [ref=f8e244]:
+                    - generic [ref=f8e245]: تسجيل دفعة
+                    - time [ref=f8e246]: الخميس، 24 سبتمبر 2026 · 11:43 ص
+                  - heading "دفعة جلسة علاجية" [level=2] [ref=f8e247]
+                  - paragraph [ref=f8e248]: "نفّذها: لينا منصور — السكرتارية · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e249]:
+                  - generic "عرض التفاصيل" [ref=f8e250] [cursor=pointer]
+            - article [ref=f8e251]:
+              - generic [ref=f8e253]:
+                - generic [ref=f8e254]:
+                  - generic [ref=f8e255]:
+                    - generic [ref=f8e256]: سحب من صندوق
+                    - time [ref=f8e257]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "حركة صندوق" [level=2] [ref=f8e258]
+                  - paragraph [ref=f8e259]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e260]:
+                  - generic "عرض التفاصيل" [ref=f8e261] [cursor=pointer]
+            - article [ref=f8e262]:
+              - generic [ref=f8e264]:
+                - generic [ref=f8e265]:
+                  - generic [ref=f8e266]:
+                    - generic [ref=f8e267]: تحويل بين الصناديق
+                    - time [ref=f8e268]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تحويل بين صندوقين" [level=2] [ref=f8e269]
+                  - paragraph [ref=f8e270]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e271]:
+                  - generic "عرض التفاصيل" [ref=f8e272] [cursor=pointer]
+            - article [ref=f8e273]:
+              - generic [ref=f8e275]:
+                - generic [ref=f8e276]:
+                  - generic [ref=f8e277]:
+                    - generic [ref=f8e278]: تسجيل مصروف
+                    - time [ref=f8e279]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "مصروف عيادة" [level=2] [ref=f8e280]
+                  - paragraph [ref=f8e281]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e282]:
+                  - generic "عرض التفاصيل" [ref=f8e283] [cursor=pointer]
+            - article [ref=f8e284]:
+              - generic [ref=f8e286]:
+                - generic [ref=f8e287]:
+                  - generic [ref=f8e288]:
+                    - generic [ref=f8e289]: إنشاء تعديل مالي
+                    - time [ref=f8e290]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تعديل مالي" [level=2] [ref=f8e291]
+                  - paragraph [ref=f8e292]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e293]:
+                  - generic "عرض التفاصيل" [ref=f8e294] [cursor=pointer]
+            - article [ref=f8e295]:
+              - generic [ref=f8e297]:
+                - generic [ref=f8e298]:
+                  - generic [ref=f8e299]:
+                    - generic [ref=f8e300]: إنشاء تعديل مالي
+                    - time [ref=f8e301]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تعديل مالي" [level=2] [ref=f8e302]
+                  - paragraph [ref=f8e303]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e304]:
+                  - generic "عرض التفاصيل" [ref=f8e305] [cursor=pointer]
+            - article [ref=f8e306]:
+              - generic [ref=f8e308]:
+                - generic [ref=f8e309]:
+                  - generic [ref=f8e310]:
+                    - generic [ref=f8e311]: تسجيل استرداد
+                    - time [ref=f8e312]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "استرداد دفعة" [level=2] [ref=f8e313]
+                  - paragraph [ref=f8e314]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e315]:
+                  - generic "عرض التفاصيل" [ref=f8e316] [cursor=pointer]
+            - article [ref=f8e317]:
+              - generic [ref=f8e319]:
+                - generic [ref=f8e320]:
+                  - generic [ref=f8e321]:
+                    - generic [ref=f8e322]: إنشاء تعديل مالي
+                    - time [ref=f8e323]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تعديل مالي" [level=2] [ref=f8e324]
+                  - paragraph [ref=f8e325]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e326]:
+                  - generic "عرض التفاصيل" [ref=f8e327] [cursor=pointer]
+            - article [ref=f8e328]:
+              - generic [ref=f8e330]:
+                - generic [ref=f8e331]:
+                  - generic [ref=f8e332]:
+                    - generic [ref=f8e333]: تسجيل استرداد
+                    - time [ref=f8e334]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "استرداد دفعة" [level=2] [ref=f8e335]
+                  - paragraph [ref=f8e336]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e337]:
+                  - generic "عرض التفاصيل" [ref=f8e338] [cursor=pointer]
+            - article [ref=f8e339]:
+              - generic [ref=f8e341]:
+                - generic [ref=f8e342]:
+                  - generic [ref=f8e343]:
+                    - generic [ref=f8e344]: إنشاء تعديل مالي
+                    - time [ref=f8e345]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تعديل مالي" [level=2] [ref=f8e346]
+                  - paragraph [ref=f8e347]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e348]:
+                  - generic "عرض التفاصيل" [ref=f8e349] [cursor=pointer]
+            - article [ref=f8e350]:
+              - generic [ref=f8e352]:
+                - generic [ref=f8e353]:
+                  - generic [ref=f8e354]:
+                    - generic [ref=f8e355]: دفع مستحق معالج
+                    - time [ref=f8e356]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "دفعة مستحقات معالج" [level=2] [ref=f8e357]
+                  - paragraph [ref=f8e358]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e359]:
+                  - generic "عرض التفاصيل" [ref=f8e360] [cursor=pointer]
+            - article [ref=f8e361]:
+              - generic [ref=f8e363]:
+                - generic [ref=f8e364]:
+                  - generic [ref=f8e365]:
+                    - generic [ref=f8e366]: إغلاق أسبوع مالي
+                    - time [ref=f8e367]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "إغلاق أسبوع مالي" [level=2] [ref=f8e368]
+                  - paragraph [ref=f8e369]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e370]:
+                  - generic "عرض التفاصيل" [ref=f8e371] [cursor=pointer]
+            - article [ref=f8e372]:
+              - generic [ref=f8e374]:
+                - generic [ref=f8e375]:
+                  - generic [ref=f8e376]:
+                    - generic [ref=f8e377]: تحويل بين الصناديق
+                    - time [ref=f8e378]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تحويل بين صندوقين" [level=2] [ref=f8e379]
+                  - paragraph [ref=f8e380]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e381]:
+                  - generic "عرض التفاصيل" [ref=f8e382] [cursor=pointer]
+            - article [ref=f8e383]:
+              - generic [ref=f8e385]:
+                - generic [ref=f8e386]:
+                  - generic [ref=f8e387]:
+                    - generic [ref=f8e388]: إنشاء تسوية معالج
+                    - time [ref=f8e389]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e390]
+                  - paragraph [ref=f8e391]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e392]:
+                  - generic "عرض التفاصيل" [ref=f8e393] [cursor=pointer]
+            - article [ref=f8e394]:
+              - generic [ref=f8e396]:
+                - generic [ref=f8e397]:
+                  - generic [ref=f8e398]:
+                    - generic [ref=f8e399]: إنشاء تسوية معالج
+                    - time [ref=f8e400]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e401]
+                  - paragraph [ref=f8e402]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e403]:
+                  - generic "عرض التفاصيل" [ref=f8e404] [cursor=pointer]
+            - article [ref=f8e405]:
+              - generic [ref=f8e407]:
+                - generic [ref=f8e408]:
+                  - generic [ref=f8e409]:
+                    - generic [ref=f8e410]: إنشاء تسوية معالج
+                    - time [ref=f8e411]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e412]
+                  - paragraph [ref=f8e413]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e414]:
+                  - generic "عرض التفاصيل" [ref=f8e415] [cursor=pointer]
+            - article [ref=f8e416]:
+              - generic [ref=f8e418]:
+                - generic [ref=f8e419]:
+                  - generic [ref=f8e420]:
+                    - generic [ref=f8e421]: إنشاء تسوية معالج
+                    - time [ref=f8e422]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e423]
+                  - paragraph [ref=f8e424]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e425]:
+                  - generic "عرض التفاصيل" [ref=f8e426] [cursor=pointer]
+            - article [ref=f8e427]:
+              - generic [ref=f8e429]:
+                - generic [ref=f8e430]:
+                  - generic [ref=f8e431]:
+                    - generic [ref=f8e432]: إنشاء تسوية معالج
+                    - time [ref=f8e433]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e434]
+                  - paragraph [ref=f8e435]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e436]:
+                  - generic "عرض التفاصيل" [ref=f8e437] [cursor=pointer]
+            - article [ref=f8e438]:
+              - generic [ref=f8e440]:
+                - generic [ref=f8e441]:
+                  - generic [ref=f8e442]:
+                    - generic [ref=f8e443]: إنشاء تسوية معالج
+                    - time [ref=f8e444]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e445]
+                  - paragraph [ref=f8e446]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e447]:
+                  - generic "عرض التفاصيل" [ref=f8e448] [cursor=pointer]
+            - article [ref=f8e449]:
+              - generic [ref=f8e451]:
+                - generic [ref=f8e452]:
+                  - generic [ref=f8e453]:
+                    - generic [ref=f8e454]: تسجيل مصروف
+                    - time [ref=f8e455]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "مصروف عيادة" [level=2] [ref=f8e456]
+                  - paragraph [ref=f8e457]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e458]:
+                  - generic "عرض التفاصيل" [ref=f8e459] [cursor=pointer]
+            - article [ref=f8e460]:
+              - generic [ref=f8e462]:
+                - generic [ref=f8e463]:
+                  - generic [ref=f8e464]:
+                    - generic [ref=f8e465]: دفع مستحق معالج
+                    - time [ref=f8e466]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "دفعة مستحقات معالج" [level=2] [ref=f8e467]
+                  - paragraph [ref=f8e468]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e469]:
+                  - generic "عرض التفاصيل" [ref=f8e470] [cursor=pointer]
+            - article [ref=f8e471]:
+              - generic [ref=f8e473]:
+                - generic [ref=f8e474]:
+                  - generic [ref=f8e475]:
+                    - generic [ref=f8e476]: إغلاق أسبوع مالي
+                    - time [ref=f8e477]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "إغلاق أسبوع مالي" [level=2] [ref=f8e478]
+                  - paragraph [ref=f8e479]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e480]:
+                  - generic "عرض التفاصيل" [ref=f8e481] [cursor=pointer]
+            - article [ref=f8e482]:
+              - generic [ref=f8e484]:
+                - generic [ref=f8e485]:
+                  - generic [ref=f8e486]:
+                    - generic [ref=f8e487]: تحويل بين الصناديق
+                    - time [ref=f8e488]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تحويل بين صندوقين" [level=2] [ref=f8e489]
+                  - paragraph [ref=f8e490]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e491]:
+                  - generic "عرض التفاصيل" [ref=f8e492] [cursor=pointer]
+            - article [ref=f8e493]:
+              - generic [ref=f8e495]:
+                - generic [ref=f8e496]:
+                  - generic [ref=f8e497]:
+                    - generic [ref=f8e498]: إنشاء تسوية معالج
+                    - time [ref=f8e499]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e500]
+                  - paragraph [ref=f8e501]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e502]:
+                  - generic "عرض التفاصيل" [ref=f8e503] [cursor=pointer]
+            - article [ref=f8e504]:
+              - generic [ref=f8e506]:
+                - generic [ref=f8e507]:
+                  - generic [ref=f8e508]:
+                    - generic [ref=f8e509]: إنشاء تسوية معالج
+                    - time [ref=f8e510]: الخميس، 24 سبتمبر 2026 · 11:26 ص
+                  - heading "تسوية مستحقات معالج" [level=2] [ref=f8e511]
+                  - paragraph [ref=f8e512]: "نفّذها: مدير عيادة الحياة · عنوان الشبكة 127.0.0.1"
+                - group [ref=f8e513]:
+                  - generic "عرض التفاصيل" [ref=f8e514] [cursor=pointer]
+          - navigation "التنقل بين الصفحات" [ref=f8e515]:
+            - paragraph [ref=f8e516]:
+              - text: عرض
+              - strong [ref=f8e517]: "1"
+              - text: إلى
+              - strong [ref=f8e518]: "25"
+              - text: من أصل
+              - strong [ref=f8e519]: "122"
+              - text: نتيجة
+            - generic [ref=f8e520]:
+              - generic [ref=f8e521]: السابق
+              - generic [ref=f8e524]:
+                - generic "الصفحة الحالية، 1" [ref=f8e525]: "1"
+                - button "الانتقال إلى الصفحة 2" [ref=f8e526] [cursor=pointer]: "2"
+                - button "الانتقال إلى الصفحة 3" [ref=f8e527] [cursor=pointer]: "3"
+                - button "الانتقال إلى الصفحة 4" [ref=f8e528] [cursor=pointer]: "4"
+                - button "الانتقال إلى الصفحة 5" [ref=f8e529] [cursor=pointer]: "5"
+              - button "الصفحة التالية" [ref=f8e530] [cursor=pointer]: التالي

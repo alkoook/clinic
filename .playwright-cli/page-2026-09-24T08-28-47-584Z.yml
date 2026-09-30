@@ -1,0 +1,27 @@
+- main [ref=e2]:
+  - button "تفعيل المظهر الفاتح" [active] [pressed] [ref=e70] [cursor=pointer]
+  - generic [ref=e42]:
+    - link "عيادة الحياة" [ref=e75] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/dashboard
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - paragraph [ref=e45]: بوابة الموظفين
+        - heading "أهلًا بعودتك" [level=1] [ref=e46]
+        - paragraph [ref=e47]: أدخل بيانات حسابك للوصول إلى مساحة إدارة العيادة.
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]: اسم المستخدم
+          - textbox "اسم المستخدم" [ref=e51]:
+            - /placeholder: ahmad
+        - generic [ref=e52]:
+          - generic [ref=e53]: كلمة المرور
+          - generic [ref=e54]:
+            - textbox "كلمة المرور" [ref=e55]:
+              - /placeholder: ••••••••
+            - button "إظهار كلمة المرور" [ref=e56] [cursor=pointer]
+        - generic [ref=e60] [cursor=pointer]:
+          - checkbox "تذكرني على هذا الجهاز" [ref=e61]
+          - generic [ref=e62]: تذكرني على هذا الجهاز
+        - button "تسجيل الدخول" [ref=e63] [cursor=pointer]
+      - paragraph [ref=e69]: لا تشارك بيانات حسابك، وسجّل الخروج عند استخدام جهاز مشترك.
+    - paragraph [ref=e84]: نظام داخلي خاص بموظفي الحياة • اتصالك محمي بجلسة مشفّرة

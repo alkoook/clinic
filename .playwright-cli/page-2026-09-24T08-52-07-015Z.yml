@@ -1,0 +1,158 @@
+- generic [active] [ref=f2e1]:
+  - link "الانتقال إلى المحتوى" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - link "عيادة الحياة" [ref=f2e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f2e15]:
+        - generic [ref=f2e16]:
+          - generic [ref=f2e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f2e18]
+            - generic [ref=f2e20]:
+              - link "لوحة التشغيل" [ref=f2e21] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f2e26] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f2e32] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f2e39] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f2e45]:
+            - heading "المرضى" [level=2] [ref=f2e46]
+            - link "ملفات المرضى" [ref=f2e48] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/patients
+          - generic [ref=f2e55]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f2e56]
+            - generic [ref=f2e57]:
+              - link "ملفي الشخصي" [ref=f2e58] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners/my-profile
+              - link "التوفر والدوام" [ref=f2e65] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners/1/availability
+          - generic [ref=f2e71]:
+            - heading "المالية والتقارير" [level=2] [ref=f2e72]
+            - generic [ref=f2e73]:
+              - link "المستحقات" [ref=f2e74] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f2e80] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+      - generic [ref=f2e86]:
+        - button "تسجيل الخروج" [ref=f2e88] [cursor=pointer]
+        - paragraph [ref=f2e92]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f2e93]:
+    - banner [ref=f2e94]:
+      - generic [ref=f2e95]:
+        - button "طي القائمة الجانبية" [ref=f2e96] [cursor=pointer]
+        - generic [ref=f2e99]:
+          - paragraph [ref=f2e100]: مساحة العمل الآمنة
+          - heading "لوحة التحكم" [level=1] [ref=f2e101]
+        - button "الإشعارات" [ref=f2e103] [cursor=pointer]:
+          - generic [ref=f2e106]: "63"
+        - button "المواعيد القادمة" [ref=f2e108] [cursor=pointer]:
+          - generic [ref=f2e113]: "1"
+        - button "تفعيل المظهر الداكن" [ref=f2e114] [cursor=pointer]
+        - generic [ref=f2e117]:
+          - generic [ref=f2e118]: د
+          - generic [ref=f2e119]:
+            - paragraph [ref=f2e120]: د. محمد خالد
+            - paragraph [ref=f2e121]: طبيب / معالج
+    - main [ref=f2e122]:
+      - generic [ref=f2e124]:
+        - generic [ref=f2e125]:
+          - generic [ref=f2e126]:
+            - paragraph [ref=f2e127]: نظرة اليوم
+            - heading "مرحباً، د. محمد خالد" [level=1] [ref=f2e128]
+            - paragraph [ref=f2e129]: الخميس، 24 سبتمبر 2026 — ملخص حي لعمل العيادة.
+          - link "فتح التقويم" [ref=f2e131] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/appointments/calendar
+        - region "إحصاءات مواعيد اليوم" [ref=f2e132]:
+          - article [ref=f2e133]:
+            - paragraph [ref=f2e134]: كل المواعيد
+            - paragraph [ref=f2e135]: "1"
+          - article [ref=f2e136]:
+            - paragraph [ref=f2e137]: المجدولة
+            - paragraph [ref=f2e138]: "0"
+          - article [ref=f2e139]:
+            - paragraph [ref=f2e140]: الحضور
+            - paragraph [ref=f2e141]: "0"
+          - article [ref=f2e142]:
+            - paragraph [ref=f2e143]: المكتملة
+            - paragraph [ref=f2e144]: "1"
+          - article [ref=f2e145]:
+            - paragraph [ref=f2e146]: لم يحضر
+            - paragraph [ref=f2e147]: "0"
+          - article [ref=f2e148]:
+            - paragraph [ref=f2e149]: الملغاة
+            - paragraph [ref=f2e150]: "0"
+        - generic [ref=f2e151]:
+          - article [ref=f2e152]:
+            - paragraph [ref=f2e153]: جلسات الأسبوع
+            - paragraph [ref=f2e154]: "5"
+          - article [ref=f2e155]:
+            - paragraph [ref=f2e156]: استحقاق الأسبوع
+            - paragraph [ref=f2e157]: 480,000
+          - article [ref=f2e158]:
+            - paragraph [ref=f2e159]: المبالغ المدفوعة
+            - paragraph [ref=f2e160]: "0"
+          - article [ref=f2e161]:
+            - paragraph [ref=f2e162]: الرصيد المرحّل
+            - paragraph [ref=f2e163]: 888,000
+          - article [ref=f2e164]:
+            - paragraph [ref=f2e165]: المرضى
+            - paragraph [ref=f2e166]: "15"
+        - generic [ref=f2e167]:
+          - generic [ref=f2e168]:
+            - generic [ref=f2e169]:
+              - paragraph [ref=f2e170]: هذا الأسبوع
+              - heading "جدول مواعيدي" [level=2] [ref=f2e171]
+            - link "فتح التقويم" [ref=f2e172] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments/calendar
+          - generic [ref=f2e173]:
+            - article [ref=f2e174]:
+              - generic [ref=f2e175]:
+                - time [ref=f2e176]: السبت 2026/09/19 09:00
+                - generic [ref=f2e177]: مكتمل
+              - paragraph [ref=f2e178]: عمر خالد العلي
+              - paragraph [ref=f2e179]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e180]:
+              - generic [ref=f2e181]:
+                - time [ref=f2e182]: الأحد 2026/09/20 09:00
+                - generic [ref=f2e183]: مكتمل
+              - paragraph [ref=f2e184]: مريم عماد العلي
+              - paragraph [ref=f2e185]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e186]:
+              - generic [ref=f2e187]:
+                - time [ref=f2e188]: الاثنين 2026/09/21 09:00
+                - generic [ref=f2e189]: مكتمل
+              - paragraph [ref=f2e190]: يزن فراس الخطيب
+              - paragraph [ref=f2e191]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e192]:
+              - generic [ref=f2e193]:
+                - time [ref=f2e194]: الثلاثاء 2026/09/22 09:00
+                - generic [ref=f2e195]: أعيدت جدولته
+              - paragraph [ref=f2e196]: سارة سليم النجار
+              - paragraph [ref=f2e197]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e198]:
+              - generic [ref=f2e199]:
+                - time [ref=f2e200]: الثلاثاء 2026/09/22 10:00
+                - generic [ref=f2e201]: مجدول
+              - paragraph [ref=f2e202]: سارة سليم النجار
+              - paragraph [ref=f2e203]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e204]:
+              - generic [ref=f2e205]:
+                - time [ref=f2e206]: الأربعاء 2026/09/23 09:00
+                - generic [ref=f2e207]: مكتمل
+              - paragraph [ref=f2e208]: تالا خالد النجار
+              - paragraph [ref=f2e209]: غرفة 1 — العلاج الفردي
+            - article [ref=f2e210]:
+              - generic [ref=f2e211]:
+                - time [ref=f2e212]: الخميس 2026/09/24 09:00
+                - generic [ref=f2e213]: مكتمل
+              - paragraph [ref=f2e214]: عمر عماد شاهين
+              - paragraph [ref=f2e215]: غرفة 1 — العلاج الفردي
+        - generic [ref=f2e216]:
+          - generic [ref=f2e217]:
+            - heading "المواعيد القادمة اليوم" [level=2] [ref=f2e218]
+            - link "عرض الكل" [ref=f2e219] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments
+          - generic [ref=f2e220]: لا توجد مواعيد قادمة اليوم.

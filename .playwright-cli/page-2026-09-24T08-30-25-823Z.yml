@@ -1,0 +1,143 @@
+- generic [ref=f3e1]:
+  - link "الانتقال إلى المحتوى" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - link "عيادة الحياة" [ref=f3e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f3e15]:
+        - generic [ref=f3e16]:
+          - generic [ref=f3e17]:
+            - heading "التشغيل اليومي" [level=2] [ref=f3e18]
+            - generic [ref=f3e19]:
+              - link "لوحة التشغيل" [ref=f3e20] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f3e25] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f3e31] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f3e38] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f3e44]:
+            - heading "المرضى" [level=2] [ref=f3e45]
+            - generic [ref=f3e47]:
+              - link "ملفات المرضى" [ref=f3e48] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f3e55] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f3e61]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f3e62]
+            - link "التوفر والدوام" [ref=f3e64] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f3e70]:
+            - heading "المالية والتقارير" [level=2] [ref=f3e71]
+            - link "المصروفات" [ref=f3e73] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f3e79]:
+            - heading "إدارة النظام" [level=2] [ref=f3e80]
+            - link "الغرف" [ref=f3e82] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f3e87]:
+        - button "تسجيل الخروج" [ref=f3e89] [cursor=pointer]
+        - paragraph [ref=f3e93]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f3e94]:
+    - banner [ref=f3e95]:
+      - generic [ref=f3e96]:
+        - button "طي القائمة الجانبية" [ref=f3e97] [cursor=pointer]
+        - generic [ref=f3e100]:
+          - paragraph [ref=f3e101]: مساحة العمل الآمنة
+          - heading "مريض جديد" [level=1] [ref=f3e102]
+        - button "الإشعارات" [ref=f3e104] [cursor=pointer]:
+          - generic [ref=f3e107]: 99+
+        - button "المواعيد القادمة" [ref=f3e109] [cursor=pointer]:
+          - generic [ref=f3e114]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f3e115] [cursor=pointer]
+        - generic [ref=f3e119]:
+          - generic [ref=f3e120]: ل
+          - generic [ref=f3e121]:
+            - paragraph [ref=f3e122]: لينا منصور — السكرتارية
+            - paragraph [ref=f3e123]: السكرتارية
+    - main [ref=f3e124]:
+      - generic [ref=f3e126]:
+        - generic [ref=f3e127]:
+          - generic [ref=f3e128]:
+            - paragraph [ref=f3e129]: فتح ملف جديد
+            - heading "إضافة مريض" [level=1] [ref=f3e130]
+            - paragraph [ref=f3e131]: اختر المعالج أولًا ليُقترح رقم الملف تلقائيًا ضمن ملفاته.
+          - link "رجوع" [ref=f3e132] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/patients
+        - generic [ref=f3e133]:
+          - generic [ref=f3e134]:
+            - heading "البيانات الأساسية" [level=2] [ref=f3e135]
+            - generic [ref=f3e136]:
+              - generic [ref=f3e137]:
+                - generic [ref=f3e138]: الدكتور / المعالج *
+                - combobox "الدكتور / المعالج *" [ref=f3e139]:
+                  - option "اختر المعالج أولًا"
+                  - option "أ. سامر العلي"
+                  - option "أ. ليلى شاهين"
+                  - option "أ. نور منصور"
+                  - option "د. ريم الأحمد"
+                  - option "د. محمد خالد" [selected]
+                  - option "د. هالة النجار"
+              - generic [ref=f3e140]:
+                - generic [ref=f3e141]: رقم الملف *
+                - spinbutton "رقم الملف * يُقترح تلقائيًا بعد اختيار المعالج، ويمكن تعديله إلى رقم غير مكرر لديه." [ref=f3e142]: "15"
+                - generic [ref=f3e143]: يُقترح تلقائيًا بعد اختيار المعالج، ويمكن تعديله إلى رقم غير مكرر لديه.
+              - generic [ref=f3e144]:
+                - generic [ref=f3e145]: اسم المريض *
+                - textbox "اسم المريض *" [ref=f3e146]: مريض تدقيق
+              - generic [ref=f3e147]:
+                - generic [ref=f3e148]: العمر *
+                - spinbutton "العمر *" [active] [ref=f3e149]: "31"
+              - generic [ref=f3e150]:
+                - generic [ref=f3e151]: الجنس *
+                - combobox "الجنس *" [ref=f3e152]:
+                  - option "اختر"
+                  - option "ذكر" [selected]
+                  - option "أنثى"
+              - generic [ref=f3e153]:
+                - generic [ref=f3e154]: الحالة الاجتماعية *
+                - combobox "الحالة الاجتماعية *" [ref=f3e155]:
+                  - option "اختر" [selected]
+                  - option "أعزب / عزباء"
+                  - option "متزوج / متزوجة"
+                  - option "مطلق / مطلقة"
+                  - option "أرمل / أرملة"
+              - generic [ref=f3e156]:
+                - generic [ref=f3e157]: الحالة الوظيفية / المهنة
+                - textbox "الحالة الوظيفية / المهنة" [ref=f3e158]
+              - generic [ref=f3e159]:
+                - generic [ref=f3e160]: الشخص المرافق
+                - textbox "الشخص المرافق" [ref=f3e161]
+              - generic [ref=f3e162]:
+                - generic [ref=f3e163]: رقم الهاتف
+                - textbox "رقم الهاتف" [ref=f3e164]
+              - generic [ref=f3e165]:
+                - generic [ref=f3e166]: المستشفى المحوّل منه
+                - textbox "المستشفى المحوّل منه" [ref=f3e167]
+          - generic [ref=f3e168]:
+            - heading "المصدر والإحالات" [level=2] [ref=f3e169]
+            - generic [ref=f3e170]:
+              - generic [ref=f3e171]:
+                - generic [ref=f3e172]: مصدر المريض *
+                - combobox "مصدر المريض *" [ref=f3e173]:
+                  - option "من طرف العيادة" [selected]
+                  - option "من طرف الطبيب / المعالج"
+              - generic [ref=f3e174]:
+                - checkbox "تم تحويل المريض إلى جهة خارجية" [ref=f3e175]
+                - generic [ref=f3e176]: تم تحويل المريض إلى جهة خارجية
+              - generic [ref=f3e177]:
+                - generic [ref=f3e178]: ملاحظات الإحالة
+                - textbox "ملاحظات الإحالة" [ref=f3e179]
+          - generic [ref=f3e180]:
+            - generic [ref=f3e181]:
+              - generic [ref=f3e182]: ملاحظات إدارية
+              - textbox "ملاحظات إدارية" [ref=f3e183]
+            - generic [ref=f3e184]:
+              - checkbox "الملف نشط" [checked] [ref=f3e185]
+              - generic [ref=f3e186]: الملف نشط
+          - generic [ref=f3e187]:
+            - link "إلغاء" [ref=f3e188] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/patients
+            - button "حفظ الملف" [ref=f3e189] [cursor=pointer]

@@ -1,0 +1,41 @@
+- main [ref=f6e2]:
+  - button "تفعيل المظهر الفاتح" [pressed] [ref=f6e4] [cursor=pointer]
+  - generic [ref=f6e8]:
+    - complementary [ref=f6e9]:
+      - generic [ref=f6e12]:
+        - link "عيادة الحياة" [ref=f6e13] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/dashboard
+        - generic [ref=f6e22]:
+          - paragraph [ref=f6e23]: مساحة عمل موثوقة
+          - heading "إدارة يوم العيادة بهدوء ووضوح." [level=1] [ref=f6e24]: إدارة يوم العيادةبهدوء ووضوح.
+          - paragraph [ref=f6e25]: وصول آمن إلى المواعيد وملفات المرضى والجلسات والعمليات المالية، ضمن صلاحيات كل مستخدم.
+        - generic [ref=f6e26]:
+          - generic [ref=f6e27]: مواعيد منظمة
+          - generic [ref=f6e32]: صلاحيات دقيقة
+          - generic [ref=f6e37]: متابعة واضحة
+      - paragraph [ref=f6e41]: نظام داخلي خاص بموظفي الحياة. تُسجّل محاولات الدخول لحماية بيانات المرضى.
+    - generic [ref=f6e43]:
+      - status [ref=f6e46]:
+        - paragraph [ref=f6e50]: تم تسجيل الخروج بأمان.
+        - button "إخفاء الرسالة" [ref=f6e51] [cursor=pointer]
+      - generic [ref=f6e54]:
+        - generic [ref=f6e55]:
+          - paragraph [ref=f6e56]: بوابة الموظفين
+          - heading "أهلًا بعودتك" [level=1] [ref=f6e57]
+          - paragraph [ref=f6e58]: أدخل بيانات حسابك للوصول إلى مساحة إدارة العيادة.
+        - generic [ref=f6e59]:
+          - generic [ref=f6e60]:
+            - generic [ref=f6e61]: اسم المستخدم
+            - textbox "اسم المستخدم" [active] [ref=f6e62]:
+              - /placeholder: ahmad
+          - generic [ref=f6e63]:
+            - generic [ref=f6e64]: كلمة المرور
+            - generic [ref=f6e65]:
+              - textbox "كلمة المرور" [ref=f6e66]:
+                - /placeholder: ••••••••
+              - button "إظهار كلمة المرور" [ref=f6e67] [cursor=pointer]
+          - generic [ref=f6e71] [cursor=pointer]:
+            - checkbox "تذكرني على هذا الجهاز" [ref=f6e72]
+            - generic [ref=f6e73]: تذكرني على هذا الجهاز
+          - button "تسجيل الدخول" [ref=f6e74] [cursor=pointer]
+        - paragraph [ref=f6e80]: لا تشارك بيانات حسابك، وسجّل الخروج عند استخدام جهاز مشترك.

@@ -1,0 +1,265 @@
+- generic [active] [ref=f6e81]:
+  - link "الانتقال إلى المحتوى" [ref=f6e82] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f6e83]:
+    - generic [ref=f6e84]:
+      - link "عيادة الحياة" [ref=f6e86] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f6e95]:
+        - generic [ref=f6e96]:
+          - generic [ref=f6e97]:
+            - heading "التشغيل اليومي" [level=2] [ref=f6e98]
+            - generic [ref=f6e100]:
+              - link "لوحة التشغيل" [ref=f6e101] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f6e106] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f6e112] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f6e119] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f6e125]:
+            - heading "المرضى" [level=2] [ref=f6e126]
+            - generic [ref=f6e127]:
+              - link "ملفات المرضى" [ref=f6e128] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f6e135] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f6e141]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f6e142]
+            - generic [ref=f6e143]:
+              - link "الأطباء والمعالجون" [ref=f6e144] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/practitioners
+              - link "التوفر والدوام" [ref=f6e151] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f6e157]:
+            - heading "المالية والتقارير" [level=2] [ref=f6e158]
+            - generic [ref=f6e159]:
+              - link "المصروفات" [ref=f6e160] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/expenses
+              - link "الاتفاقات المالية" [ref=f6e166] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/agreements
+              - link "الصناديق" [ref=f6e172] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+              - link "الإغلاق الأسبوعي" [ref=f6e178] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/weekly-closing
+              - link "المستحقات" [ref=f6e185] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/settlements
+              - link "التقارير" [ref=f6e191] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/reports
+          - generic [ref=f6e197]:
+            - heading "إدارة النظام" [level=2] [ref=f6e198]
+            - generic [ref=f6e199]:
+              - link "الاختصاصات" [ref=f6e200] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/specialties
+              - link "أنواع العلاج" [ref=f6e206] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/treatment-types
+              - link "الغرف" [ref=f6e212] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/master-data/rooms
+              - link "المستخدمون" [ref=f6e217] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/users
+              - link "سجل التدقيق" [ref=f6e223] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/audit-log
+              - link "الإعدادات" [ref=f6e229] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/settings
+      - generic [ref=f6e235]:
+        - button "تسجيل الخروج" [ref=f6e237] [cursor=pointer]
+        - paragraph [ref=f6e241]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f6e242]:
+    - banner [ref=f6e243]:
+      - generic [ref=f6e244]:
+        - button "طي القائمة الجانبية" [ref=f6e245] [cursor=pointer]
+        - generic [ref=f6e248]:
+          - paragraph [ref=f6e249]: مساحة العمل الآمنة
+          - heading "لوحة التحكم" [level=1] [ref=f6e250]
+        - button "الإشعارات" [ref=f6e252] [cursor=pointer]:
+          - generic [ref=f6e255]: 99+
+        - button "المواعيد القادمة" [ref=f6e257] [cursor=pointer]:
+          - generic [ref=f6e262]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f6e263] [cursor=pointer]
+        - generic [ref=f6e267]:
+          - generic [ref=f6e268]: م
+          - generic [ref=f6e269]:
+            - paragraph [ref=f6e270]: مدير عيادة الحياة
+            - paragraph [ref=f6e271]: المدير العام
+    - main [ref=f6e272]:
+      - generic [ref=f6e274]:
+        - generic [ref=f6e275]:
+          - generic [ref=f6e276]:
+            - paragraph [ref=f6e277]: نظرة اليوم
+            - heading "مرحباً، مدير عيادة الحياة" [level=1] [ref=f6e278]
+            - paragraph [ref=f6e279]: الخميس، 24 سبتمبر 2026 — ملخص حي لعمل العيادة.
+          - generic [ref=f6e280]:
+            - link "حجز موعد" [ref=f6e281] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments/create
+            - link "فتح التقويم" [ref=f6e282] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments/calendar
+        - region "إحصاءات مواعيد اليوم" [ref=f6e283]:
+          - article [ref=f6e284]:
+            - paragraph [ref=f6e285]: كل المواعيد
+            - paragraph [ref=f6e286]: "7"
+          - article [ref=f6e287]:
+            - paragraph [ref=f6e288]: المجدولة
+            - paragraph [ref=f6e289]: "3"
+          - article [ref=f6e290]:
+            - paragraph [ref=f6e291]: الحضور
+            - paragraph [ref=f6e292]: "0"
+          - article [ref=f6e293]:
+            - paragraph [ref=f6e294]: المكتملة
+            - paragraph [ref=f6e295]: "3"
+          - article [ref=f6e296]:
+            - paragraph [ref=f6e297]: لم يحضر
+            - paragraph [ref=f6e298]: "0"
+          - article [ref=f6e299]:
+            - paragraph [ref=f6e300]: الملغاة
+            - paragraph [ref=f6e301]: "0"
+        - generic [ref=f6e302]:
+          - article [ref=f6e303]:
+            - paragraph [ref=f6e304]: بانتظار الدخول
+            - paragraph [ref=f6e305]: "0"
+          - article [ref=f6e306]:
+            - paragraph [ref=f6e307]: بانتظار الدفع
+            - paragraph [ref=f6e308]: "0"
+          - article [ref=f6e309]:
+            - paragraph [ref=f6e310]: الغرف المشغولة
+            - paragraph [ref=f6e311]: 2 / 3
+          - article [ref=f6e312]:
+            - paragraph [ref=f6e313]: مرضى جدد
+            - paragraph [ref=f6e314]: "5"
+        - generic [ref=f6e315]:
+          - generic [ref=f6e316]:
+            - generic [ref=f6e317]:
+              - paragraph [ref=f6e318]: الأسبوع المالي الحالي
+              - heading "2026/09/19 — 2026/09/24" [level=2] [ref=f6e319]
+            - link "مراجعة الإغلاق" [ref=f6e320] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/weekly-closing
+          - generic [ref=f6e321]:
+            - generic [ref=f6e322]:
+              - paragraph [ref=f6e323]: المقبوضات
+              - paragraph [ref=f6e324]: 4,120,000
+            - generic [ref=f6e325]:
+              - paragraph [ref=f6e326]: المستردات
+              - paragraph [ref=f6e327]: 175,000
+            - generic [ref=f6e328]:
+              - paragraph [ref=f6e329]: المصروفات المؤثرة
+              - paragraph [ref=f6e330]: 80,000
+            - generic [ref=f6e331]:
+              - paragraph [ref=f6e332]: صافي الأسبوع
+              - paragraph [ref=f6e333]: 2,006,500
+        - generic [ref=f6e334]:
+          - generic [ref=f6e335]:
+            - heading "أرصدة الصناديق" [level=2] [ref=f6e336]
+            - generic [ref=f6e337]:
+              - generic [ref=f6e338]:
+                - generic [ref=f6e339]: الصندوق الرئيسي
+                - generic [ref=f6e340]: 22,981,500
+              - generic [ref=f6e341]:
+                - generic [ref=f6e342]: الصندوق الجانبي
+                - generic [ref=f6e343]: 9,568,500
+          - generic [ref=f6e344]:
+            - heading "الأطباء الأكثر نشاطاً هذا الأسبوع" [level=2] [ref=f6e345]
+            - generic [ref=f6e346]:
+              - generic [ref=f6e347]:
+                - generic [ref=f6e348]:
+                  - paragraph [ref=f6e349]: د. ريم الأحمد
+                  - paragraph [ref=f6e350]: 7 جلسة
+                - generic [ref=f6e351]: 544,500
+              - generic [ref=f6e352]:
+                - generic [ref=f6e353]:
+                  - paragraph [ref=f6e354]: د. محمد خالد
+                  - paragraph [ref=f6e355]: 5 جلسة
+                - generic [ref=f6e356]: 480,000
+              - generic [ref=f6e357]:
+                - generic [ref=f6e358]:
+                  - paragraph [ref=f6e359]: أ. ليلى شاهين
+                  - paragraph [ref=f6e360]: 4 جلسة
+                - generic [ref=f6e361]: 210,000
+              - generic [ref=f6e362]:
+                - generic [ref=f6e363]:
+                  - paragraph [ref=f6e364]: د. هالة النجار
+                  - paragraph [ref=f6e365]: 4 جلسة
+                - generic [ref=f6e366]: 288,000
+              - generic [ref=f6e367]:
+                - generic [ref=f6e368]:
+                  - paragraph [ref=f6e369]: أ. سامر العلي
+                  - paragraph [ref=f6e370]: 4 جلسة
+                - generic [ref=f6e371]: 206,000
+        - generic [ref=f6e372]:
+          - generic [ref=f6e373]:
+            - generic [ref=f6e374]:
+              - paragraph [ref=f6e375]: آخر 7 أيام
+              - heading "اتجاه المقبوضات النقدية" [level=2] [ref=f6e376]
+            - generic "مخطط المقبوضات اليومية" [ref=f6e377]:
+              - generic [ref=f6e378]:
+                - generic [ref=f6e379]: "0"
+                - generic [ref=f6e381]: جمعة
+              - generic [ref=f6e382]:
+                - generic [ref=f6e383]: 600,000
+                - generic [ref=f6e385]: سبت
+              - generic [ref=f6e386]:
+                - generic [ref=f6e387]: 815,000
+                - generic [ref=f6e389]: أحد
+              - generic [ref=f6e390]:
+                - generic [ref=f6e391]: 825,000
+                - generic [ref=f6e393]: اثنين
+              - generic [ref=f6e394]:
+                - generic [ref=f6e395]: 750,000
+                - generic [ref=f6e397]: ثلاثاء
+              - generic [ref=f6e398]:
+                - generic [ref=f6e399]: 690,000
+                - generic [ref=f6e401]: أربعاء
+              - generic [ref=f6e402]:
+                - generic [ref=f6e403]: 440,000
+                - generic [ref=f6e405]: خميس
+          - generic [ref=f6e406]:
+            - generic [ref=f6e407]:
+              - heading "أحدث حركات الصندوق" [level=2] [ref=f6e408]
+              - link "السجل الكامل" [ref=f6e409] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/finance/cashboxes
+            - generic [ref=f6e410]:
+              - generic [ref=f6e411]:
+                - generic [ref=f6e412]:
+                  - paragraph [ref=f6e413]: دفعة جلسة علاجية
+                  - paragraph [ref=f6e414]: الصندوق الرئيسي · 2026/09/24 11:43
+                - strong [ref=f6e415]: +175,000
+              - generic [ref=f6e416]:
+                - generic [ref=f6e417]:
+                  - paragraph [ref=f6e418]: تحويل فائض الإغلاق الأسبوعي
+                  - paragraph [ref=f6e419]: الصندوق الرئيسي · 2026/09/24 11:26
+                - strong [ref=f6e420]: −323,250
+              - generic [ref=f6e421]:
+                - generic [ref=f6e422]:
+                  - paragraph [ref=f6e423]: تحويل فائض الإغلاق الأسبوعي
+                  - paragraph [ref=f6e424]: الصندوق الجانبي · 2026/09/24 11:26
+                - strong [ref=f6e425]: +323,250
+              - generic [ref=f6e426]:
+                - generic [ref=f6e427]:
+                  - paragraph [ref=f6e428]: تحويل فائض الإغلاق الأسبوعي
+                  - paragraph [ref=f6e429]: الصندوق الرئيسي · 2026/09/24 11:26
+                - strong [ref=f6e430]: −1,845,250
+              - generic [ref=f6e431]:
+                - generic [ref=f6e432]:
+                  - paragraph [ref=f6e433]: تحويل فائض الإغلاق الأسبوعي
+                  - paragraph [ref=f6e434]: الصندوق الجانبي · 2026/09/24 11:26
+                - strong [ref=f6e435]: +1,845,250
+              - generic [ref=f6e436]:
+                - generic [ref=f6e437]:
+                  - paragraph [ref=f6e438]: استرداد جزئي موثق بعد إغلاق الأسبوع
+                  - paragraph [ref=f6e439]: الصندوق الرئيسي · 2026/09/24 11:26
+                - strong [ref=f6e440]: −25,000
+              - generic [ref=f6e441]:
+                - generic [ref=f6e442]:
+                  - paragraph [ref=f6e443]: استرداد كامل بناء على طلب المريض
+                  - paragraph [ref=f6e444]: الصندوق الرئيسي · 2026/09/24 11:26
+                - strong [ref=f6e445]: −150,000
+              - generic [ref=f6e446]:
+                - generic [ref=f6e447]:
+                  - paragraph [ref=f6e448]: مستلزمات استقبال المرضى
+                  - paragraph [ref=f6e449]: الصندوق الرئيسي · 2026/09/24 11:26
+                - strong [ref=f6e450]: −80,000
+        - generic [ref=f6e451]:
+          - generic [ref=f6e452]:
+            - heading "المواعيد القادمة اليوم" [level=2] [ref=f6e453]
+            - link "عرض الكل" [ref=f6e454] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/appointments
+          - generic [ref=f6e455]: لا توجد مواعيد قادمة اليوم.

@@ -1,0 +1,142 @@
+- generic [ref=f5e182]:
+  - link "الانتقال إلى المحتوى" [ref=f5e183] [cursor=pointer]:
+    - /url: "#main-content"
+  - complementary [ref=f5e184]:
+    - generic [ref=f5e185]:
+      - link "عيادة الحياة" [ref=f5e187] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/dashboard
+      - navigation "التنقل الرئيسي" [ref=f5e196]:
+        - generic [ref=f5e197]:
+          - generic [ref=f5e198]:
+            - heading "التشغيل اليومي" [level=2] [ref=f5e199]
+            - generic [ref=f5e201]:
+              - link "لوحة التشغيل" [ref=f5e202] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/dashboard
+              - link "المواعيد" [ref=f5e207] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments
+              - link "التقويم" [ref=f5e213] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "الجلسات" [ref=f5e220] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/sessions
+          - generic [ref=f5e226]:
+            - heading "المرضى" [level=2] [ref=f5e227]
+            - generic [ref=f5e228]:
+              - link "ملفات المرضى" [ref=f5e229] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients
+              - link "إضافة مريض" [ref=f5e236] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/patients/create
+          - generic [ref=f5e242]:
+            - heading "الأطباء والمعالجون" [level=2] [ref=f5e243]
+            - link "التوفر والدوام" [ref=f5e245] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/availability/practitioners
+          - generic [ref=f5e251]:
+            - heading "المالية والتقارير" [level=2] [ref=f5e252]
+            - link "المصروفات" [ref=f5e254] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/finance/expenses
+          - generic [ref=f5e260]:
+            - heading "إدارة النظام" [level=2] [ref=f5e261]
+            - link "الغرف" [ref=f5e263] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/master-data/rooms
+      - generic [ref=f5e268]:
+        - button "تسجيل الخروج" [ref=f5e270] [cursor=pointer]
+        - paragraph [ref=f5e274]: بيانات المرضى سرية — استخدمها ضمن صلاحياتك فقط.
+  - generic [ref=f5e275]:
+    - banner [ref=f5e276]:
+      - generic [ref=f5e277]:
+        - button "طي القائمة الجانبية" [ref=f5e278] [cursor=pointer]
+        - generic [ref=f5e281]:
+          - paragraph [ref=f5e282]: مساحة العمل الآمنة
+          - heading "المواعيد" [level=1] [ref=f5e283]
+        - button "الإشعارات" [ref=f5e285] [cursor=pointer]:
+          - generic [ref=f5e288]: 99+
+        - button "المواعيد القادمة" [ref=f5e290] [cursor=pointer]:
+          - generic [ref=f5e295]: "6"
+        - button "تفعيل المظهر الفاتح" [pressed] [ref=f5e296] [cursor=pointer]
+        - generic [ref=f5e300]:
+          - generic [ref=f5e301]: ل
+          - generic [ref=f5e302]:
+            - paragraph [ref=f5e303]: لينا منصور — السكرتارية
+            - paragraph [ref=f5e304]: السكرتارية
+    - main [ref=f5e305]:
+      - generic [ref=f5e306]:
+        - status [ref=f5e309]:
+          - paragraph [ref=f5e313]: تم حجز الموعد بنجاح.
+          - button "إخفاء الرسالة" [ref=f5e314] [cursor=pointer]
+        - generic [ref=f5e317]:
+          - alert [ref=f5e974]: الغرفة محجوزة خلال هذا الوقت. اختر غرفة أو موعدًا آخر.
+          - generic [ref=f5e318]:
+            - generic [ref=f5e319]:
+              - paragraph [ref=f5e320]: التشغيل اليومي
+              - heading "المواعيد" [level=1] [ref=f5e321]
+              - paragraph [ref=f5e322]: الموعد للحجز والتنظيم فقط؛ الأثر المالي يبدأ من الجلسة والدفع.
+            - generic [ref=f5e323]:
+              - link "عرض التقويم" [ref=f5e324] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/calendar
+              - link "موعد جديد" [ref=f5e325] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/appointments/create
+          - generic [ref=f5e326]:
+            - generic [ref=f5e327]:
+              - generic [ref=f5e328]: البحث عن مريض
+              - searchbox "البحث عن مريض" [ref=f5e329]: تدقيق
+            - generic [ref=f5e330]:
+              - generic [ref=f5e331]: من
+              - textbox "من" [ref=f5e332]: 2026-09-24
+            - generic [ref=f5e333]:
+              - generic [ref=f5e334]: إلى
+              - textbox "إلى" [ref=f5e335]: 2026-10-08
+            - generic [ref=f5e336]:
+              - generic [ref=f5e337]: الطبيب / المعالج
+              - combobox "الطبيب / المعالج" [ref=f5e338]:
+                - option "الكل" [selected]
+                - option "أ. سامر العلي"
+                - option "أ. ليلى شاهين"
+                - option "أ. نور منصور"
+                - option "د. ريم الأحمد"
+                - option "د. محمد خالد"
+                - option "د. هالة النجار"
+            - generic [ref=f5e339]:
+              - generic [ref=f5e340]: الغرفة
+              - combobox "الغرفة" [ref=f5e341]:
+                - option "كل الغرف" [selected]
+                - option "غرفة 1 — العلاج الفردي"
+                - option "غرفة 2 — العلاج الفردي"
+                - option "غرفة 3 — الجلسات الجماعية والأسرية"
+            - generic [ref=f5e342]:
+              - generic [ref=f5e343]: الحالة
+              - combobox "الحالة" [ref=f5e344]:
+                - option "كل الحالات" [selected]
+                - option "مجدول"
+                - option "حضر"
+                - option "مكتمل"
+                - option "ملغى"
+                - option "لم يحضر"
+                - option "أعيدت جدولته"
+          - table [ref=f5e346]:
+            - rowgroup [ref=f5e347]:
+              - row [ref=f5e348]:
+                - columnheader "الموعد" [ref=f5e349]
+                - columnheader "المريض / المرضى" [ref=f5e350]
+                - columnheader "المعالج" [ref=f5e351]
+                - columnheader "الغرفة والعلاج" [ref=f5e352]
+                - columnheader "الحالة" [ref=f5e353]
+                - columnheader "الإجراء" [ref=f5e354]
+            - rowgroup [ref=f5e355]:
+              - row [ref=f5e944]:
+                - cell [ref=f5e945]:
+                  - paragraph [ref=f5e946]: السبت 26/09/2026
+                  - paragraph [ref=f5e947]: 07:00 م — 08:00 م
+                - cell [ref=f5e948]:
+                  - paragraph [ref=f5e949]: مريض تدقيق
+                  - paragraph [ref=f5e950]: فردية · 1 مريض
+                - cell "د. محمد خالد" [ref=f5e951]
+                - cell [ref=f5e952]:
+                  - paragraph [ref=f5e953]: غرفة 1 — العلاج الفردي
+                  - paragraph [ref=f5e954]: جلسة علاج نفسي فردي
+                - cell "مجدول" [ref=f5e955]
+                - cell [ref=f5e957]:
+                  - generic [ref=f5e958]:
+                    - button "حضر" [active] [ref=f5e959] [cursor=pointer]
+                    - button "لم يحضر" [ref=f5e963] [cursor=pointer]
+                    - link "إعادة جدولة" [ref=f5e967] [cursor=pointer]:
+                      - /url: http://127.0.0.1:8000/appointments/161/reschedule
+                    - button "إلغاء" [ref=f5e971] [cursor=pointer]

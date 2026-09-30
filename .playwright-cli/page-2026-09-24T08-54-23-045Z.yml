@@ -1,0 +1,6 @@
+- main [ref=f11e2]:
+  - paragraph [ref=f11e3]: خطأ 403
+  - heading "لا تملك صلاحية الوصول" [level=1] [ref=f11e4]
+  - paragraph [ref=f11e5]: لا يسمح حسابك بفتح هذه الصفحة أو تنفيذ هذا الإجراء.
+  - link "العودة إلى الصفحة السابقة" [ref=f11e6] [cursor=pointer]:
+    - /url: http://127.0.0.1:8000/dashboard
