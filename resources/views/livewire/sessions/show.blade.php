@@ -120,9 +120,8 @@
             <button
                 class="btn btn-secondary"
                 type="submit"
+                wire:key="session-attachment-submit-{{ count($attachmentFiles) }}"
                 @disabled($attachmentFiles === [])
-                wire:loading.attr="disabled"
-                wire:target="uploadAttachments,attachmentFiles"
             >
                 <span wire:loading.remove wire:target="uploadAttachments,attachmentFiles">رفع وربط بالجلسة</span>
                 <span wire:loading wire:target="uploadAttachments,attachmentFiles">جارٍ الرفع والحفظ…</span>

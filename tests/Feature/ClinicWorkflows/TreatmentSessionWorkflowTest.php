@@ -39,6 +39,19 @@ it('binds session attachment uploads to the only participant automatically', fun
         ->assertSet('attachmentPatientId', $patient->id);
 });
 
+it('replaces the session attachment submit control when selected files change', function () {
+    $actor = sessionWorkflowActor('sessions.manage', 'patients.view', 'patient_attachments.upload');
+    $session = TreatmentSession::factory()->create();
+    $patient = Patient::factory()->create();
+    TreatmentSessionParticipant::factory()->for($session)->for($patient)->create();
+
+    Livewire::actingAs($actor)
+        ->test(SessionShow::class, ['treatmentSession' => $session])
+        ->assertSeeHtml('wire:key="session-attachment-submit-0"')
+        ->set('attachmentFiles', [UploadedFile::fake()->create('session.pdf', 10, 'application/pdf')])
+        ->assertSeeHtml('wire:key="session-attachment-submit-1"');
+});
+
 it('limits group session attachment uploads to the sessions own participants', function () {
     Storage::fake('local');
     $actor = sessionWorkflowActor('sessions.manage', 'patient_attachments.upload');
