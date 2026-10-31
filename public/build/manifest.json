@@ -1,0 +1,24 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Dcm_VCZo.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "assets": [
+      "assets/Alexandria-Variable-C0jvMOE_.ttf"
+    ]
+  },
+  "resources/fonts/Alexandria-Variable.ttf": {
+    "file": "assets/Alexandria-Variable-C0jvMOE_.ttf",
+    "src": "resources/fonts/Alexandria-Variable.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-VpOrBqdE.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
