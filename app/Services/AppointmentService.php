@@ -104,11 +104,12 @@ final class AppointmentService
                 'room_id' => (int) $lockedAppointment->getAttribute('room_id'),
                 'treatment_type_id' => (int) $lockedAppointment->getAttribute('treatment_type_id'),
                 'starts_at' => $lockedAppointment->getAttribute('starts_at'),
-                'duration_minutes' => (int) $lockedAppointment->getAttribute('duration_minutes'),
                 'kind' => $this->kind($lockedAppointment),
                 'patient_ids' => $patientIds,
                 'notes' => $lockedAppointment->getAttribute('notes'),
-            ], $data);
+            ], $data, [
+                'duration_minutes' => (int) $lockedAppointment->getAttribute('duration_minutes'),
+            ]);
 
             $replacement = $this->bookWithinTransaction(
                 $replacementData,

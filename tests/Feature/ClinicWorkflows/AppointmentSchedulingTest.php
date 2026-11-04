@@ -309,11 +309,14 @@ it('reschedules with explicit lineage while leaving all financial records untouc
 
     $replacement = $service->reschedule($original, [
         'starts_at' => '2026-09-12 14:00:00',
+        'duration_minutes' => 15,
     ], $actor);
 
     expect($original->refresh()->status)->toBe(AppointmentStatus::Rescheduled)
         ->and($replacement->rescheduled_from_id)->toBe($original->id)
         ->and($replacement->status)->toBe(AppointmentStatus::Scheduled)
+        ->and($replacement->duration_minutes)->toBe(60)
+        ->and($replacement->ends_at->format('Y-m-d H:i:s'))->toBe('2026-09-12 15:00:00')
         ->and($replacement->participants()->pluck('patient_id')->all())->toBe([$resources['patient']->id]);
     $this->assertDatabaseCount('treatment_sessions', 0);
     $this->assertDatabaseCount('payments', 0);

@@ -36,7 +36,7 @@ class Form extends Component
 
     public string $startTime = '';
 
-    public int $durationMinutes = 60;
+    public ?int $durationMinutes = null;
 
     public string $kind = 'individual';
 
@@ -63,7 +63,7 @@ class Form extends Component
             $this->patientIds = $this->appointment->participants->pluck('patient_id')->all();
             $this->notes = $this->appointment->notes ?? '';
         } else {
-            $this->durationMinutes = app(SettingsService::class)->integer('appointment.default_duration', 60);
+            $this->durationMinutes = app(SettingsService::class)->integer('appointment.default_duration');
             $this->date = now()->format('Y-m-d');
             $this->startTime = now()->addMinutes(30)->format('H:i');
         }
@@ -116,7 +116,7 @@ class Form extends Component
     #[Computed]
     public function availablePeriods(): array
     {
-        if (! $this->practitionerId || ! $this->roomId || ! Validator::make(['date' => $this->date], ['date' => ['required', 'date_format:Y-m-d']])->passes()) {
+        if (! $this->practitionerId || ! $this->roomId || ! $this->durationMinutes || ! Validator::make(['date' => $this->date], ['date' => ['required', 'date_format:Y-m-d']])->passes()) {
             return [];
         }
 
@@ -136,7 +136,6 @@ class Form extends Component
             'treatmentTypeId' => ['required', 'integer', Rule::exists('treatment_types', 'id')->where('is_active', true)],
             'date' => ['required', 'date'],
             'startTime' => ['required', 'date_format:H:i'],
-            'durationMinutes' => ['required', 'integer', 'min:5', 'max:720'],
             'kind' => ['required', Rule::enum(AppointmentKind::class)],
             'patientIds' => ['required', 'array', 'min:1'],
             'patientIds.*' => ['integer', 'distinct', Rule::exists('patients', 'id')->where('is_active', true)],
@@ -149,12 +148,16 @@ class Form extends Component
             return null;
         }
 
+        $durationMinutes = $this->appointment
+            ? (int) $this->appointment->getAttribute('duration_minutes')
+            : app(SettingsService::class)->integer('appointment.default_duration');
+
         $data = [
             'practitioner_id' => $validated['practitionerId'],
             'room_id' => $validated['roomId'],
             'treatment_type_id' => $validated['treatmentTypeId'],
             'starts_at' => $validated['date'].' '.$validated['startTime'],
-            'duration_minutes' => $validated['durationMinutes'],
+            'duration_minutes' => $durationMinutes,
             'kind' => $validated['kind'],
             'patient_ids' => array_map('intval', $validated['patientIds']),
             'notes' => filled($validated['notes']) ? trim($validated['notes']) : null,
