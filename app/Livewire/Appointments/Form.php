@@ -214,6 +214,11 @@ class Form extends Component
             ? $availabilityService->bookingIntervals($this->practitionerId, $this->date, $this->roomId, $this->appointment?->id)
             : [];
         $clinicPeriod = app(ClinicWorkingHoursService::class)->schedule()[$startsAt->dayOfWeek];
+        $isOpenEndedSession = ($exception->details['conflict_type'] ?? null) === 'treatment_session'
+            && ($exception->details['open_ended'] ?? false) === true;
+        $conflictSessionId = $isOpenEndedSession
+            ? (int) ($exception->details['treatment_session_id'] ?? 0)
+            : null;
 
         return [
             'reason' => $exception->reason,
@@ -228,10 +233,14 @@ class Form extends Component
                 ->values()
                 ->all(),
             'conflict_start' => isset($exception->details['starts_at'])
-                ? CarbonImmutable::parse($exception->details['starts_at'])->format('H:i')
+                ? CarbonImmutable::parse($exception->details['starts_at'])->format($isOpenEndedSession ? 'Y-m-d H:i' : 'H:i')
                 : null,
             'conflict_end' => isset($exception->details['ends_at'])
                 ? CarbonImmutable::parse($exception->details['ends_at'])->format('H:i')
+                : null,
+            'conflict_open_ended' => $isOpenEndedSession,
+            'conflict_session_url' => $conflictSessionId && auth()->user()->can('sessions.manage')
+                ? route('sessions.show', $conflictSessionId)
                 : null,
             'alternatives' => collect($availablePeriods)
                 ->filter(static fn (array $period): bool => $period['start']->diffInMinutes($period['end']) >= $durationMinutes)

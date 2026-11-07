@@ -66,8 +66,17 @@
 
                     @if ($schedulingConflict['conflict_start'])
                         <div class="rounded-2xl border border-[var(--warning)]/30 bg-[var(--warning-soft)] p-4 text-sm text-[var(--warning)]">
-                            <strong>الفترة المتعارضة:</strong>
-                            <span dir="ltr">{{ $schedulingConflict['conflict_start'] }} – {{ $schedulingConflict['conflict_end'] ?? 'مستمرة الآن' }}</span>
+                            @if ($schedulingConflict['conflict_open_ended'] ?? false)
+                                <strong>جلسة علاج مفتوحة:</strong>
+                                <span>بدأت فعليًا في <bdi dir="ltr">{{ $schedulingConflict['conflict_start'] }}</bdi> ولم تُسجّل نهاية العلاج الفعلية بعد.</span>
+                                <p class="mt-1 text-xs">يبقى المعالج والغرفة مشغولين حتى تسجيل النهاية الفعلية؛ ولا تُستنتج النهاية من الحالة المالية.</p>
+                                @if ($schedulingConflict['conflict_session_url'])
+                                    <a class="btn btn-secondary mt-3" href="{{ $schedulingConflict['conflict_session_url'] }}" wire:navigate>فتح الجلسة وتسجيل نهايتها</a>
+                                @endif
+                            @else
+                                <strong>الفترة المتعارضة:</strong>
+                                <span dir="ltr">{{ $schedulingConflict['conflict_start'] }} – {{ $schedulingConflict['conflict_end'] }}</span>
+                            @endif
                             <p class="mt-1 text-xs">لا تُعرض أي بيانات خاصة بالمريض المرتبط بالحجز الآخر.</p>
                         </div>
                     @endif

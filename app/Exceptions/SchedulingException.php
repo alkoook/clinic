@@ -77,6 +77,16 @@ final class SchedulingException extends RuntimeException
         return new self('لا يمكن إكمال الجلسة لوجود رصيد غير مسدد: '.$details.'.');
     }
 
+    public static function treatmentStillRunning(): self
+    {
+        return new self('يجب تسجيل نهاية العلاج الفعلية قبل اعتماد اكتمال الجلسة.', 'treatment_still_running');
+    }
+
+    public static function invalidTreatmentEnd(): self
+    {
+        return new self('يجب أن يكون وقت نهاية العلاج الفعلية بعد بدء الجلسة وألا يكون في المستقبل.', 'invalid_treatment_end');
+    }
+
     public static function appointmentNotStarted(): self
     {
         return new self('لا يمكن إنشاء جلسة علاجية قبل حلول وقت الموعد.');

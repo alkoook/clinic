@@ -246,6 +246,42 @@ final class TreatmentSessionService
         return $lockedSession;
     }
 
+    public function endTreatment(
+        TreatmentSession $session,
+        User $actor,
+        CarbonInterface $endedAt,
+    ): TreatmentSession {
+        if (! $actor->hasPermission('sessions.manage')) {
+            throw SchedulingException::permissionDenied('sessions.manage');
+        }
+
+        return DB::transaction(function () use ($session, $endedAt): TreatmentSession {
+            /** @var TreatmentSession $lockedSession */
+            $lockedSession = TreatmentSession::query()
+                ->whereKey($session->getKey())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($lockedSession->getAttribute('ended_at') !== null) {
+                return $lockedSession;
+            }
+
+            $actualEnd = CarbonImmutable::instance($endedAt)
+                ->setTimezone((string) config('app.timezone'));
+            $actualStart = CarbonImmutable::instance($lockedSession->getAttribute('started_at'))
+                ->setTimezone((string) config('app.timezone'));
+
+            if ($actualEnd->lessThan($actualStart) || $actualEnd->greaterThan(CarbonImmutable::now())) {
+                throw SchedulingException::invalidTreatmentEnd();
+            }
+
+            $lockedSession->forceFill(['ended_at' => $actualEnd]);
+            $lockedSession->save();
+
+            return $lockedSession->refresh();
+        }, 3);
+    }
+
     public function complete(
         TreatmentSession $session,
         User $actor,
@@ -266,10 +302,13 @@ final class TreatmentSessionService
                 throw SchedulingException::unpaidParticipants($this->outstandingParticipantBalances($synchronized));
             }
 
+            if ($synchronized->getAttribute('ended_at') === null) {
+                throw SchedulingException::treatmentStillRunning();
+            }
+
             $synchronized->forceFill([
                 'status' => TreatmentSessionStatus::Completed->value,
                 'completed_at' => $completedAt ?? now(),
-                'ended_at' => $completedAt ?? now(),
             ]);
             $synchronized->save();
 

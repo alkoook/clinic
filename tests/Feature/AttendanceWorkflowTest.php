@@ -2,6 +2,8 @@
 
 use App\Enums\AppointmentStatus;
 use App\Enums\ParticipantPaymentStatus;
+use App\Enums\TreatmentSessionStatus;
+use App\Exceptions\SchedulingException;
 use App\Livewire\Appointments\Index;
 use App\Livewire\Sessions\Show;
 use App\Models\Appointment;
@@ -102,17 +104,69 @@ it('rejects early attendance overlapping another reserved resource', function (s
     expect(TreatmentSession::count())->toBe(0);
 })->with(['practitioner_id', 'room_id']);
 
-it('records the actual end once when a paid session is completed', function () {
+it('records the actual end once independently from administrative completion', function () {
     $session = TreatmentSession::factory()->create(['started_at' => now()->subMinutes(40), 'ended_at' => null]);
     TreatmentSessionParticipant::factory()->for($session)->create(['payment_status' => ParticipantPaymentStatus::Paid]);
     $service = app(TreatmentSessionService::class);
+    $service->endTreatment($session, $this->secretary, now());
     $service->complete($session, $this->secretary);
     expect($session->refresh()->ended_at->eq(now()))->toBeTrue();
     $endedAt = $session->ended_at->copy();
     $this->travel(5)->minutes();
+    $service->endTreatment($session, $this->secretary, now());
     $service->complete($session, $this->secretary);
     expect($session->refresh()->ended_at->eq($endedAt))->toBeTrue();
 });
+
+it('does not fabricate an actual end while administratively completing a running session', function () {
+    $session = TreatmentSession::factory()->create(['started_at' => now()->subMinutes(40), 'ended_at' => null]);
+    TreatmentSessionParticipant::factory()->for($session)->create(['payment_status' => ParticipantPaymentStatus::Paid]);
+
+    expect(fn () => app(TreatmentSessionService::class)->complete($session, $this->secretary))
+        ->toThrow(SchedulingException::class, 'نهاية العلاج الفعلية');
+
+    expect($session->refresh()->ended_at)->toBeNull()
+        ->and($session->completed_at)->toBeNull();
+});
+
+it('records an explicit actual end for a refunded session without changing financial state', function () {
+    $session = TreatmentSession::factory()->for($this->appointment)->create([
+        'status' => TreatmentSessionStatus::Refunded,
+        'started_at' => now()->subDay(),
+        'ended_at' => null,
+        'completed_at' => null,
+    ]);
+    $participant = TreatmentSessionParticipant::factory()->for($session)->create([
+        'payment_status' => ParticipantPaymentStatus::Refunded,
+    ]);
+    $actualEnd = now()->subDay()->addMinutes(35);
+
+    Livewire::test(Show::class, ['treatmentSession' => $session])
+        ->set('actualEndedAt', $actualEnd->format('Y-m-d\TH:i'))
+        ->call('endTreatment')
+        ->assertHasNoErrors();
+
+    expect($session->refresh()->ended_at->format('Y-m-d H:i'))->toBe($actualEnd->format('Y-m-d H:i'))
+        ->and($session->status)->toBe(TreatmentSessionStatus::Refunded)
+        ->and($session->completed_at)->toBeNull()
+        ->and($participant->refresh()->payment_status)->toBe(ParticipantPaymentStatus::Refunded)
+        ->and($this->appointment->refresh()->status)->toBe(AppointmentStatus::Scheduled);
+});
+
+it('rejects an impossible actual treatment end', function (CarbonImmutable $actualEnd) {
+    $session = TreatmentSession::factory()->create([
+        'started_at' => now()->subMinutes(40),
+        'ended_at' => null,
+    ]);
+
+    expect(fn () => app(TreatmentSessionService::class)->endTreatment($session, $this->secretary, $actualEnd))
+        ->toThrow(SchedulingException::class);
+
+    expect($session->refresh()->ended_at)->toBeNull();
+})->with([
+    'before the actual start' => fn (): CarbonImmutable => CarbonImmutable::now()->subHour(),
+    'in the future' => fn (): CarbonImmutable => CarbonImmutable::now()->addMinute(),
+]);
 
 it('records a five minute session independently of the booked duration', function () {
     $scheduledStart = $this->appointment->starts_at->copy();
@@ -126,7 +180,9 @@ it('records a five minute session independently of the booked duration', functio
     ]);
     $this->travel(5)->minutes();
 
-    app(TreatmentSessionService::class)->complete($session, $this->secretary);
+    $service = app(TreatmentSessionService::class);
+    $service->endTreatment($session, $this->secretary, now());
+    $service->complete($session, $this->secretary);
 
     expect($session->refresh()->started_at->diffInMinutes($session->ended_at))->toBe(5.0)
         ->and($this->appointment->refresh()->starts_at->eq($scheduledStart))->toBeTrue()
@@ -160,7 +216,9 @@ it('keeps a long session running across the next appointment and shows a due war
     expect($session->refresh()->ended_at)->toBeNull()
         ->and($nextAppointment->refresh()->status)->toBe(AppointmentStatus::Scheduled);
 
-    app(TreatmentSessionService::class)->complete($session, $this->secretary);
+    $service = app(TreatmentSessionService::class);
+    $service->endTreatment($session, $this->secretary, now());
+    $service->complete($session, $this->secretary);
 
     expect($session->refresh()->started_at->diffInMinutes($session->ended_at))->toBe(70.0)
         ->and($nextAppointment->refresh()->status)->toBe(AppointmentStatus::Scheduled);

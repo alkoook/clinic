@@ -322,7 +322,11 @@ class DemoClinicSeeder extends Seeder
                             $discount = $sequence % 7 === 0 ? 10_000 : 0;
                             $payments[] = app(PaymentService::class)->pay($participant, $price, $discount, $admin, (string) Str::uuid(), $time);
                         }
-                        app(TreatmentSessionService::class)->complete($session, $admin, $time->addMinutes(45 + $sequence % 15));
+                        $actualEnd = $time->addMinutes(45 + $sequence % 15);
+                        Carbon::setTestNow($actualEnd);
+                        CarbonImmutable::setTestNow($actualEnd);
+                        app(TreatmentSessionService::class)->endTreatment($session, $admin, $actualEnd);
+                        app(TreatmentSessionService::class)->complete($session, $admin, $actualEnd);
                     }
                 }
             }

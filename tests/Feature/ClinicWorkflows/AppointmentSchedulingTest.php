@@ -3,7 +3,11 @@
 use App\Enums\AppointmentKind;
 use App\Enums\AppointmentStatus;
 use App\Enums\AvailabilityExceptionType;
+use App\Enums\ParticipantPaymentStatus;
+use App\Enums\TreatmentSessionStatus;
 use App\Exceptions\SchedulingException;
+use App\Livewire\Appointments\Form;
+use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Permission;
 use App\Models\Practitioner;
@@ -12,12 +16,16 @@ use App\Models\PractitionerAvailabilityException;
 use App\Models\Role;
 use App\Models\Room;
 use App\Models\Setting;
+use App\Models\TreatmentSession;
+use App\Models\TreatmentSessionParticipant;
 use App\Models\TreatmentType;
 use App\Models\User;
 use App\Services\AppointmentService;
+use App\Services\TreatmentSessionService;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Livewire;
 
 uses(LazilyRefreshDatabase::class);
 
@@ -53,6 +61,94 @@ function individualSchedulingResources(string $date = '2026-09-12'): array
 
     return compact('practitioner', 'room', 'treatmentType', 'patient');
 }
+
+it('keeps a refunded open treatment occupied until its explicit actual end then releases later days', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-11-07 09:00:00'));
+    $actor = schedulingActorWithPermissions('appointments.manage', 'sessions.manage');
+    $resources = individualSchedulingResources('2026-11-07');
+    $originalAppointment = Appointment::factory()->create([
+        'practitioner_id' => $resources['practitioner']->id,
+        'room_id' => $resources['room']->id,
+        'treatment_type_id' => $resources['treatmentType']->id,
+        'starts_at' => '2026-11-06 14:00:00',
+        'ends_at' => '2026-11-06 15:00:00',
+        'status' => AppointmentStatus::Attended,
+    ]);
+    $session = TreatmentSession::factory()->for($originalAppointment)->create([
+        'status' => TreatmentSessionStatus::Refunded,
+        'started_at' => '2026-11-06 14:21:09',
+        'ended_at' => null,
+        'completed_at' => null,
+    ]);
+    $participant = TreatmentSessionParticipant::factory()->for($session)->create([
+        'payment_status' => ParticipantPaymentStatus::Refunded,
+    ]);
+    $appointmentData = [
+        'practitioner_id' => $resources['practitioner']->id,
+        'room_id' => $resources['room']->id,
+        'treatment_type_id' => $resources['treatmentType']->id,
+        'starts_at' => '2026-11-07 10:00:00',
+        'duration_minutes' => 60,
+        'kind' => AppointmentKind::Individual,
+        'patient_ids' => [$resources['patient']->id],
+    ];
+
+    expect(fn () => app(AppointmentService::class)->book($appointmentData, $actor))
+        ->toThrow(SchedulingException::class);
+
+    app(TreatmentSessionService::class)->endTreatment(
+        $session,
+        $actor,
+        CarbonImmutable::parse('2026-11-06 14:55:00'),
+    );
+    $booked = app(AppointmentService::class)->book($appointmentData, $actor);
+
+    expect($session->refresh()->ended_at->format('Y-m-d H:i:s'))->toBe('2026-11-06 14:55:00')
+        ->and($session->status)->toBe(TreatmentSessionStatus::Refunded)
+        ->and($session->completed_at)->toBeNull()
+        ->and($participant->refresh()->payment_status)->toBe(ParticipantPaymentStatus::Refunded)
+        ->and($originalAppointment->refresh()->status)->toBe(AppointmentStatus::Attended)
+        ->and($booked->starts_at->format('Y-m-d H:i:s'))->toBe('2026-11-07 10:00:00');
+});
+
+it('identifies an open treatment interval clearly in the scheduling conflict modal', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-11-07 09:00:00'));
+    $actor = schedulingActorWithPermissions('appointments.manage', 'sessions.manage');
+    $resources = individualSchedulingResources('2026-11-07');
+    $originalAppointment = Appointment::factory()->create([
+        'practitioner_id' => $resources['practitioner']->id,
+        'room_id' => $resources['room']->id,
+        'treatment_type_id' => $resources['treatmentType']->id,
+        'starts_at' => '2026-11-06 14:00:00',
+        'ends_at' => '2026-11-06 15:00:00',
+        'status' => AppointmentStatus::Attended,
+    ]);
+    $session = TreatmentSession::factory()->for($originalAppointment)->create([
+        'status' => TreatmentSessionStatus::Refunded,
+        'started_at' => '2026-11-06 14:21:09',
+        'ended_at' => null,
+    ]);
+
+    $component = Livewire::actingAs($actor)
+        ->test(Form::class)
+        ->set('practitionerId', $resources['practitioner']->id)
+        ->set('roomId', $resources['room']->id)
+        ->set('treatmentTypeId', $resources['treatmentType']->id)
+        ->set('date', '2026-11-07')
+        ->set('startTime', '10:00')
+        ->set('durationMinutes', 60)
+        ->set('kind', AppointmentKind::Individual->value)
+        ->set('patientIds', [$resources['patient']->id])
+        ->call('save')
+        ->assertHasErrors('schedule')
+        ->assertSee('لم تُسجّل نهاية العلاج الفعلية بعد')
+        ->assertSee('فتح الجلسة وتسجيل نهايتها');
+
+    expect($component->get('schedulingConflict')['conflict_open_ended'])->toBeTrue()
+        ->and($component->get('schedulingConflict')['conflict_start'])->toBe('2026-11-06 14:21')
+        ->and($component->get('schedulingConflict')['conflict_end'])->toBeNull()
+        ->and($component->get('schedulingConflict')['conflict_session_url'])->toBe(route('sessions.show', $session));
+});
 
 it('books an individual appointment only inside the practitioner recurring availability', function () {
     $actor = schedulingActorWithPermissions('appointments.manage');

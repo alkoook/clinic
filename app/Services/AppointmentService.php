@@ -295,9 +295,12 @@ final class AppointmentService
                 ->whereNot('status', 'cancelled')
                 ->where(fn (Builder $query) => $query->whereNull('ended_at')->orWhere('ended_at', '>', $startsAt))
                 ->orderBy('started_at')
-                ->first(['started_at', 'ended_at']);
+                ->first(['id', 'started_at', 'ended_at']);
             if ($occupied !== null) {
-                $details = $this->conflictDetails($occupied->started_at, $occupied->ended_at);
+                $details = $this->conflictDetails($occupied->started_at, $occupied->ended_at, [
+                    'conflict_type' => 'treatment_session',
+                    'treatment_session_id' => (int) $occupied->getKey(),
+                ]);
                 throw $resource === 'room_id'
                     ? SchedulingException::roomConflict($details)
                     : SchedulingException::practitionerConflict($details);
@@ -358,12 +361,17 @@ final class AppointmentService
         return $durationMinutes;
     }
 
-    /** @return array{starts_at: string, ends_at: string|null} */
-    private function conflictDetails(CarbonInterface $startsAt, ?CarbonInterface $endsAt): array
+    /**
+     * @param  array<string, mixed>  $details
+     * @return array<string, mixed>
+     */
+    private function conflictDetails(CarbonInterface $startsAt, ?CarbonInterface $endsAt, array $details = []): array
     {
         return [
             'starts_at' => $startsAt->toIso8601String(),
             'ends_at' => $endsAt?->toIso8601String(),
+            'open_ended' => $endsAt === null,
+            ...$details,
         ];
     }
 

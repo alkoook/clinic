@@ -14,6 +14,7 @@ use App\Services\PaymentService;
 use App\Services\PractitionerShareWaiverService;
 use App\Services\RefundService;
 use App\Services\TreatmentSessionService;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -65,6 +66,8 @@ class Show extends Component
 
     public ?int $attachmentPatientId = null;
 
+    public string $actualEndedAt = '';
+
     public function updatedAttachmentFiles(mixed $value): void
     {
         $this->attachmentFiles = PatientAttachmentService::readyUploads($value);
@@ -84,6 +87,9 @@ class Show extends Component
         $this->hydrateParticipantInputs();
         if ($this->treatmentSession->participants()->count() === 1) {
             $this->attachmentPatientId = (int) $this->treatmentSession->participants()->value('patient_id');
+        }
+        if ($this->treatmentSession->ended_at === null) {
+            $this->actualEndedAt = CarbonImmutable::now()->format('Y-m-d\TH:i');
         }
     }
 
@@ -220,6 +226,33 @@ class Show extends Component
         }
         $this->treatmentSession->refresh();
         $this->dispatch('app-toast', type: 'success', message: 'تم اعتماد اكتمال الجلسة.');
+    }
+
+    public function endTreatment(TreatmentSessionService $treatmentSessionService): void
+    {
+        Gate::authorize('sessions.manage');
+        $validated = $this->validate(
+            ['actualEndedAt' => ['required', 'date']],
+            [
+                'actualEndedAt.required' => 'أدخل وقت نهاية العلاج الفعلية.',
+                'actualEndedAt.date' => 'وقت نهاية العلاج الفعلية غير صالح.',
+            ],
+        );
+
+        try {
+            $treatmentSessionService->endTreatment(
+                $this->treatmentSession,
+                auth()->user(),
+                CarbonImmutable::parse($validated['actualEndedAt'], (string) config('app.timezone')),
+            );
+        } catch (SchedulingException $exception) {
+            $this->addError('actualEndedAt', $exception->getMessage());
+
+            return;
+        }
+
+        $this->treatmentSession->refresh();
+        $this->dispatch('app-toast', type: 'success', message: 'تم تسجيل نهاية العلاج الفعلية وتحرير المعالج والغرفة.');
     }
 
     public function uploadAttachments(PatientAttachmentService $attachmentService): void
