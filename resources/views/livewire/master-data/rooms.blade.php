@@ -13,11 +13,15 @@
         @endcan
         <section class="space-y-4">
             <input class="form-input" type="search" wire:model.live.debounce.300ms="search" placeholder="ابحث بالاسم أو الرمز">
-            <div class="table-shell"><table><thead><tr><th>الغرفة</th><th>الرمز</th><th>الوصف</th><th>الحالة</th><th></th></tr></thead><tbody>
+            <div class="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
                 @forelse ($this->rooms as $room)
-                    <tr wire:key="room-{{ $room->id }}"><td class="font-bold text-[var(--ink)]">{{ $room->name }}</td><td dir="ltr" class="text-right">{{ $room->code }}</td><td>{{ $room->description ?: '—' }}</td><td>@can('master_data.manage')<button class="status-badge {{ $room->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $room->id }})">{{ $room->is_active ? 'متاحة' : 'متوقفة' }}</button>@else<span class="status-badge {{ $room->is_active ? 'status-success' : 'status-danger' }}">{{ $room->is_active ? 'متاحة' : 'متوقفة' }}</span>@endcan</td><td>@can('master_data.manage')<div class="flex flex-wrap gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $room->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف الغرفة؟', description: 'سيبقى تاريخ حجوزاتها محفوظًا في السجلات السابقة.', confirmLabel: 'حذف الغرفة', action: () => $wire.delete({{ $room->id }}) })">حذف</button></div>@else<span class="text-xs text-[var(--muted)]">عرض فقط</span>@endcan</td></tr>
-                @empty<tr><td colspan="5"><div class="empty-state">لا توجد غرف.</div></td></tr>@endforelse
-            </tbody></table></div>
+                    <article class="app-card flex min-w-0 flex-col gap-4 p-4" wire:key="room-{{ $room->id }}">
+                        <div class="flex items-start justify-between gap-3"><div class="min-w-0"><h2 class="truncate font-black text-[var(--ink)]">{{ $room->name }}</h2><p class="mt-1 text-xs font-bold text-[var(--brand-strong)]" dir="ltr">{{ $room->code ?: '—' }}</p></div>@can('master_data.manage')<button class="status-badge {{ $room->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $room->id }})">{{ $room->is_active ? 'متاحة' : 'متوقفة' }}</button>@else<span class="status-badge {{ $room->is_active ? 'status-success' : 'status-danger' }}">{{ $room->is_active ? 'متاحة' : 'متوقفة' }}</span>@endcan</div>
+                        <p class="min-h-10 break-words text-sm leading-6 text-[var(--muted)]">{{ $room->description ?: 'لا يوجد وصف.' }}</p>
+                        @can('master_data.manage')<div class="mt-auto grid grid-cols-2 gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $room->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف الغرفة؟', description: 'سيبقى تاريخ حجوزاتها محفوظًا في السجلات السابقة.', confirmLabel: 'حذف الغرفة', action: () => $wire.delete({{ $room->id }}) })">حذف</button></div>@endcan
+                    </article>
+                @empty<div class="empty-state sm:col-span-2 2xl:col-span-3">لا توجد غرف.</div>@endforelse
+            </div>
             {{ $this->rooms->links() }}
         </section>
     </div>

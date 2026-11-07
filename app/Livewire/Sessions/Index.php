@@ -61,7 +61,7 @@ class Index extends Component
         }
 
         return TreatmentSession::query()
-            ->with(['practitioner:id,name', 'room:id,name', 'treatmentType:id,name', 'participants:id,treatment_session_id,patient_id', 'participants.patient:id,full_name'])
+            ->with(['practitioner:id,name', 'room:id,name', 'treatmentType:id,name', 'participants:id,treatment_session_id,patient_id,patient_name,payment_status', 'participants.patient:id,full_name'])
             ->withSum('participants', 'final_amount')
             ->when($this->canViewPractitionerShare, fn (Builder $query) => $query->withSum('participants', 'practitioner_share'))
             ->when($practitionerId !== null, fn (Builder $query) => $query->where('practitioner_id', $practitionerId))

@@ -49,6 +49,7 @@
             <dl class="grid gap-4 text-sm sm:grid-cols-2">
                 @foreach ([
                     'المرافق' => $patient->companion_name,
+                    'مكان السكن' => $patient->residence_location,
                     'المستشفى المحوّل منه' => $patient->incoming_hospital_name,
                     'المعالج المحوّل' => $patient->referringPractitioner?->name,
                     'المعالج الحالي' => $patient->currentPractitioner?->name,

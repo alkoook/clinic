@@ -104,12 +104,11 @@ final class AppointmentService
                 'room_id' => (int) $lockedAppointment->getAttribute('room_id'),
                 'treatment_type_id' => (int) $lockedAppointment->getAttribute('treatment_type_id'),
                 'starts_at' => $lockedAppointment->getAttribute('starts_at'),
+                'duration_minutes' => (int) $lockedAppointment->getAttribute('duration_minutes'),
                 'kind' => $this->kind($lockedAppointment),
                 'patient_ids' => $patientIds,
                 'notes' => $lockedAppointment->getAttribute('notes'),
-            ], $data, [
-                'duration_minutes' => (int) $lockedAppointment->getAttribute('duration_minutes'),
-            ]);
+            ], $data);
 
             $replacement = $this->bookWithinTransaction(
                 $replacementData,
@@ -201,9 +200,9 @@ final class AppointmentService
         ?int $rescheduledFromId = null,
     ): Appointment {
         $startsAt = $this->dateTime($data['starts_at']);
-        $durationMinutes = (int) $data['duration_minutes'];
+        $durationMinutes = $this->validatedDurationMinutes($data['duration_minutes'] ?? null);
 
-        if ($durationMinutes <= 0 || $startsAt->second !== 0) {
+        if ($startsAt->second !== 0) {
             throw SchedulingException::invalidInterval();
         }
 
@@ -269,10 +268,11 @@ final class AppointmentService
             ->where('starts_at', '<', $endsAt)
             ->where('ends_at', '>', $startsAt)
             ->when($excludeAppointmentId !== null, fn (Builder $query): Builder => $query->whereKeyNot($excludeAppointmentId))
-            ->exists();
+            ->orderBy('starts_at')
+            ->first(['starts_at', 'ends_at']);
 
-        if ($practitionerConflict) {
-            throw SchedulingException::practitionerConflict();
+        if ($practitionerConflict !== null) {
+            throw SchedulingException::practitionerConflict($this->conflictDetails($practitionerConflict->starts_at, $practitionerConflict->ends_at));
         }
 
         $roomConflict = Appointment::query()
@@ -281,10 +281,11 @@ final class AppointmentService
             ->where('starts_at', '<', $endsAt)
             ->where('ends_at', '>', $startsAt)
             ->when($excludeAppointmentId !== null, fn (Builder $query): Builder => $query->whereKeyNot($excludeAppointmentId))
-            ->exists();
+            ->orderBy('starts_at')
+            ->first(['starts_at', 'ends_at']);
 
-        if ($roomConflict) {
-            throw SchedulingException::roomConflict();
+        if ($roomConflict !== null) {
+            throw SchedulingException::roomConflict($this->conflictDetails($roomConflict->starts_at, $roomConflict->ends_at));
         }
 
         foreach (['practitioner_id' => $practitioner->id, 'room_id' => $room->id] as $resource => $resourceId) {
@@ -293,9 +294,13 @@ final class AppointmentService
                 ->where('started_at', '<', $endsAt)
                 ->whereNot('status', 'cancelled')
                 ->where(fn (Builder $query) => $query->whereNull('ended_at')->orWhere('ended_at', '>', $startsAt))
-                ->exists();
-            if ($occupied) {
-                throw $resource === 'room_id' ? SchedulingException::roomConflict() : SchedulingException::practitionerConflict();
+                ->orderBy('started_at')
+                ->first(['started_at', 'ended_at']);
+            if ($occupied !== null) {
+                $details = $this->conflictDetails($occupied->started_at, $occupied->ended_at);
+                throw $resource === 'room_id'
+                    ? SchedulingException::roomConflict($details)
+                    : SchedulingException::practitionerConflict($details);
             }
         }
 
@@ -336,6 +341,30 @@ final class AppointmentService
         }
 
         return CarbonImmutable::parse($value, (string) config('app.timezone'));
+    }
+
+    private function validatedDurationMinutes(mixed $value): int
+    {
+        if (! is_int($value) && (! is_string($value) || ! ctype_digit($value))) {
+            throw SchedulingException::invalidInterval();
+        }
+
+        $durationMinutes = (int) $value;
+
+        if ($durationMinutes < 5 || $durationMinutes > 720) {
+            throw SchedulingException::invalidInterval();
+        }
+
+        return $durationMinutes;
+    }
+
+    /** @return array{starts_at: string, ends_at: string|null} */
+    private function conflictDetails(CarbonInterface $startsAt, ?CarbonInterface $endsAt): array
+    {
+        return [
+            'starts_at' => $startsAt->toIso8601String(),
+            'ends_at' => $endsAt?->toIso8601String(),
+        ];
     }
 
     private function status(Appointment $appointment): AppointmentStatus

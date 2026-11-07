@@ -43,6 +43,7 @@ final class PractitionerShareWaiverService
                 idempotencyKey: $idempotencyKey,
                 refundedAt: $waivedAt,
                 reversePractitionerShareByRefundAmount: true,
+                affectsPaymentEligibility: false,
             );
         }, 3);
     }

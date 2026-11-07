@@ -105,15 +105,16 @@ final class PatientAttachmentService
         ?TreatmentSession $session = null,
         ?string $title = null,
         ?string $description = null,
+        string $errorKey = 'files',
     ): PatientAttachment {
-        $this->assertSafe($file);
+        $this->assertSafe($file, $errorKey);
         $extension = strtolower($file->getClientOriginalExtension());
         $storedName = $this->storedName($patient, $session, $extension);
         $directory = 'patients/'.$patient->getKey().'/attachments';
         $path = $file->storeAs($directory, $storedName, 'local');
 
         if ($path === false) {
-            throw ValidationException::withMessages(['files' => 'تعذر رفع الملف. حاول مرة أخرى.']);
+            throw ValidationException::withMessages([$errorKey => 'تعذر رفع الملف. حاول مرة أخرى.']);
         }
 
         try {
@@ -153,23 +154,23 @@ final class PatientAttachmentService
         return Str::limit(basename($file->getClientOriginalName()), 255, '');
     }
 
-    private function assertSafe(UploadedFile $file): void
+    private function assertSafe(UploadedFile $file, string $errorKey): void
     {
         if (! $file->isValid()) {
-            throw ValidationException::withMessages(['files' => 'تعذر رفع الملف. تحقق من الملف وحاول مرة أخرى.']);
+            throw ValidationException::withMessages([$errorKey => 'تعذر رفع الملف. تحقق من الملف وحاول مرة أخرى.']);
         }
 
         $originalName = strtolower($file->getClientOriginalName());
         $nameParts = array_values(array_filter(array_slice(explode('.', $originalName), 1)));
 
         if (array_intersect($nameParts, self::DANGEROUS_EXTENSIONS) !== []) {
-            throw ValidationException::withMessages(['files' => 'نوع الملف غير مسموح لأسباب أمنية.']);
+            throw ValidationException::withMessages([$errorKey => 'نوع الملف غير مسموح لأسباب أمنية.']);
         }
 
         $extension = strtolower($file->getClientOriginalExtension());
 
         if ($extension === '' || ! in_array($extension, self::ALLOWED_EXTENSIONS, true)) {
-            throw ValidationException::withMessages(['files' => 'نوع الملف غير مسموح.']);
+            throw ValidationException::withMessages([$errorKey => 'نوع الملف غير مسموح.']);
         }
 
         $mimeType = $file->getMimeType();
@@ -177,7 +178,7 @@ final class PatientAttachmentService
 
         if (! is_string($mimeType) || ! in_array($mimeType, $allowedMimeTypes, true)) {
             throw ValidationException::withMessages([
-                'files' => 'محتوى الملف لا يطابق نوعه أو أن الملف غير آمن.',
+                $errorKey => 'محتوى الملف لا يطابق نوعه أو أن الملف غير آمن.',
             ]);
         }
     }

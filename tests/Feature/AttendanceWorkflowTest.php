@@ -3,6 +3,7 @@
 use App\Enums\AppointmentStatus;
 use App\Enums\ParticipantPaymentStatus;
 use App\Livewire\Appointments\Index;
+use App\Livewire\Sessions\Show;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\PractitionerAvailability;
@@ -41,7 +42,8 @@ it('starts early once and navigates to the same session without changing the res
     $component->assertHasNoErrors()->assertRedirect(route('sessions.show', $session));
     expect($session->started_at->format('H:i'))->toBe('13:55')
         ->and($session->ended_at)->toBeNull()
-        ->and($this->appointment->refresh()->starts_at->format('H:i'))->toBe('14:00');
+        ->and($this->appointment->refresh()->starts_at->format('H:i'))->toBe('14:00')
+        ->and($this->appointment->ends_at->format('H:i'))->toBe('15:00');
     Livewire::test(Index::class)->call('markStatus', $this->appointment->id, 'attended')
         ->assertRedirect(route('sessions.show', $session));
     expect(TreatmentSession::count())->toBe(1);
@@ -56,18 +58,18 @@ it('rejects an early start while a resource is occupied', function (string $reso
         ->and($this->appointment->treatmentSession)->toBeNull();
 })->with(['practitioner_id', 'room_id']);
 
-it('rejects attendance outside the allowed early start window', function () {
+it('allows attendance more than thirty minutes early when resources are available', function () {
     $this->appointment->update([
-        'starts_at' => now()->addMinutes(31),
-        'ends_at' => now()->addMinutes(91),
+        'starts_at' => now()->addHour(),
+        'ends_at' => now()->addHours(2),
     ]);
 
     Livewire::test(Index::class)
         ->call('markStatus', $this->appointment->id, 'attended')
-        ->assertHasErrors(['operation' => 'يمكن بدء الجلسة قبل الموعد بـ 30 دقيقة كحد أقصى.']);
+        ->assertHasNoErrors();
 
-    expect($this->appointment->refresh()->status)->toBe(AppointmentStatus::Scheduled)
-        ->and($this->appointment->treatmentSession)->toBeNull();
+    expect($this->appointment->refresh()->status)->toBe(AppointmentStatus::Attended)
+        ->and($this->appointment->treatmentSession->started_at->eq(now()))->toBeTrue();
 });
 
 it('orders appointments by reservation time descending', function () {
@@ -110,4 +112,56 @@ it('records the actual end once when a paid session is completed', function () {
     $this->travel(5)->minutes();
     $service->complete($session, $this->secretary);
     expect($session->refresh()->ended_at->eq($endedAt))->toBeTrue();
+});
+
+it('records a five minute session independently of the booked duration', function () {
+    $scheduledStart = $this->appointment->starts_at->copy();
+    $scheduledEnd = $this->appointment->ends_at->copy();
+    $session = TreatmentSession::factory()->for($this->appointment)->create([
+        'started_at' => now(),
+        'ended_at' => null,
+    ]);
+    TreatmentSessionParticipant::factory()->for($session)->create([
+        'payment_status' => ParticipantPaymentStatus::Paid,
+    ]);
+    $this->travel(5)->minutes();
+
+    app(TreatmentSessionService::class)->complete($session, $this->secretary);
+
+    expect($session->refresh()->started_at->diffInMinutes($session->ended_at))->toBe(5.0)
+        ->and($this->appointment->refresh()->starts_at->eq($scheduledStart))->toBeTrue()
+        ->and($this->appointment->ends_at->eq($scheduledEnd))->toBeTrue();
+});
+
+it('keeps a long session running across the next appointment and shows a due warning', function () {
+    $nextPatient = Patient::factory()->create(['full_name' => 'مريض الموعد التالي']);
+    $nextAppointment = Appointment::factory()->create([
+        'practitioner_id' => $this->appointment->practitioner_id,
+        'room_id' => $this->appointment->room_id,
+        'starts_at' => now()->setTime(15, 0),
+        'ends_at' => now()->setTime(15, 30),
+        'duration_minutes' => 30,
+        'status' => AppointmentStatus::Scheduled,
+    ]);
+    $nextAppointment->participants()->create([
+        'patient_id' => $nextPatient->id,
+        'status' => AppointmentStatus::Scheduled,
+    ]);
+    Livewire::test(Index::class)->call('markStatus', $this->appointment->id, 'attended');
+    $session = $this->appointment->treatmentSession()->sole();
+    $session->participants()->update(['payment_status' => ParticipantPaymentStatus::Paid]);
+    $this->travelTo(now()->setTime(15, 5));
+
+    Livewire::test(Show::class, ['treatmentSession' => $session])
+        ->assertSee('حان موعد الحجز التالي')
+        ->assertSee($nextPatient->full_name)
+        ->assertSee('لن تُنهى تلقائيًا');
+
+    expect($session->refresh()->ended_at)->toBeNull()
+        ->and($nextAppointment->refresh()->status)->toBe(AppointmentStatus::Scheduled);
+
+    app(TreatmentSessionService::class)->complete($session, $this->secretary);
+
+    expect($session->refresh()->started_at->diffInMinutes($session->ended_at))->toBe(70.0)
+        ->and($nextAppointment->refresh()->status)->toBe(AppointmentStatus::Scheduled);
 });

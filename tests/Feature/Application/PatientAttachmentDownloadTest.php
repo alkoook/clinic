@@ -53,3 +53,23 @@ it('returns 404 when an attachment is requested through another patient record',
 
     $response->assertNotFound();
 });
+
+it('forbids downloading a private attachment without download permission', function () {
+    Storage::fake('local');
+    $role = Role::factory()->create();
+    $role->permissions()->attach([
+        Permission::factory()->create(['name' => 'patients.view']),
+        Permission::factory()->create(['name' => 'patient_attachments.view']),
+    ]);
+    $user = User::factory()->for($role)->create();
+    $patient = Patient::factory()->create();
+    $attachment = PatientAttachment::factory()->for($patient)->create([
+        'disk' => 'local',
+        'path' => 'patient-attachments/restricted.pdf',
+    ]);
+    Storage::disk('local')->put($attachment->path, 'private medical contents');
+
+    $response = $this->actingAs($user)->get(route('patients.attachments.download', [$patient, $attachment]));
+
+    $response->assertForbidden();
+});

@@ -5,6 +5,7 @@ use App\Enums\PatientSource;
 use App\Enums\PaymentStatus;
 use App\Enums\TransactionDirection;
 use App\Enums\TransactionType;
+use App\Enums\TreatmentSessionStatus;
 use App\Exceptions\FinancialException;
 use App\Models\Appointment;
 use App\Models\Cashbox;
@@ -26,6 +27,7 @@ use App\Services\CashboxService;
 use App\Services\PaymentService;
 use App\Services\PractitionerShareWaiverService;
 use App\Services\RefundService;
+use App\Services\TreatmentSessionService;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Str;
@@ -136,9 +138,32 @@ it('refunds a practitioner share waiver without changing the payment snapshot', 
 
     expect($refund->amount)->toBe(50_000)
         ->and($payment->fresh()->amount)->toBe(100_000)
+        ->and($payment->fresh()->status)->toBe(PaymentStatus::Paid)
+        ->and($participant->fresh()->payment_status)->toBe(ParticipantPaymentStatus::Paid)
         ->and($earning->amount)->toBe(0)
         ->and($participant->fresh()->practitioner_share)->toBe(50_000)
         ->and(app(CashboxService::class)->balance($mainCashbox))->toBe(50_000);
+});
+
+it('completes a paid session after the practitioner waives their share', function () {
+    [$participant] = createPaymentScenario(50);
+    $actor = paymentActorWithPermissions('payments.create', 'refunds.create', 'sessions.manage');
+    $payment = app(PaymentService::class)->pay(
+        $participant, 100_000, 0, $actor, (string) Str::uuid(), CarbonImmutable::parse('2026-09-08 12:00:00'),
+    );
+    app(PractitionerShareWaiverService::class)->waive(
+        $payment, 50_000, $actor, (string) Str::uuid(), null, CarbonImmutable::parse('2026-09-08 13:00:00'),
+    );
+
+    $completed = app(TreatmentSessionService::class)->complete(
+        $participant->treatmentSession,
+        $actor,
+        CarbonImmutable::parse('2026-09-08 14:00:00'),
+    );
+
+    expect($completed->status)->toBe(TreatmentSessionStatus::Completed)
+        ->and($participant->refresh()->payment_status)->toBe(ParticipantPaymentStatus::Paid)
+        ->and($payment->refresh()->status)->toBe(PaymentStatus::Paid);
 });
 
 it('applies the same practitioner percentage across treatments and patient sources', function () {

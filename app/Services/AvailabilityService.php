@@ -148,6 +148,30 @@ final class AvailabilityService
         }
     }
 
+    public function isAvailableAt(
+        Practitioner|int $practitioner,
+        CarbonInterface|DateTimeInterface|string $at,
+    ): bool {
+        $time = $this->date($at);
+
+        foreach ($this->intervalsFor($practitioner, $time) as $period) {
+            if ($time->greaterThanOrEqualTo($period['start']) && $time->lessThan($period['end'])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function assertAvailableAt(
+        Practitioner|int $practitioner,
+        CarbonInterface|DateTimeInterface|string $at,
+    ): void {
+        if (! $this->isAvailableAt($practitioner, $at)) {
+            throw SchedulingException::practitionerUnavailable();
+        }
+    }
+
     private function exceptionType(PractitionerAvailabilityException $exception): AvailabilityExceptionType
     {
         $type = $exception->getAttribute('type');

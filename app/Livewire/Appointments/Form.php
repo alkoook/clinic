@@ -11,6 +11,7 @@ use App\Models\Room;
 use App\Models\TreatmentType;
 use App\Services\AppointmentService;
 use App\Services\AvailabilityService;
+use App\Services\ClinicWorkingHoursService;
 use App\Services\SettingsService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,7 +37,7 @@ class Form extends Component
 
     public string $startTime = '';
 
-    public ?int $durationMinutes = null;
+    public int|string|null $durationMinutes = null;
 
     public string $kind = 'individual';
 
@@ -46,6 +47,9 @@ class Form extends Component
     public string $patientSearch = '';
 
     public string $notes = '';
+
+    /** @var array<string, mixed>|null */
+    public ?array $schedulingConflict = null;
 
     public function mount(?Appointment $appointment = null): void
     {
@@ -136,6 +140,7 @@ class Form extends Component
             'treatmentTypeId' => ['required', 'integer', Rule::exists('treatment_types', 'id')->where('is_active', true)],
             'date' => ['required', 'date'],
             'startTime' => ['required', 'date_format:H:i'],
+            'durationMinutes' => ['required', 'integer', 'min:5', 'max:720'],
             'kind' => ['required', Rule::enum(AppointmentKind::class)],
             'patientIds' => ['required', 'array', 'min:1'],
             'patientIds.*' => ['integer', 'distinct', Rule::exists('patients', 'id')->where('is_active', true)],
@@ -148,16 +153,12 @@ class Form extends Component
             return null;
         }
 
-        $durationMinutes = $this->appointment
-            ? (int) $this->appointment->getAttribute('duration_minutes')
-            : app(SettingsService::class)->integer('appointment.default_duration');
-
         $data = [
             'practitioner_id' => $validated['practitionerId'],
             'room_id' => $validated['roomId'],
             'treatment_type_id' => $validated['treatmentTypeId'],
             'starts_at' => $validated['date'].' '.$validated['startTime'],
-            'duration_minutes' => $durationMinutes,
+            'duration_minutes' => (int) $validated['durationMinutes'],
             'kind' => $validated['kind'],
             'patient_ids' => array_map('intval', $validated['patientIds']),
             'notes' => filled($validated['notes']) ? trim($validated['notes']) : null,
@@ -169,6 +170,7 @@ class Form extends Component
                 : $appointmentService->book($data, auth()->user());
         } catch (SchedulingException $exception) {
             $this->addError('schedule', $exception->getMessage());
+            $this->schedulingConflict = $this->explainSchedulingFailure($exception, (int) $validated['durationMinutes']);
 
             return null;
         }
@@ -181,5 +183,65 @@ class Form extends Component
     public function render()
     {
         return view('livewire.appointments.form')->title($this->appointment ? 'إعادة جدولة الموعد' : 'حجز موعد');
+    }
+
+    public function clearSchedulingConflict(): void
+    {
+        $this->schedulingConflict = null;
+    }
+
+    public function selectSuggestedTime(string $time): void
+    {
+        if (preg_match('/^\d{2}:\d{2}$/', $time) !== 1) {
+            return;
+        }
+
+        $this->startTime = $time;
+        $this->resetErrorBag('schedule');
+        $this->schedulingConflict = null;
+    }
+
+    /** @return array<string, mixed> */
+    private function explainSchedulingFailure(SchedulingException $exception, int $durationMinutes): array
+    {
+        $startsAt = CarbonImmutable::parse($this->date.' '.$this->startTime, (string) config('app.timezone'));
+        $endsAt = $startsAt->addMinutes($durationMinutes);
+        $availabilityService = app(AvailabilityService::class);
+        $workingPeriods = $this->practitionerId
+            ? $availabilityService->intervalsFor($this->practitionerId, $startsAt)
+            : [];
+        $availablePeriods = $this->practitionerId && $this->roomId
+            ? $availabilityService->bookingIntervals($this->practitionerId, $this->date, $this->roomId, $this->appointment?->id)
+            : [];
+        $clinicPeriod = app(ClinicWorkingHoursService::class)->schedule()[$startsAt->dayOfWeek];
+
+        return [
+            'reason' => $exception->reason,
+            'message' => $exception->getMessage(),
+            'practitioner' => $this->practitionerId ? Practitioner::query()->whereKey($this->practitionerId)->value('name') : null,
+            'room' => $this->roomId ? Room::query()->whereKey($this->roomId)->value('name') : null,
+            'requested_start' => $startsAt->format('H:i'),
+            'requested_end' => $endsAt->format('H:i'),
+            'clinic_hours' => $clinicPeriod['enabled'] ? $clinicPeriod['start'].'–'.$clinicPeriod['end'] : null,
+            'practitioner_hours' => collect($workingPeriods)
+                ->map(static fn (array $period): string => $period['start']->format('H:i').'–'.$period['end']->format('H:i'))
+                ->values()
+                ->all(),
+            'conflict_start' => isset($exception->details['starts_at'])
+                ? CarbonImmutable::parse($exception->details['starts_at'])->format('H:i')
+                : null,
+            'conflict_end' => isset($exception->details['ends_at'])
+                ? CarbonImmutable::parse($exception->details['ends_at'])->format('H:i')
+                : null,
+            'alternatives' => collect($availablePeriods)
+                ->filter(static fn (array $period): bool => $period['start']->diffInMinutes($period['end']) >= $durationMinutes)
+                ->take(3)
+                ->map(static fn (array $period): array => [
+                    'start' => $period['start']->format('H:i'),
+                    'end' => $period['start']->addMinutes($durationMinutes)->format('H:i'),
+                ])
+                ->values()
+                ->all(),
+        ];
     }
 }

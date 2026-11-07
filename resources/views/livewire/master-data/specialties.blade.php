@@ -10,11 +10,15 @@
         </form>
         <section class="space-y-4">
             <input class="form-input" type="search" wire:model.live.debounce.300ms="search" placeholder="ابحث باسم الاختصاص">
-            <div class="table-shell"><table><thead><tr><th>الاختصاص</th><th>الوصف</th><th>الحالة</th><th></th></tr></thead><tbody>
+            <div class="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
                 @forelse ($this->specialties as $specialty)
-                    <tr wire:key="specialty-{{ $specialty->id }}"><td class="font-bold text-[var(--ink)]">{{ $specialty->name }}</td><td>{{ $specialty->description ?: '—' }}</td><td><button class="status-badge {{ $specialty->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $specialty->id }})">{{ $specialty->is_active ? 'نشط' : 'متوقف' }}</button></td><td><div class="flex flex-wrap gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $specialty->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف الاختصاص؟', description: 'سيبقى تاريخه محفوظًا في السجلات السابقة.', confirmLabel: 'حذف الاختصاص', action: () => $wire.delete({{ $specialty->id }}) })">حذف</button></div></td></tr>
-                @empty<tr><td colspan="4"><div class="empty-state">لا توجد اختصاصات.</div></td></tr>@endforelse
-            </tbody></table></div>
+                    <article class="app-card flex min-w-0 flex-col gap-4 p-4" wire:key="specialty-{{ $specialty->id }}">
+                        <div class="flex items-start justify-between gap-3"><h2 class="break-words font-black text-[var(--ink)]">{{ $specialty->name }}</h2><button class="status-badge {{ $specialty->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $specialty->id }})">{{ $specialty->is_active ? 'نشط' : 'متوقف' }}</button></div>
+                        <p class="min-h-12 break-words text-sm leading-6 text-[var(--muted)]">{{ $specialty->description ?: 'لا يوجد وصف.' }}</p>
+                        <div class="mt-auto grid grid-cols-2 gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $specialty->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف الاختصاص؟', description: 'سيبقى تاريخه محفوظًا في السجلات السابقة.', confirmLabel: 'حذف الاختصاص', action: () => $wire.delete({{ $specialty->id }}) })">حذف</button></div>
+                    </article>
+                @empty<div class="empty-state sm:col-span-2 2xl:col-span-3">لا توجد اختصاصات.</div>@endforelse
+            </div>
             {{ $this->specialties->links() }}
         </section>
     </div>

@@ -24,7 +24,10 @@ use Illuminate\Support\Facades\DB;
 
 final class TreatmentSessionService
 {
-    public function __construct(private readonly ClinicNotificationService $notifications) {}
+    public function __construct(
+        private readonly ClinicNotificationService $notifications,
+        private readonly AvailabilityService $availabilityService,
+    ) {}
 
     /**
      * Prices may be keyed by appointment-participant ID or patient ID. A list
@@ -74,29 +77,24 @@ final class TreatmentSessionService
             $treatmentType = TreatmentType::query()->withTrashed()->findOrFail((int) $lockedAppointment->getAttribute('treatment_type_id'));
 
             $actualStart = CarbonImmutable::now();
-            $expectedEnd = $actualStart->addMinutes($lockedAppointment->duration_minutes);
-            $earlyStartMinutes = max(0, (int) config('clinic.scheduling.early_session_start_minutes', 30));
-
             if (! $practitioner->is_active || ! $room->is_active || ! $treatmentType->is_active) {
                 throw SchedulingException::inactiveResource('session');
             }
-            app(AvailabilityService::class)->assertAvailable($practitioner, $actualStart, $expectedEnd);
+            $this->availabilityService->assertAvailableAt($practitioner, $actualStart);
             foreach (['practitioner_id', 'room_id'] as $resource) {
                 $appointmentConflict = Appointment::query()->where($resource, $lockedAppointment->$resource)
                     ->whereKeyNot($lockedAppointment->id)
                     ->whereIn('status', [AppointmentStatus::Scheduled, AppointmentStatus::Attended])
-                    ->where('starts_at', '<', $expectedEnd)->where('ends_at', '>', $actualStart)->exists();
+                    ->where('starts_at', '<=', $actualStart)
+                    ->where('ends_at', '>', $actualStart)
+                    ->exists();
                 $sessionConflict = TreatmentSession::query()->where($resource, $lockedAppointment->$resource)
-                    ->where('started_at', '<', $expectedEnd)
+                    ->where('started_at', '<=', $actualStart)
                     ->whereNot('status', TreatmentSessionStatus::Cancelled)
                     ->where(fn ($query) => $query->whereNull('ended_at')->orWhere('ended_at', '>', $actualStart))->exists();
                 if ($appointmentConflict || $sessionConflict) {
                     throw $resource === 'room_id' ? SchedulingException::roomConflict() : SchedulingException::practitionerConflict();
                 }
-            }
-
-            if ($actualStart->lt($lockedAppointment->starts_at->subMinutes($earlyStartMinutes))) {
-                throw SchedulingException::appointmentTooEarly($earlyStartMinutes);
             }
 
             $appointmentParticipants = AppointmentParticipant::query()
@@ -265,7 +263,7 @@ final class TreatmentSessionService
             }
 
             if ($this->sessionStatus($synchronized) !== TreatmentSessionStatus::Ready) {
-                throw SchedulingException::invalidState('completed before every participant pays');
+                throw SchedulingException::unpaidParticipants($this->outstandingParticipantBalances($synchronized));
             }
 
             $synchronized->forceFill([
@@ -370,6 +368,29 @@ final class TreatmentSessionService
         return $status instanceof ParticipantPaymentStatus
             ? $status
             : ParticipantPaymentStatus::from((string) $status);
+    }
+
+    /** @return list<array{name: string, amount: int}> */
+    private function outstandingParticipantBalances(TreatmentSession $session): array
+    {
+        return TreatmentSessionParticipant::query()
+            ->with('payment.refunds')
+            ->where('treatment_session_id', $session->getKey())
+            ->where('payment_status', '!=', ParticipantPaymentStatus::Paid->value)
+            ->orderBy('id')
+            ->get()
+            ->map(function (TreatmentSessionParticipant $participant): array {
+                $payment = $participant->payment;
+                $netPaid = $payment === null
+                    ? 0
+                    : max(0, (int) $payment->amount - (int) $payment->refunds->sum('amount'));
+
+                return [
+                    'name' => (string) $participant->patient_name,
+                    'amount' => max(0, (int) $participant->final_amount - $netPaid),
+                ];
+            })
+            ->all();
     }
 
     private function enumValue(mixed $value): string

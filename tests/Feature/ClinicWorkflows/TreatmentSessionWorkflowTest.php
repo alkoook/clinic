@@ -346,7 +346,29 @@ it('does not complete a session whose payment was partially refunded', function 
     ]);
 
     expect(fn () => app(TreatmentSessionService::class)->complete($session, $actor))
-        ->toThrow(SchedulingException::class, 'قبل تسجيل دفعات جميع المشاركين');
+        ->toThrow(SchedulingException::class, 'رصيد غير مسدد');
+
+    expect($session->refresh()->status)->toBe(TreatmentSessionStatus::PendingPayment);
+});
+
+it('identifies each unpaid group participant and outstanding amount', function () {
+    $actor = sessionWorkflowActor('sessions.manage');
+    $session = TreatmentSession::factory()->create([
+        'status' => TreatmentSessionStatus::PendingPayment,
+    ]);
+    TreatmentSessionParticipant::factory()->for($session)->create([
+        'patient_name' => 'المريض المدفوع',
+        'final_amount' => 40_000,
+        'payment_status' => ParticipantPaymentStatus::Paid,
+    ]);
+    TreatmentSessionParticipant::factory()->for($session)->create([
+        'patient_name' => 'المريض غير المدفوع',
+        'final_amount' => 75_000,
+        'payment_status' => ParticipantPaymentStatus::Unpaid,
+    ]);
+
+    expect(fn () => app(TreatmentSessionService::class)->complete($session, $actor))
+        ->toThrow(SchedulingException::class, 'المريض غير المدفوع — 75,000 ل.س');
 
     expect($session->refresh()->status)->toBe(TreatmentSessionStatus::PendingPayment);
 });

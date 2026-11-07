@@ -119,6 +119,27 @@ it('rejects an appointment that is not wholly inside practitioner availability',
     $this->assertDatabaseCount('appointment_participants', 0);
 });
 
+it('rejects unchecked appointment durations at the service boundary', function (mixed $durationMinutes) {
+    $actor = schedulingActorWithPermissions('appointments.manage');
+    $resources = individualSchedulingResources();
+
+    expect(fn () => app(AppointmentService::class)->book([
+        'practitioner_id' => $resources['practitioner']->id,
+        'room_id' => $resources['room']->id,
+        'treatment_type_id' => $resources['treatmentType']->id,
+        'starts_at' => '2026-09-12 10:00:00',
+        'duration_minutes' => $durationMinutes,
+        'kind' => AppointmentKind::Individual,
+        'patient_ids' => [$resources['patient']->id],
+    ], $actor))->toThrow(SchedulingException::class);
+
+    $this->assertDatabaseCount('appointments', 0);
+})->with([
+    'below the minimum' => 3,
+    'above the maximum' => 721,
+    'non-numeric input' => '30minutes',
+]);
+
 it('subtracts a partial unavailable exception from recurring availability', function () {
     $actor = schedulingActorWithPermissions('appointments.manage');
     $resources = individualSchedulingResources();
@@ -309,14 +330,14 @@ it('reschedules with explicit lineage while leaving all financial records untouc
 
     $replacement = $service->reschedule($original, [
         'starts_at' => '2026-09-12 14:00:00',
-        'duration_minutes' => 15,
+        'duration_minutes' => 45,
     ], $actor);
 
     expect($original->refresh()->status)->toBe(AppointmentStatus::Rescheduled)
         ->and($replacement->rescheduled_from_id)->toBe($original->id)
         ->and($replacement->status)->toBe(AppointmentStatus::Scheduled)
-        ->and($replacement->duration_minutes)->toBe(60)
-        ->and($replacement->ends_at->format('Y-m-d H:i:s'))->toBe('2026-09-12 15:00:00')
+        ->and($replacement->duration_minutes)->toBe(45)
+        ->and($replacement->ends_at->format('Y-m-d H:i:s'))->toBe('2026-09-12 14:45:00')
         ->and($replacement->participants()->pluck('patient_id')->all())->toBe([$resources['patient']->id]);
     $this->assertDatabaseCount('treatment_sessions', 0);
     $this->assertDatabaseCount('payments', 0);

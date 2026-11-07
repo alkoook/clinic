@@ -29,6 +29,7 @@ class PatientFactory extends Factory
             'occupation' => fake()->jobTitle(),
             'companion_name' => fake()->optional()->name(),
             'phone' => fake()->optional()->phoneNumber(),
+            'residence_location' => fake()->optional()->city(),
             'incoming_hospital_name' => null,
             'source' => PatientSource::Clinic,
             'referring_practitioner_id' => null,

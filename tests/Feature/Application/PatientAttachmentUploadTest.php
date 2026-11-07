@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ParticipantPaymentStatus;
+use App\Enums\TreatmentSessionStatus;
 use App\Livewire\Patients\Show as PatientShow;
 use App\Livewire\Sessions\Show as SessionShow;
 use App\Models\Patient;
@@ -102,6 +104,20 @@ it('shows an arabic error for executable uploads and does not store the file', f
     expect($patient->attachments()->count())->toBe(0);
 });
 
+it('rejects patient attachments larger than 25 megabytes with an arabic error', function () {
+    Storage::fake('local');
+    $user = attachmentUploadUser();
+    $patient = Patient::factory()->create();
+
+    $component = Livewire::actingAs($user)
+        ->test(PatientShow::class, ['patient' => $patient])
+        ->set('files', [UploadedFile::fake()->create('large.pdf', 25_601, 'application/pdf')])
+        ->assertHasErrors(['files.0']);
+
+    expect($component->errors()->first('files.0'))->toContain('حجم')->toContain('25')
+        ->and($patient->attachments()->count())->toBe(0);
+});
+
 it('rejects a dangerous payload even when it uses an allowed document extension', function () {
     Storage::fake('local');
     $user = attachmentUploadUser();
@@ -124,8 +140,15 @@ it('includes the session number in the private stored filename when a session is
 
     $user = attachmentUploadUser();
     $patient = Patient::factory()->create(['full_name' => 'أحمد محمد']);
-    $session = TreatmentSession::factory()->create();
-    TreatmentSessionParticipant::factory()->for($session)->for($patient)->create();
+    $session = TreatmentSession::factory()->ready()->create();
+    $participant = TreatmentSessionParticipant::factory()->for($session)->for($patient)->paid()->create([
+        'original_price' => 120_000,
+        'discount_amount' => 20_000,
+        'final_amount' => 100_000,
+        'practitioner_percentage' => 40,
+        'practitioner_share' => 40_000,
+        'clinic_share' => 60_000,
+    ]);
 
     Livewire::actingAs($user)
         ->test(SessionShow::class, ['treatmentSession' => $session])
@@ -139,7 +162,50 @@ it('includes the session number in the private stored filename when a session is
     expect($attachment->title)->toBe('جلسة.pdf')
         ->and($attachment->treatment_session_id)->toBe($session->id)
         ->and($attachment->stored_name)->toBe('أحمد-محمد_جلسة-'.$session->id.'_2026-09-20_cccccc.pdf')
-        ->and($attachment->disk)->toBe('local');
+        ->and($attachment->disk)->toBe('local')
+        ->and($session->refresh()->status)->toBe(TreatmentSessionStatus::Ready)
+        ->and($session->completed_at)->toBeNull()
+        ->and($participant->refresh()->original_price)->toBe(120_000)
+        ->and($participant->discount_amount)->toBe(20_000)
+        ->and($participant->final_amount)->toBe(100_000)
+        ->and($participant->practitioner_share)->toBe(40_000)
+        ->and($participant->clinic_share)->toBe(60_000)
+        ->and($participant->payment_status)->toBe(ParticipantPaymentStatus::Paid);
 
     Storage::disk('local')->assertExists($attachment->path);
+});
+
+it('shows session attachment safety errors without changing session or financial state', function () {
+    Storage::fake('local');
+    $user = attachmentUploadUser();
+    $patient = Patient::factory()->create();
+    $session = TreatmentSession::factory()->ready()->create();
+    $participant = TreatmentSessionParticipant::factory()->for($session)->for($patient)->paid()->create();
+    $sessionFields = ['status', 'ended_at', 'completed_at'];
+    $financialFields = [
+        'original_price',
+        'discount_amount',
+        'final_amount',
+        'practitioner_percentage',
+        'practitioner_share',
+        'clinic_share',
+        'payment_status',
+    ];
+    $sessionState = collect($session->getRawOriginal())->only($sessionFields)->all();
+    $financialState = collect($participant->getRawOriginal())->only($financialFields)->all();
+
+    Livewire::actingAs($user)
+        ->test(SessionShow::class, ['treatmentSession' => $session])
+        ->set('attachmentPatientId', $patient->id)
+        ->set('attachmentFiles', [
+            UploadedFile::fake()->createWithContent('report.pdf', '<?php echo "unsafe";')->mimeType('text/x-php'),
+        ])
+        ->call('uploadAttachments')
+        ->assertHasErrors([
+            'attachmentFiles' => 'محتوى الملف لا يطابق نوعه أو أن الملف غير آمن.',
+        ]);
+
+    expect($patient->attachments()->count())->toBe(0)
+        ->and(collect($session->refresh()->getRawOriginal())->only($sessionFields)->all())->toBe($sessionState)
+        ->and(collect($participant->refresh()->getRawOriginal())->only($financialFields)->all())->toBe($financialState);
 });

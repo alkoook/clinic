@@ -21,6 +21,7 @@
                 <label><span class="form-label">الحالة الوظيفية / المهنة</span><input class="form-input" wire:model="occupation">@error('occupation')<span class="form-error">{{ $message }}</span>@enderror</label>
                 <label><span class="form-label">الشخص المرافق</span><input class="form-input" wire:model="companionName">@error('companionName')<span class="form-error">{{ $message }}</span>@enderror</label>
                 <label><span class="form-label">رقم الهاتف</span><input class="form-input" dir="ltr" wire:model="phone">@error('phone')<span class="form-error">{{ $message }}</span>@enderror</label>
+                <label><span class="form-label">مكان السكن</span><input class="form-input" wire:model="residenceLocation" placeholder="المدينة أو الحي">@error('residenceLocation')<span class="form-error">{{ $message }}</span>@enderror</label>
                 <label><span class="form-label">المستشفى المحوّل منه</span><input class="form-input" wire:model="incomingHospitalName">@error('incomingHospitalName')<span class="form-error">{{ $message }}</span>@enderror</label>
             </div>
         </section>

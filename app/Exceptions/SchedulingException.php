@@ -6,9 +6,18 @@ use RuntimeException;
 
 final class SchedulingException extends RuntimeException
 {
+    /** @param array<string, mixed> $details */
+    public function __construct(
+        string $message,
+        public readonly string $reason = 'scheduling_error',
+        public readonly array $details = [],
+    ) {
+        parent::__construct($message);
+    }
+
     public static function invalidInterval(): self
     {
-        return new self('يجب أن تكون مدة الموعد دقائق صحيحة موجبة وأن يقع الموعد ضمن يوم واحد.');
+        return new self('يجب أن تكون مدة الموعد بين 5 و720 دقيقة وأن يقع الموعد ضمن يوم واحد.', 'invalid_interval');
     }
 
     public static function invalidParticipants(): self
@@ -18,27 +27,29 @@ final class SchedulingException extends RuntimeException
 
     public static function practitionerUnavailable(): self
     {
-        return new self('المعالج غير متاح لكامل مدة الموعد المحدد. اختر وقتًا آخر ضمن أوقات دوامه.');
+        return new self('المعالج غير متاح لكامل مدة الموعد المحدد. اختر وقتًا آخر ضمن أوقات دوامه.', 'practitioner_unavailable');
     }
 
     public static function clinicClosed(): self
     {
-        return new self('العيادة مغلقة في اليوم المحدد. اختر يومًا ضمن دوام العيادة.');
+        return new self('العيادة مغلقة في اليوم المحدد. اختر يومًا ضمن دوام العيادة.', 'clinic_closed');
     }
 
     public static function outsideClinicWorkingHours(): self
     {
-        return new self('الموعد المحدد خارج ساعات دوام العيادة. اختر وقتًا يقع بالكامل ضمن الدوام.');
+        return new self('الموعد المحدد خارج ساعات دوام العيادة. اختر وقتًا يقع بالكامل ضمن الدوام.', 'outside_clinic_hours');
     }
 
-    public static function practitionerConflict(): self
+    /** @param array<string, mixed> $details */
+    public static function practitionerConflict(array $details = []): self
     {
-        return new self('المعالج لديه موعد آخر يتداخل مع هذا الوقت. اختر وقتًا مختلفًا.');
+        return new self('المعالج لديه موعد آخر يتداخل مع هذا الوقت. اختر وقتًا مختلفًا.', 'practitioner_conflict', $details);
     }
 
-    public static function roomConflict(): self
+    /** @param array<string, mixed> $details */
+    public static function roomConflict(array $details = []): self
     {
-        return new self('الغرفة محجوزة خلال هذا الوقت. اختر غرفة أو موعدًا آخر.');
+        return new self('الغرفة محجوزة خلال هذا الوقت. اختر غرفة أو موعدًا آخر.', 'room_conflict', $details);
     }
 
     public static function inactiveResource(string $resource): self
@@ -54,6 +65,16 @@ final class SchedulingException extends RuntimeException
             'cancelled' => 'لا تسمح حالة الموعد الحالية بإلغائه.',
             default => 'لا تسمح الحالة الحالية بتنفيذ هذه العملية.',
         });
+    }
+
+    /** @param list<array{name: string, amount: int}> $participants */
+    public static function unpaidParticipants(array $participants): self
+    {
+        $details = collect($participants)
+            ->map(static fn (array $participant): string => $participant['name'].' — '.number_format($participant['amount']).' ل.س')
+            ->join('، ');
+
+        return new self('لا يمكن إكمال الجلسة لوجود رصيد غير مسدد: '.$details.'.');
     }
 
     public static function appointmentNotStarted(): self

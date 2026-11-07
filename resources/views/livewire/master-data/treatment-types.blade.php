@@ -12,11 +12,16 @@
         </form>
         <section class="space-y-4">
             <input class="form-input" type="search" wire:model.live.debounce.300ms="search" placeholder="ابحث باسم العلاج">
-            <div class="table-shell"><table><thead><tr><th>النوع</th><th>الاختصاص</th><th>النمط</th><th>الحالة</th><th></th></tr></thead><tbody>
+            <div class="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
                 @forelse ($this->treatmentTypes as $type)
-                    <tr wire:key="type-{{ $type->id }}"><td><p class="font-bold text-[var(--ink)]">{{ $type->name }}</p><p class="text-xs text-[var(--muted)]">{{ $type->description }}</p></td><td>{{ $type->specialty?->name ?: 'عام' }}</td><td><span class="status-badge">{{ $type->is_group ? 'جماعي' : 'فردي' }}</span></td><td><button class="status-badge {{ $type->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $type->id }})">{{ $type->is_active ? 'نشط' : 'متوقف' }}</button></td><td><div class="flex flex-wrap gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $type->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف نوع العلاج؟', description: 'سيبقى تاريخه محفوظًا في الجلسات السابقة.', confirmLabel: 'حذف نوع العلاج', action: () => $wire.delete({{ $type->id }}) })">حذف</button></div></td></tr>
-                @empty<tr><td colspan="5"><div class="empty-state">لا توجد أنواع علاج.</div></td></tr>@endforelse
-            </tbody></table></div>
+                    <article class="app-card flex min-w-0 flex-col gap-4 p-4" wire:key="type-{{ $type->id }}">
+                        <div class="flex items-start justify-between gap-3"><div class="min-w-0"><h2 class="break-words font-black text-[var(--ink)]">{{ $type->name }}</h2><p class="mt-1 text-xs font-bold text-[var(--brand-strong)]">{{ $type->specialty?->name ?: 'عام' }}</p></div><button class="status-badge {{ $type->is_active ? 'status-success' : 'status-danger' }}" type="button" wire:click="toggle({{ $type->id }})">{{ $type->is_active ? 'نشط' : 'متوقف' }}</button></div>
+                        <p class="min-h-10 break-words text-sm leading-6 text-[var(--muted)]">{{ $type->description ?: 'لا يوجد وصف.' }}</p>
+                        <span class="status-badge">{{ $type->is_group ? 'جلسة جماعية' : 'جلسة فردية' }}</span>
+                        <div class="mt-auto grid grid-cols-2 gap-2"><button class="btn btn-secondary" type="button" wire:click="edit({{ $type->id }})">تعديل</button><button class="btn btn-danger" type="button" x-on:click="$dispatch('confirm-action', { title: 'حذف نوع العلاج؟', description: 'سيبقى تاريخه محفوظًا في الجلسات السابقة.', confirmLabel: 'حذف نوع العلاج', action: () => $wire.delete({{ $type->id }}) })">حذف</button></div>
+                    </article>
+                @empty<div class="empty-state sm:col-span-2 2xl:col-span-3">لا توجد أنواع علاج.</div>@endforelse
+            </div>
             {{ $this->treatmentTypes->links() }}
         </section>
     </div>

@@ -42,6 +42,7 @@ final class RefundService
         string $idempotencyKey,
         ?CarbonInterface $refundedAt = null,
         bool $reversePractitionerShareByRefundAmount = false,
+        bool $affectsPaymentEligibility = true,
     ): Refund {
         if (! $actor->hasPermission('refunds.create')) {
             throw FinancialException::permissionDenied('refunds.create');
@@ -61,6 +62,7 @@ final class RefundService
                 $idempotencyKey,
                 $refundedAt,
                 $reversePractitionerShareByRefundAmount,
+                $affectsPaymentEligibility,
             ): Refund {
                 /** @var Refund|null $idempotentRefund */
                 $idempotentRefund = Refund::query()
@@ -203,23 +205,24 @@ final class RefundService
                     $earning->save();
                 }
 
-                $isFullyRefunded = $cumulativeRefund === $paymentAmount;
-                $lockedPayment->forceFill([
-                    'status' => $isFullyRefunded
-                        ? PaymentStatus::Refunded->value
-                        : PaymentStatus::PartiallyRefunded->value,
-                ]);
-                $lockedPayment->save();
-                $participant->forceFill([
-                    'payment_status' => $isFullyRefunded
-                        ? ParticipantPaymentStatus::Refunded->value
-                        : ParticipantPaymentStatus::PartiallyRefunded->value,
-                ]);
-                $participant->save();
-
                 /** @var TreatmentSession $session */
                 $session = TreatmentSession::query()->findOrFail((int) $participant->getAttribute('treatment_session_id'));
-                $this->treatmentSessionService->synchronizePaymentStatus($session);
+                if ($affectsPaymentEligibility) {
+                    $isFullyRefunded = $cumulativeRefund === $paymentAmount;
+                    $lockedPayment->forceFill([
+                        'status' => $isFullyRefunded
+                            ? PaymentStatus::Refunded->value
+                            : PaymentStatus::PartiallyRefunded->value,
+                    ]);
+                    $lockedPayment->save();
+                    $participant->forceFill([
+                        'payment_status' => $isFullyRefunded
+                            ? ParticipantPaymentStatus::Refunded->value
+                            : ParticipantPaymentStatus::PartiallyRefunded->value,
+                    ]);
+                    $participant->save();
+                    $this->treatmentSessionService->synchronizePaymentStatus($session);
+                }
                 $this->auditService->record(
                     'refund.created',
                     $refund,

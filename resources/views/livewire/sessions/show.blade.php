@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-6" wire:poll.30s.visible>
     @error('operation')<div class="flash-message flash-error">{{ $message }}</div>@enderror
     <header class="page-header"><div><p class="page-kicker">جلسة #{{ $treatmentSession->id }}</p><h1>{{ $treatmentSession->treatment_type_name }}</h1><p>{{ $treatmentSession->practitioner_name }} · {{ $treatmentSession->room_name }} · {{ App\Support\ArabicFormat::dateTime($treatmentSession->started_at) }}</p></div><div class="flex flex-wrap gap-2"><span class="status-badge">{{ $treatmentSession->status->label() }}</span><a class="btn btn-secondary" href="{{ route('sessions.index') }}" wire:navigate>الجلسات</a></div></header>
     <section class="app-card grid gap-4 p-5 sm:grid-cols-3">
@@ -6,6 +6,21 @@
         <div><p class="form-label">بدء الجلسة فعليًا</p><time>{{ App\Support\ArabicFormat::dateTime($treatmentSession->started_at) }}</time></div>
         <div><p class="form-label">مدة الجلسة الفعلية</p><span>{{ (int) $treatmentSession->started_at->diffInMinutes($treatmentSession->ended_at ?? now()) }} دقيقة {{ $treatmentSession->ended_at ? '' : '— قيد التنفيذ' }}</span></div>
     </section>
+    @php
+        $nextAppointmentWarning = $this->nextAppointmentWarning;
+    @endphp
+    @if ($nextAppointmentWarning)
+        <aside class="rounded-2xl border border-[var(--warning)] bg-[var(--warning-soft)] p-4 text-[var(--warning)]" role="alert">
+            <p class="font-black">{{ $nextAppointmentWarning->starts_at->isFuture() ? 'اقترب موعد الحجز التالي' : 'حان موعد الحجز التالي' }}</p>
+            <p class="mt-1 text-sm font-bold">
+                {{ App\Support\ArabicFormat::dateTime($nextAppointmentWarning->starts_at) }}
+                · {{ $nextAppointmentWarning->participants->pluck('patient.full_name')->filter()->join('، ') }}
+                · {{ $nextAppointmentWarning->practitioner?->name ?? $treatmentSession->practitioner_name }}
+                · {{ $nextAppointmentWarning->room?->name ?? $treatmentSession->room_name }}
+            </p>
+            <p class="mt-1 text-xs font-bold">الجلسة الحالية ما زالت قيد التنفيذ ولن تُنهى تلقائيًا. يرجى تنسيق توفر المعالج والغرفة للموعد التالي.</p>
+        </aside>
+    @endif
     <section class="space-y-4">
         @foreach ($treatmentSession->participants as $participant)
             <article class="app-card p-5 sm:p-6" wire:key="participant-{{ $participant->id }}">
@@ -131,8 +146,24 @@
 
     @can('sessions.manage')
         @if ($treatmentSession->status !== App\Enums\TreatmentSessionStatus::Completed)
-            @php($unpaidParticipants = $treatmentSession->participants->filter(fn ($participant) => ! $participant->payment))
-            <section class="app-card flex flex-wrap items-center justify-between gap-4 p-5"><div><h2 class="font-black text-[var(--ink)]">اعتماد اكتمال الجلسة</h2>@if($unpaidParticipants->isNotEmpty())<p class="mt-1 text-sm font-bold text-[var(--warning)]">لا يمكن الإكمال قبل دفع {{ $unpaidParticipants->pluck('patient_name')->join('، ') }}.</p>@else<p class="mt-1 text-xs text-[var(--muted)]">جميع المشاركين مدفوعون، ويمكن الآن اعتماد الجلسة.</p>@endif</div><button class="btn btn-primary" type="button" @disabled($unpaidParticipants->isNotEmpty()) x-on:click="$dispatch('confirm-action', { title: 'إكمال الجلسة؟', description: 'سيتم اعتماد الجلسة وتثبيت بياناتها المالية بعد التأكيد.', confirmLabel: 'تأكيد إكمال الجلسة', tone: 'primary', action: () => $wire.complete() })">إكمال الجلسة</button></section>
+            @php($unpaidParticipants = $treatmentSession->participants->filter(fn ($participant) => $participant->payment_status !== App\Enums\ParticipantPaymentStatus::Paid))
+            <section class="app-card flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 class="font-black text-[var(--ink)]">اعتماد اكتمال الجلسة</h2>
+                    @if($unpaidParticipants->isNotEmpty())
+                        <p class="mt-1 text-sm font-bold text-[var(--warning)]">توجد أرصدة غير مسددة قبل الإكمال:</p>
+                        <ul class="mt-2 space-y-1 text-xs font-bold text-[var(--warning)]">
+                            @foreach ($unpaidParticipants as $participant)
+                                @php($outstanding = max(0, (int) $participant->final_amount - max(0, (int) ($participant->payment?->amount ?? 0) - (int) ($participant->payment?->refunds?->sum('amount') ?? 0))))
+                                <li>{{ $participant->patient_name }} — {{ App\Support\ArabicFormat::money($outstanding) }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="mt-1 text-xs text-[var(--muted)]">جميع المشاركين مستوفون ماليًا، ويمكن الآن اعتماد الجلسة.</p>
+                    @endif
+                </div>
+                <button class="btn btn-primary w-full sm:w-auto" type="button" @disabled($unpaidParticipants->isNotEmpty()) x-on:click="$dispatch('confirm-action', { title: 'إكمال الجلسة؟', description: 'سيتم اعتماد الجلسة وتثبيت بياناتها المالية بعد التأكيد.', confirmLabel: 'تأكيد إكمال الجلسة', tone: 'primary', action: () => $wire.complete() })">إكمال الجلسة</button>
+            </section>
         @endif
     @endcan
 </div>

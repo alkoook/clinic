@@ -15,14 +15,20 @@
         </div>
     </section>
     @php($calendarAppointments = $this->appointments->groupBy(fn ($appointment) => $appointment->starts_at->format('Y-m-d')))
-    <section class="grid gap-4 {{ $viewMode === 'week' ? 'md:grid-cols-2 xl:grid-cols-4' : '' }}">
+    <section class="grid gap-4 {{ $viewMode === 'week' ? 'md:grid-cols-2 xl:grid-cols-4' : 'mx-auto max-w-5xl' }}">
         @foreach (range(0, $viewMode === 'day' ? 0 : 6) as $offset)
             @php($day = $this->range[0]->addDays($offset))
-            <article class="app-card min-h-56 p-4 {{ $day->isToday() ? 'ring-2 ring-[var(--brand)]' : '' }}">
+            <article class="app-card min-h-56 overflow-hidden p-4 sm:p-5 {{ $day->isToday() ? 'ring-2 ring-[var(--brand)]' : '' }}">
                 <div class="mb-4 flex items-center justify-between"><div><p class="text-xs font-bold text-[var(--muted)]">{{ $day->translatedFormat('l') }}</p><h2 class="text-lg font-black text-[var(--ink)]">{{ $day->format('d/m') }}</h2></div><span class="status-badge">{{ $calendarAppointments->get($day->format('Y-m-d'), collect())->count() }}</span></div>
                 <div class="space-y-3">
                     @forelse ($calendarAppointments->get($day->format('Y-m-d'), collect()) as $appointment)
-                        <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface-soft)] p-3" wire:key="calendar-{{ $appointment->id }}"><div class="flex justify-between gap-2"><time class="font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->format('H:i') }}</time><span class="status-badge">{{ $appointment->status->label() }}</span></div><p class="mt-2 text-sm font-bold text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p><p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->practitioner?->name }} · {{ $appointment->room?->name }}</p></div>
+                        <article class="group rounded-2xl border border-[var(--line)] bg-[var(--surface-soft)] p-3 transition hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-md" wire:key="calendar-{{ $appointment->id }}">
+                            <div class="flex items-start justify-between gap-2"><div><time class="font-black text-[var(--brand-strong)]" dir="ltr">{{ $appointment->starts_at->format('H:i') }} – {{ $appointment->ends_at->format('H:i') }}</time><p class="mt-0.5 text-[10px] font-bold text-[var(--muted)]">{{ $appointment->duration_minutes }} دقيقة</p></div><span class="status-badge {{ $appointment->status === App\Enums\AppointmentStatus::Completed ? 'status-success' : ($appointment->status === App\Enums\AppointmentStatus::Cancelled ? 'status-danger' : '') }}">{{ $appointment->status->label() }}</span></div>
+                            <p class="mt-3 text-sm font-black text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p>
+                            <p class="mt-1 text-xs font-bold text-[var(--ink-soft)]">{{ $appointment->treatmentType?->name }}</p>
+                            <p class="mt-2 text-xs text-[var(--muted)]">{{ $appointment->practitioner?->name }} · {{ $appointment->room?->name }}</p>
+                            @can('appointments.manage')<a class="mt-3 inline-flex text-xs font-black text-[var(--brand-strong)]" href="{{ route('appointments.reschedule', $appointment) }}" wire:navigate>فتح وإعادة الجدولة</a>@endcan
+                        </article>
                     @empty<div class="empty-state py-8">لا مواعيد</div>@endforelse
                 </div>
             </article>

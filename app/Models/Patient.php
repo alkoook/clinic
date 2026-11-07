@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'occupation',
     'companion_name',
     'phone',
+    'residence_location',
     'incoming_hospital_name',
     'source',
     'referring_practitioner_id',

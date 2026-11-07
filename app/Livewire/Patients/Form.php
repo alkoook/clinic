@@ -36,6 +36,8 @@ class Form extends Component
 
     public string $phone = '';
 
+    public string $residenceLocation = '';
+
     public string $incomingHospitalName = '';
 
     public string $source = 'clinic';
@@ -70,6 +72,7 @@ class Form extends Component
             $this->occupation = $this->patient->occupation ?? '';
             $this->companionName = $this->patient->companion_name ?? '';
             $this->phone = $this->patient->phone ?? '';
+            $this->residenceLocation = $this->patient->residence_location ?? '';
             $this->incomingHospitalName = $this->patient->incoming_hospital_name ?? '';
             $this->source = $this->patient->source->value;
             $this->referringPractitionerId = $this->patient->referring_practitioner_id;
@@ -142,6 +145,7 @@ class Form extends Component
             'occupation' => ['nullable', 'string', 'max:255'],
             'companionName' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:32'],
+            'residenceLocation' => ['nullable', 'string', 'max:255'],
             'incomingHospitalName' => ['nullable', 'string', 'max:255'],
             'source' => ['required', Rule::enum(PatientSource::class)],
             'referringPractitionerId' => [Rule::requiredIf($this->source === PatientSource::Practitioner->value), 'nullable', 'integer', 'exists:practitioners,id'],
@@ -163,6 +167,7 @@ class Form extends Component
             'occupation' => filled($validated['occupation']) ? trim($validated['occupation']) : null,
             'companion_name' => filled($validated['companionName']) ? trim($validated['companionName']) : null,
             'phone' => filled($validated['phone']) ? trim($validated['phone']) : null,
+            'residence_location' => filled($validated['residenceLocation']) ? trim($validated['residenceLocation']) : null,
             'incoming_hospital_name' => filled($validated['incomingHospitalName']) ? trim($validated['incomingHospitalName']) : null,
             'source' => $validated['source'],
             'referring_practitioner_id' => $validated['referringPractitionerId'],

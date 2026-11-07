@@ -48,10 +48,31 @@
         <label><span class="form-label">الحالة</span><select class="form-select" wire:model.live="status"><option value="">كل الحالات</option>@foreach (App\Enums\TreatmentSessionStatus::cases() as $option)<option value="{{ $option->value }}">{{ $option->label() }}</option>@endforeach</select></label>
     </section>
 
-    <div class="table-shell"><table class="mobile-record-table"><thead><tr><th>الجلسة</th><th>التاريخ</th><th>المرضى</th><th>المعالج والعلاج</th><th>المبلغ</th>@if ($this->canViewPractitionerShare)<th>حصة المعالج</th>@endif<th>الحالة</th><th></th></tr></thead><tbody>
+    <section class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3" aria-label="قائمة الجلسات">
         @forelse ($this->sessions as $session)
-            <tr wire:key="session-{{ $session->id }}"><td data-label="الجلسة" class="font-black text-[var(--brand-strong)]">#{{ $session->id }}</td><td data-label="وقت البدء الفعلي">{{ $session->started_at->format('Y/m/d H:i') }}</td><td data-label="المرضى">{{ $session->participants->pluck('patient.full_name')->filter()->join('، ') }}</td><td data-label="المعالج والعلاج"><p>{{ $session->practitioner?->name }}</p><p class="text-xs text-[var(--muted)]">{{ $session->treatmentType?->name }} · {{ $session->room?->name }}</p></td><td data-label="المبلغ" class="font-bold text-[var(--ink)]">{{ number_format((int) $session->participants_sum_final_amount) }}</td>@if ($this->canViewPractitionerShare)<td data-label="حصة المعالج">{{ number_format((int) $session->participants_sum_practitioner_share) }}</td>@endif<td data-label="الحالة"><span class="status-badge">{{ $session->status->label() }}</span></td><td data-label="الإجراء"><a class="btn btn-secondary" href="{{ route('sessions.show', $session) }}" wire:navigate>فتح</a></td></tr>
-        @empty<tr><td colspan="{{ $this->canViewPractitionerShare ? 8 : 7 }}"><div class="empty-state">لا توجد جلسات ضمن الفترة.</div></td></tr>@endforelse
-    </tbody></table></div>
+            @php($isFullyPaid = $session->participants->isNotEmpty() && $session->participants->every(fn ($participant) => $participant->payment_status === App\Enums\ParticipantPaymentStatus::Paid))
+            <article class="app-card overflow-hidden" wire:key="session-{{ $session->id }}">
+                <div class="flex items-start justify-between gap-3 border-b border-[var(--line)] p-4 sm:p-5">
+                    <div><p class="page-kicker">جلسة #{{ $session->id }}</p><h2 class="mt-1 text-lg font-black text-[var(--ink)]">{{ $session->participants->pluck('patient_name')->filter()->join('، ') }}</h2><time class="mt-1 block text-xs text-[var(--muted)]">{{ App\Support\ArabicFormat::dateTime($session->started_at) }}</time></div>
+                    <span class="status-badge {{ $session->status === App\Enums\TreatmentSessionStatus::Completed ? 'status-success' : '' }}">{{ $session->status->label() }}</span>
+                </div>
+                <div class="space-y-4 p-4 sm:p-5">
+                    <dl class="grid grid-cols-2 gap-3 text-sm">
+                        <div><dt class="form-label">المعالج</dt><dd class="mt-1 font-bold text-[var(--ink)]">{{ $session->practitioner?->name }}</dd></div>
+                        <div><dt class="form-label">العلاج</dt><dd class="mt-1 font-bold text-[var(--ink)]">{{ $session->treatmentType?->name }}</dd></div>
+                        <div><dt class="form-label">الغرفة</dt><dd class="mt-1 font-bold text-[var(--ink)]">{{ $session->room?->name }}</dd></div>
+                        <div><dt class="form-label">الدفع</dt><dd class="mt-1"><span class="status-badge {{ $isFullyPaid ? 'status-success' : 'status-warning' }}">{{ $isFullyPaid ? 'مكتمل' : 'غير مكتمل' }}</span></dd></div>
+                    </dl>
+                    <div class="grid grid-cols-2 gap-3 rounded-2xl bg-[var(--surface-soft)] p-4 text-sm">
+                        <div><p class="form-label">إجمالي الجلسة</p><p class="mt-1 font-black text-[var(--ink)]">{{ App\Support\ArabicFormat::money((int) $session->participants_sum_final_amount) }}</p></div>
+                        @if ($this->canViewPractitionerShare)<div><p class="form-label">حصة المعالج</p><p class="mt-1 font-black text-[var(--ink)]">{{ App\Support\ArabicFormat::money((int) $session->participants_sum_practitioner_share) }}</p></div>@endif
+                    </div>
+                    <a class="btn btn-primary w-full" href="{{ route('sessions.show', $session) }}" wire:navigate>فتح تفاصيل الجلسة</a>
+                </div>
+            </article>
+        @empty
+            <div class="empty-state lg:col-span-2 2xl:col-span-3">لا توجد جلسات ضمن الفترة.</div>
+        @endforelse
+    </section>
     {{ $this->sessions->links() }}
 </div>

@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Sessions;
 
+use App\Enums\AppointmentStatus;
 use App\Exceptions\FinancialException;
 use App\Exceptions\SchedulingException;
+use App\Models\Appointment;
 use App\Models\Payment;
 use App\Models\TreatmentSession;
 use App\Models\TreatmentSessionParticipant;
@@ -30,6 +32,8 @@ use Throwable;
 class Show extends Component
 {
     use WithFileUploads;
+
+    private const NEXT_APPOINTMENT_WARNING_MINUTES = 15;
 
     public TreatmentSession $treatmentSession;
 
@@ -256,6 +260,7 @@ class Show extends Component
                         $participant->patient,
                         auth()->user(),
                         $this->treatmentSession,
+                        errorKey: 'attachmentFiles',
                     );
                 }
             });
@@ -321,6 +326,32 @@ class Show extends Component
 
         return $user->can('financial.dashboard.view')
             || ($user->can('sessions.view_own') && $user->practitioner?->getKey() === $this->treatmentSession->practitioner_id);
+    }
+
+    #[Computed]
+    public function nextAppointmentWarning(): ?Appointment
+    {
+        if ($this->treatmentSession->ended_at !== null) {
+            return null;
+        }
+
+        return Appointment::query()
+            ->with([
+                'practitioner:id,name',
+                'room:id,name',
+                'participants.patient:id,full_name',
+            ])
+            ->whereKeyNot($this->treatmentSession->appointment_id)
+            ->where('status', AppointmentStatus::Scheduled)
+            ->where('starts_at', '>', $this->treatmentSession->started_at)
+            ->where('starts_at', '<=', now()->addMinutes(self::NEXT_APPOINTMENT_WARNING_MINUTES))
+            ->where(function ($query): void {
+                $query->where('practitioner_id', $this->treatmentSession->practitioner_id)
+                    ->orWhere('room_id', $this->treatmentSession->room_id);
+            })
+            ->orderBy('starts_at')
+            ->orderBy('id')
+            ->first();
     }
 
     public function render()
