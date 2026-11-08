@@ -48,7 +48,7 @@
             <div class="mb-4 flex items-center justify-between gap-3"><div><p class="page-kicker">هذا الأسبوع</p><h2 class="mt-1 font-black text-[var(--ink)]">جدول مواعيدي</h2></div><a class="text-sm font-bold text-[var(--brand-strong)]" href="{{ route('appointments.calendar') }}" wire:navigate>فتح التقويم</a></div>
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 @forelse ($practitionerStats['week_schedule'] as $appointment)
-                    <article class="rounded-2xl border border-[var(--line)] p-4"><div class="flex justify-between gap-3"><time class="font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->translatedFormat('l Y/m/d H:i') }}</time><span class="status-badge">{{ $appointment->status->label() }}</span></div><p class="mt-3 font-bold text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p><p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->room?->name }}</p></article>
+                    <article class="status-surface {{ $appointment->status->badgeClass() }} rounded-2xl border p-4"><div class="flex justify-between gap-3"><time class="font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->translatedFormat('l Y/m/d H:i') }}</time><x-ui.status-badge :status="$appointment->status" /></div><p class="mt-3 font-bold text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p><p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->room?->name }}</p></article>
                 @empty
                     <div class="empty-state md:col-span-2 xl:col-span-3">لا توجد مواعيد ضمن هذا الأسبوع.</div>
                 @endforelse
@@ -163,10 +163,10 @@
         </div>
         <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             @forelse ($upcomingAppointments as $appointment)
-                <article class="rounded-2xl border border-[var(--line)] p-4">
+                <article class="status-surface {{ $appointment->status->badgeClass() }} rounded-2xl border p-4">
                     <div class="flex items-start justify-between gap-3">
                         <time class="text-lg font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->format('H:i') }}</time>
-                        <span class="status-badge">{{ $appointment->status->label() }}</span>
+                        <x-ui.status-badge :status="$appointment->status" />
                     </div>
                     <p class="mt-3 font-bold text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p>
                     <p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->practitioner?->name }} · {{ $appointment->room?->name }}</p>

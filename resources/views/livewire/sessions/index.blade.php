@@ -6,8 +6,8 @@
             <div class="mb-4"><h2 class="font-black text-[var(--ink)]">مواعيد جاهزة لبدء جلسة</h2><p class="mt-1 text-xs text-[var(--muted)]">تظهر مواعيد الأمس واليوم والغد التي لم تُنشأ لها جلسة.</p></div>
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 @forelse ($this->readyAppointments as $appointment)
-                    <article class="rounded-2xl border border-[var(--line)] p-4" wire:key="ready-appointment-{{ $appointment->id }}">
-                        <div class="flex justify-between gap-3"><time class="font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->format('Y/m/d H:i') }}</time><span class="status-badge">{{ $appointment->status->label() }}</span></div>
+                    <article class="status-surface {{ $appointment->status->badgeClass() }} rounded-2xl border p-4" wire:key="ready-appointment-{{ $appointment->id }}">
+                        <div class="flex justify-between gap-3"><time class="font-black text-[var(--brand-strong)]">{{ $appointment->starts_at->format('Y/m/d H:i') }}</time><x-ui.status-badge :status="$appointment->status" /></div>
                         <p class="mt-3 font-bold text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</p>
                         <p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->practitioner?->name }} · {{ $appointment->treatmentType?->name }}</p>
                         <button class="btn btn-primary mt-4 w-full" type="button" wire:click="prepareSession({{ $appointment->id }})">تحديد الأسعار وبدء الجلسة</button>
@@ -51,10 +51,13 @@
     <section class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3" aria-label="قائمة الجلسات">
         @forelse ($this->sessions as $session)
             @php($isFullyPaid = $session->participants->isNotEmpty() && $session->participants->every(fn ($participant) => $participant->payment_status === App\Enums\ParticipantPaymentStatus::Paid))
-            <article class="app-card overflow-hidden" wire:key="session-{{ $session->id }}">
+            <article class="app-card status-surface {{ $session->ended_at === null ? 'status-info' : $session->status->badgeClass() }} overflow-hidden" wire:key="session-{{ $session->id }}">
                 <div class="flex items-start justify-between gap-3 border-b border-[var(--line)] p-4 sm:p-5">
                     <div><p class="page-kicker">جلسة #{{ $session->id }}</p><h2 class="mt-1 text-lg font-black text-[var(--ink)]">{{ $session->participants->pluck('patient_name')->filter()->join('، ') }}</h2><time class="mt-1 block text-xs text-[var(--muted)]">{{ App\Support\ArabicFormat::dateTime($session->started_at) }}</time></div>
-                    <span class="status-badge {{ $session->status === App\Enums\TreatmentSessionStatus::Completed ? 'status-success' : '' }}">{{ $session->status->label() }}</span>
+                    <div class="flex flex-wrap justify-end gap-2">
+                        @if ($session->ended_at === null)<x-ui.status-badge in-progress />@endif
+                        <x-ui.status-badge :status="$session->status" />
+                    </div>
                 </div>
                 <div class="space-y-4 p-4 sm:p-5">
                     <dl class="grid grid-cols-2 gap-3 text-sm">

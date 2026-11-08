@@ -20,4 +20,25 @@ enum TreatmentSessionStatus: string
             self::Cancelled => 'ملغاة',
         };
     }
+
+    public function badgeClass(): string
+    {
+        return match ($this) {
+            self::PendingPayment => 'status-warning',
+            self::Ready => 'status-success',
+            self::Completed => 'status-completed',
+            self::Refunded => 'status-refunded',
+            self::Cancelled => 'status-neutral',
+        };
+    }
+
+    public function icon(): string
+    {
+        return match ($this) {
+            self::PendingPayment => 'clock',
+            self::Ready, self::Completed => 'check',
+            self::Refunded => 'audit',
+            self::Cancelled => 'close',
+        };
+    }
 }

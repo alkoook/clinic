@@ -7,6 +7,7 @@ use App\Exceptions\SchedulingException;
 use App\Livewire\Appointments\Index;
 use App\Livewire\Sessions\Show;
 use App\Models\Appointment;
+use App\Models\CashboxTransaction;
 use App\Models\Patient;
 use App\Models\PractitionerAvailability;
 use App\Models\Role;
@@ -110,23 +111,47 @@ it('records the actual end once independently from administrative completion', f
     $service = app(TreatmentSessionService::class);
     $service->endTreatment($session, $this->secretary, now());
     $service->complete($session, $this->secretary);
-    expect($session->refresh()->ended_at->eq(now()))->toBeTrue();
+    $session->refresh();
+    expect($session->ended_at->eq(now()))->toBeTrue()
+        ->and($session->completed_at->eq(now()))->toBeTrue();
     $endedAt = $session->ended_at->copy();
+    $completedAt = $session->completed_at->copy();
+    $financialState = $session->participants()->sole()->only([
+        'original_price',
+        'discount_amount',
+        'final_amount',
+        'practitioner_percentage',
+        'practitioner_share',
+        'clinic_share',
+        'payment_status',
+    ]);
+    $cashboxTransactionCount = CashboxTransaction::query()->count();
+    $notificationCount = $this->secretary->notifications()->count();
     $this->travel(5)->minutes();
     $service->endTreatment($session, $this->secretary, now());
     $service->complete($session, $this->secretary);
-    expect($session->refresh()->ended_at->eq($endedAt))->toBeTrue();
+    $session->refresh();
+    expect($session->ended_at->eq($endedAt))->toBeTrue()
+        ->and($session->completed_at->eq($completedAt))->toBeTrue()
+        ->and($session->participants()->sole()->only(array_keys($financialState)))->toBe($financialState)
+        ->and(CashboxTransaction::query()->count())->toBe($cashboxTransactionCount)
+        ->and($this->secretary->notifications()->count())->toBe($notificationCount);
 });
 
-it('does not fabricate an actual end while administratively completing a running session', function () {
+it('completes a fully paid running session and records its actual end atomically', function () {
     $session = TreatmentSession::factory()->create(['started_at' => now()->subMinutes(40), 'ended_at' => null]);
     TreatmentSessionParticipant::factory()->for($session)->create(['payment_status' => ParticipantPaymentStatus::Paid]);
 
-    expect(fn () => app(TreatmentSessionService::class)->complete($session, $this->secretary))
-        ->toThrow(SchedulingException::class, 'نهاية العلاج الفعلية');
+    Livewire::test(Show::class, ['treatmentSession' => $session])
+        ->call('complete')
+        ->assertHasNoErrors();
 
-    expect($session->refresh()->ended_at)->toBeNull()
-        ->and($session->completed_at)->toBeNull();
+    $session->refresh();
+    expect($session->status)->toBe(TreatmentSessionStatus::Completed)
+        ->and($session->ended_at->eq(now()))->toBeTrue()
+        ->and($session->completed_at->eq(now()))->toBeTrue()
+        ->and($session->ended_at->greaterThan($session->started_at))->toBeTrue()
+        ->and($session->appointment->status)->toBe(AppointmentStatus::Completed);
 });
 
 it('records an explicit actual end for a refunded session without changing financial state', function () {
@@ -139,14 +164,11 @@ it('records an explicit actual end for a refunded session without changing finan
     $participant = TreatmentSessionParticipant::factory()->for($session)->create([
         'payment_status' => ParticipantPaymentStatus::Refunded,
     ]);
-    $actualEnd = now()->subDay()->addMinutes(35);
-
     Livewire::test(Show::class, ['treatmentSession' => $session])
-        ->set('actualEndedAt', $actualEnd->format('Y-m-d\TH:i'))
         ->call('endTreatment')
         ->assertHasNoErrors();
 
-    expect($session->refresh()->ended_at->format('Y-m-d H:i'))->toBe($actualEnd->format('Y-m-d H:i'))
+    expect($session->refresh()->ended_at->eq(now()))->toBeTrue()
         ->and($session->status)->toBe(TreatmentSessionStatus::Refunded)
         ->and($session->completed_at)->toBeNull()
         ->and($participant->refresh()->payment_status)->toBe(ParticipantPaymentStatus::Refunded)
@@ -165,6 +187,7 @@ it('rejects an impossible actual treatment end', function (CarbonImmutable $actu
     expect($session->refresh()->ended_at)->toBeNull();
 })->with([
     'before the actual start' => fn (): CarbonImmutable => CarbonImmutable::now()->subHour(),
+    'equal to the actual start' => fn (): CarbonImmutable => CarbonImmutable::now()->subMinutes(40),
     'in the future' => fn (): CarbonImmutable => CarbonImmutable::now()->addMinute(),
 ]);
 

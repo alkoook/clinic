@@ -18,14 +18,14 @@
 
     <section class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3" aria-label="قائمة المواعيد">
         @forelse ($this->appointments as $appointment)
-            <article class="app-card overflow-hidden" wire:key="appointment-{{ $appointment->id }}">
+            <article class="app-card status-surface {{ $appointment->status->badgeClass() }} overflow-hidden" wire:key="appointment-{{ $appointment->id }}">
                 <div class="flex items-start justify-between gap-3 border-b border-[var(--line)] p-4 sm:p-5">
                     <div class="min-w-0">
                         <p class="text-xs font-black text-[var(--brand-strong)]">{{ App\Support\ArabicFormat::appointmentDate($appointment->starts_at) }}</p>
                         <h2 class="mt-1 truncate text-lg font-black text-[var(--ink)]">{{ $appointment->participants->pluck('patient.full_name')->filter()->join('، ') }}</h2>
                         <p class="mt-1 text-xs text-[var(--muted)]">{{ $appointment->kind->label() }} · {{ $appointment->participants->count() }} مشارك</p>
                     </div>
-                    <span class="status-badge {{ $appointment->status === App\Enums\AppointmentStatus::Cancelled ? 'status-danger' : ($appointment->status === App\Enums\AppointmentStatus::Completed ? 'status-success' : '') }}">{{ $appointment->status->label() }}</span>
+                    <x-ui.status-badge :status="$appointment->status" />
                 </div>
 
                 <dl class="grid grid-cols-2 gap-px bg-[var(--line)] text-sm">

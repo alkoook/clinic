@@ -130,9 +130,7 @@
                             </td>
 
                             <td>
-                                <span class="status-badge">
-                                    {{ $participant->appointment->status->label() }}
-                                </span>
+                                <x-ui.status-badge :status="$participant->appointment->status" />
                             </td>
                         </tr>
                     @empty

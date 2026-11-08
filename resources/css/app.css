@@ -134,6 +134,14 @@
     --warning-soft: #fff4d6;
     --success: #246b4d;
     --success-soft: #e3f3e9;
+    --info: #1d4ed8;
+    --info-soft: #dbeafe;
+    --completed: #0f766e;
+    --completed-soft: #ccfbf1;
+    --refunded: #7e22ce;
+    --refunded-soft: #f3e8ff;
+    --neutral: #475569;
+    --neutral-soft: #e2e8f0;
     --focus: var(--app-focus);
     --focus-ring: rgba(2, 132, 199, 0.2);
     --card-shadow: var(--app-shadow-card);
@@ -191,6 +199,14 @@
     --warning-soft: rgba(231, 177, 94, 0.12);
     --success: #74bc92;
     --success-soft: rgba(82, 160, 116, 0.13);
+    --info: #93c5fd;
+    --info-soft: rgba(59, 130, 246, 0.16);
+    --completed: #5eead4;
+    --completed-soft: rgba(20, 184, 166, 0.15);
+    --refunded: #d8b4fe;
+    --refunded-soft: rgba(168, 85, 247, 0.16);
+    --neutral: #cbd5e1;
+    --neutral-soft: rgba(148, 163, 184, 0.14);
     --focus: #ff7a67;
     --focus-ring: rgba(255, 122, 103, 0.2);
     --card-shadow: var(--app-shadow-card);
@@ -850,22 +866,35 @@ body,
     white-space: nowrap;
 }
 
-.status-success {
-    border-color: color-mix(in srgb, var(--success) 24%, transparent);
-    background: var(--success-soft);
-    color: var(--success);
+.status-success { --status-color: var(--success); --status-soft: var(--success-soft); }
+.status-warning { --status-color: var(--warning); --status-soft: var(--warning-soft); }
+.status-danger { --status-color: var(--danger); --status-soft: var(--danger-soft); }
+.status-info { --status-color: var(--info); --status-soft: var(--info-soft); }
+.status-completed { --status-color: var(--completed); --status-soft: var(--completed-soft); }
+.status-refunded { --status-color: var(--refunded); --status-soft: var(--refunded-soft); }
+.status-neutral { --status-color: var(--neutral); --status-soft: var(--neutral-soft); }
+
+.status-badge.status-success,
+.status-badge.status-warning,
+.status-badge.status-danger,
+.status-badge.status-info,
+.status-badge.status-completed,
+.status-badge.status-refunded,
+.status-badge.status-neutral {
+    border-color: color-mix(in srgb, var(--status-color) 28%, transparent);
+    background: var(--status-soft);
+    color: var(--status-color);
 }
 
-.status-warning {
-    border-color: color-mix(in srgb, var(--warning) 24%, transparent);
-    background: var(--warning-soft);
-    color: var(--warning);
+.status-surface {
+    border-color: color-mix(in srgb, var(--status-color) 32%, var(--line));
+    border-inline-start-width: 0.25rem;
+    background: color-mix(in srgb, var(--status-soft) 32%, var(--surface));
 }
 
-.status-danger {
-    border-color: color-mix(in srgb, var(--danger) 24%, transparent);
-    background: var(--danger-soft);
-    color: var(--danger);
+.status-heading {
+    border-inline-start: 0.25rem solid var(--status-color);
+    padding-inline-start: 1rem;
 }
 
 .table-shell {

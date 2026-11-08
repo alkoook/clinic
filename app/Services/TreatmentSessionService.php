@@ -271,7 +271,7 @@ final class TreatmentSessionService
             $actualStart = CarbonImmutable::instance($lockedSession->getAttribute('started_at'))
                 ->setTimezone((string) config('app.timezone'));
 
-            if ($actualEnd->lessThan($actualStart) || $actualEnd->greaterThan(CarbonImmutable::now())) {
+            if ($actualEnd->lessThanOrEqualTo($actualStart) || $actualEnd->greaterThan(CarbonImmutable::now())) {
                 throw SchedulingException::invalidTreatmentEnd();
             }
 
@@ -291,7 +291,8 @@ final class TreatmentSessionService
             throw SchedulingException::permissionDenied('sessions.manage');
         }
 
-        $completed = DB::transaction(function () use ($session, $actor, $completedAt): TreatmentSession {
+        $wasCompleted = false;
+        $completed = DB::transaction(function () use ($session, $actor, $completedAt, &$wasCompleted): TreatmentSession {
             $synchronized = $this->synchronizePaymentStatus($session);
 
             if ($this->sessionStatus($synchronized) === TreatmentSessionStatus::Completed) {
@@ -302,15 +303,32 @@ final class TreatmentSessionService
                 throw SchedulingException::unpaidParticipants($this->outstandingParticipantBalances($synchronized));
             }
 
-            if ($synchronized->getAttribute('ended_at') === null) {
-                throw SchedulingException::treatmentStillRunning();
+            $serverNow = CarbonImmutable::now();
+            $administrativeCompletion = $completedAt === null
+                ? $serverNow
+                : CarbonImmutable::instance($completedAt)->setTimezone((string) config('app.timezone'));
+            $actualStart = CarbonImmutable::instance($synchronized->getAttribute('started_at'))
+                ->setTimezone((string) config('app.timezone'));
+            $recordedEnd = $synchronized->getAttribute('ended_at');
+            $actualEnd = $recordedEnd === null
+                ? $administrativeCompletion
+                : CarbonImmutable::instance($recordedEnd)->setTimezone((string) config('app.timezone'));
+
+            if ($actualEnd->lessThanOrEqualTo($actualStart) || $actualEnd->greaterThan($serverNow)) {
+                throw SchedulingException::invalidTreatmentEnd();
+            }
+
+            if ($administrativeCompletion->lessThan($actualEnd) || $administrativeCompletion->greaterThan($serverNow)) {
+                throw SchedulingException::invalidSessionCompletion();
             }
 
             $synchronized->forceFill([
                 'status' => TreatmentSessionStatus::Completed->value,
-                'completed_at' => $completedAt ?? now(),
+                'ended_at' => $actualEnd,
+                'completed_at' => $administrativeCompletion,
             ]);
             $synchronized->save();
+            $wasCompleted = true;
 
             Appointment::query()
                 ->whereKey($synchronized->getAttribute('appointment_id'))
@@ -322,6 +340,10 @@ final class TreatmentSessionService
 
             return $synchronized->refresh();
         }, 3);
+
+        if (! $wasCompleted) {
+            return $completed;
+        }
 
         $completed->loadMissing([
             'practitioner:id,user_id,name,telegram_chat_id',

@@ -87,6 +87,11 @@ final class SchedulingException extends RuntimeException
         return new self('يجب أن يكون وقت نهاية العلاج الفعلية بعد بدء الجلسة وألا يكون في المستقبل.', 'invalid_treatment_end');
     }
 
+    public static function invalidSessionCompletion(): self
+    {
+        return new self('يجب ألا يسبق وقت اعتماد اكتمال الجلسة نهاية العلاج الفعلية وألا يكون في المستقبل.', 'invalid_session_completion');
+    }
+
     public static function appointmentNotStarted(): self
     {
         return new self('لا يمكن إنشاء جلسة علاجية قبل حلول وقت الموعد.');

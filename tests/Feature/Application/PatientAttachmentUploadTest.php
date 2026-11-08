@@ -209,3 +209,53 @@ it('shows session attachment safety errors without changing session or financial
         ->and(collect($session->refresh()->getRawOriginal())->only($sessionFields)->all())->toBe($sessionState)
         ->and(collect($participant->refresh()->getRawOriginal())->only($financialFields)->all())->toBe($financialState);
 });
+
+it('uploads a private attachment after session completion without reopening or changing finances', function () {
+    Storage::fake('local');
+    $this->travelTo('2026-09-20 15:00:00');
+
+    $user = attachmentUploadUser();
+    $patient = Patient::factory()->create();
+    $session = TreatmentSession::factory()->completed()->create([
+        'started_at' => now()->subHour(),
+        'ended_at' => now()->subMinutes(20),
+        'completed_at' => now()->subMinutes(10),
+    ]);
+    $participant = TreatmentSessionParticipant::factory()->for($session)->for($patient)->paid()->create([
+        'original_price' => 150_000,
+        'discount_amount' => 10_000,
+        'final_amount' => 140_000,
+        'practitioner_percentage' => 50,
+        'practitioner_share' => 70_000,
+        'clinic_share' => 70_000,
+    ]);
+    $sessionFields = ['status', 'started_at', 'ended_at', 'completed_at'];
+    $financialFields = [
+        'original_price',
+        'discount_amount',
+        'final_amount',
+        'practitioner_percentage',
+        'practitioner_share',
+        'clinic_share',
+        'payment_status',
+    ];
+    $sessionState = collect($session->getRawOriginal())->only($sessionFields)->all();
+    $financialState = collect($participant->getRawOriginal())->only($financialFields)->all();
+
+    Livewire::actingAs($user)
+        ->test(SessionShow::class, ['treatmentSession' => $session])
+        ->set('attachmentPatientId', $patient->id)
+        ->set('attachmentFiles', [UploadedFile::fake()->create('aftercare.pdf', 40, 'application/pdf')])
+        ->call('uploadAttachments')
+        ->assertHasNoErrors();
+
+    $attachment = $patient->attachments()->sole();
+
+    expect($attachment->treatment_session_id)->toBe($session->id)
+        ->and($attachment->disk)->toBe('local')
+        ->and(collect($session->refresh()->getRawOriginal())->only($sessionFields)->all())->toBe($sessionState)
+        ->and(collect($participant->refresh()->getRawOriginal())->only($financialFields)->all())->toBe($financialState);
+
+    Storage::disk('local')->assertExists($attachment->path);
+    Storage::disk('public')->assertMissing($attachment->path);
+});

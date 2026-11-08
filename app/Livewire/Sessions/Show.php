@@ -66,8 +66,6 @@ class Show extends Component
 
     public ?int $attachmentPatientId = null;
 
-    public string $actualEndedAt = '';
-
     public function updatedAttachmentFiles(mixed $value): void
     {
         $this->attachmentFiles = PatientAttachmentService::readyUploads($value);
@@ -87,9 +85,6 @@ class Show extends Component
         $this->hydrateParticipantInputs();
         if ($this->treatmentSession->participants()->count() === 1) {
             $this->attachmentPatientId = (int) $this->treatmentSession->participants()->value('patient_id');
-        }
-        if ($this->treatmentSession->ended_at === null) {
-            $this->actualEndedAt = CarbonImmutable::now()->format('Y-m-d\TH:i');
         }
     }
 
@@ -231,22 +226,15 @@ class Show extends Component
     public function endTreatment(TreatmentSessionService $treatmentSessionService): void
     {
         Gate::authorize('sessions.manage');
-        $validated = $this->validate(
-            ['actualEndedAt' => ['required', 'date']],
-            [
-                'actualEndedAt.required' => 'أدخل وقت نهاية العلاج الفعلية.',
-                'actualEndedAt.date' => 'وقت نهاية العلاج الفعلية غير صالح.',
-            ],
-        );
 
         try {
             $treatmentSessionService->endTreatment(
                 $this->treatmentSession,
                 auth()->user(),
-                CarbonImmutable::parse($validated['actualEndedAt'], (string) config('app.timezone')),
+                CarbonImmutable::now(),
             );
         } catch (SchedulingException $exception) {
-            $this->addError('actualEndedAt', $exception->getMessage());
+            $this->addError('operation', $exception->getMessage());
 
             return;
         }

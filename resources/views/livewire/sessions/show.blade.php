@@ -1,6 +1,6 @@
 <div class="space-y-6" wire:poll.30s.visible>
     @error('operation')<div class="flash-message flash-error">{{ $message }}</div>@enderror
-    <header class="page-header"><div><p class="page-kicker">جلسة #{{ $treatmentSession->id }}</p><h1>{{ $treatmentSession->treatment_type_name }}</h1><p>{{ $treatmentSession->practitioner_name }} · {{ $treatmentSession->room_name }} · {{ App\Support\ArabicFormat::dateTime($treatmentSession->started_at) }}</p></div><div class="flex flex-wrap gap-2"><span class="status-badge">{{ $treatmentSession->status->label() }}</span><a class="btn btn-secondary" href="{{ route('sessions.index') }}" wire:navigate>الجلسات</a></div></header>
+    <header class="page-header status-heading {{ $treatmentSession->ended_at === null ? 'status-info' : $treatmentSession->status->badgeClass() }}"><div><p class="page-kicker">جلسة #{{ $treatmentSession->id }}</p><h1>{{ $treatmentSession->treatment_type_name }}</h1><p>{{ $treatmentSession->practitioner_name }} · {{ $treatmentSession->room_name }} · {{ App\Support\ArabicFormat::dateTime($treatmentSession->started_at) }}</p></div><div class="flex flex-wrap gap-2">@if ($treatmentSession->ended_at === null)<x-ui.status-badge in-progress />@endif<x-ui.status-badge :status="$treatmentSession->status" /><a class="btn btn-secondary" href="{{ route('sessions.index') }}" wire:navigate>الجلسات</a></div></header>
     <section class="app-card grid gap-4 p-5 sm:grid-cols-3">
         <div><p class="form-label">موعد الحجز</p><time>{{ App\Support\ArabicFormat::dateTime($treatmentSession->appointment->starts_at) }}</time></div>
         <div><p class="form-label">بدء الجلسة فعليًا</p><time>{{ App\Support\ArabicFormat::dateTime($treatmentSession->started_at) }}</time></div>
@@ -146,15 +146,12 @@
 
     @can('sessions.manage')
         @if ($treatmentSession->ended_at === null)
-            <section class="app-card grid gap-4 p-5 sm:grid-cols-[1fr_minmax(16rem,auto)] sm:items-end">
+            <section class="app-card flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <h2 class="font-black text-[var(--ink)]">إنهاء العلاج الفعلي</h2>
-                    <p class="mt-1 text-xs text-[var(--muted)]">أدخل الوقت الفعلي بدقة، وخصوصًا للجلسات القديمة المفتوحة. سيُحرر المعالج والغرفة فقط دون تغيير الحالة أو أي سجل مالي.</p>
+                    <p class="mt-1 text-xs text-[var(--muted)]">يسجل وقت الخادم الحالي كنهاية فعلية ويحرر المعالج والغرفة، دون إكمال الجلسة ماليًا أو إداريًا.</p>
                 </div>
-                <div class="grid gap-2">
-                    <label><span class="form-label">وقت نهاية العلاج الفعلية</span><input class="form-input" type="datetime-local" wire:model="actualEndedAt" max="{{ now()->format('Y-m-d\TH:i') }}">@error('actualEndedAt')<span class="form-error">{{ $message }}</span>@enderror</label>
-                    <button class="btn btn-secondary w-full" type="button" x-on:click="$dispatch('confirm-action', { title: 'تسجيل نهاية العلاج؟', description: 'سيُعتمد الوقت المدخل كنهاية فعلية وتُحرر موارد الجلسة، دون إكمالها ماليًا أو إداريًا.', confirmLabel: 'تسجيل النهاية الفعلية', tone: 'primary', action: () => $wire.endTreatment() })">تسجيل النهاية الفعلية</button>
-                </div>
+                <button class="btn btn-secondary w-full sm:w-auto" type="button" x-on:click="$dispatch('confirm-action', { title: 'إنهاء العلاج الآن؟', description: 'سيُسجّل وقت الخادم الحالي كنهاية فعلية وتُحرر موارد الجلسة، دون إكمالها ماليًا أو إداريًا.', confirmLabel: 'إنهاء العلاج الآن', tone: 'primary', action: () => $wire.endTreatment() })">إنهاء العلاج الآن</button>
             </section>
         @endif
 
@@ -175,7 +172,7 @@
                         <p class="mt-1 text-xs text-[var(--muted)]">جميع المشاركين مستوفون ماليًا، ويمكن الآن اعتماد الجلسة.</p>
                     @endif
                 </div>
-                <button class="btn btn-primary w-full sm:w-auto" type="button" @disabled($unpaidParticipants->isNotEmpty() || $treatmentSession->ended_at === null) x-on:click="$dispatch('confirm-action', { title: 'إكمال الجلسة؟', description: 'سيتم اعتماد الجلسة وتثبيت بياناتها المالية بعد التأكيد.', confirmLabel: 'تأكيد إكمال الجلسة', tone: 'primary', action: () => $wire.complete() })">إكمال الجلسة</button>
+                <button class="btn btn-primary w-full sm:w-auto" type="button" @disabled($unpaidParticipants->isNotEmpty()) x-on:click="$dispatch('confirm-action', { title: 'إكمال الجلسة؟', description: 'إذا كان العلاج ما زال مفتوحًا فسيُسجّل وقت الخادم الحالي كنهايته الفعلية، ثم تُعتمد الجلسة إداريًا في العملية نفسها.', confirmLabel: 'تأكيد إكمال الجلسة', tone: 'primary', action: () => $wire.complete() })">إكمال الجلسة</button>
             </section>
         @endif
     @endcan
